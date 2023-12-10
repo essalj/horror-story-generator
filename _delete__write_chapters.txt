@@ -1,0 +1,7 @@
+<<ROLE>>
+
+Write Chapter <<NUM>> in great detail and in a vivid and intriguing language from the following information. Make sure you only write words meant to be in the final story, so mo editorial notes etc.!!
+-----------------
+<<CHAP>>
+-----------------
+WRITE CHAPTER <<NUM>> IN GREAT DETAIL AND IN A VIVID AND INTRIGUING LANGUAGE FROM THE INFORMATION ABOVE:

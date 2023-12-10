@@ -7,6 +7,7 @@ from openai import OpenAI
 from time import time,sleep
 import datetime
 
+
 def create_dated_folder(base_path, text_add_on):
     # Get today's date in yyyy-mm-dd format
     today_date = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -27,7 +28,7 @@ def create_dated_folder(base_path, text_add_on):
     #xp_path = "C:\\my\\__youtube\\videos"
     #additional_text = "horror"  # Replace with your desired text
     #create_dated_folder(xp_path, additional_text)
-
+os.getcwd()
 
 def open_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as infile:
@@ -322,4 +323,7 @@ text2mp3(text_string = thanks, voice_name = "onyx", fn=path_voice )
 
 #################
 ## Create mp4
+# from create_mp4 import * 
 import create_mp4
+# import os
+# os.getcwd()

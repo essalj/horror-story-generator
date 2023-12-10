@@ -1,7 +1,0 @@
-<<ROLE>>
-
-Write Chapter <<NUM>> in great detail and in a vivid and intriguing language from the following information:
-
-<<CHAP>>
-
-WRITE CHAPTER <<NUM>> IN GREAT DETAIL AND IN A VIVID AND INTRIGUING LANGUAGE FROM THE INFORMATION ABOVE:

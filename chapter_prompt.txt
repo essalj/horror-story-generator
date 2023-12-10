@@ -1,7 +1,0 @@
-<<ROLE>>
-
-Write 7 detailed story chapters summaries from the following outlines:
-
-<<OUT>>
-
-WRITE 7 DETAILED STORY CHAPTERS SUMMARIES FROM THE OUTLINES ABOVE:

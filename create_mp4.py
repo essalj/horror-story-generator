@@ -9,10 +9,10 @@ import numpy as np
 
 
 
-audio_path = "C:\\my\\__youtube\\videos\\2023-12-10_horror\\Lured into Darkness The Psychological Web of the AI Girlfriend - thanks - audio_99.mp3"
-image_path = "C:\\my\\__youtube\\videos\\2023-12-10_horror\\Lured into Darkness The Psychological Web of the AI Girlfriend - ytmb1.png"
-output_filename = "C:\\my\\__youtube\\videos\\2023-12-10_horror\\final_video.mp4"
-fps = 30
+# audio_path = "C:\\my\\__youtube\\videos\\2023-12-10_horror\\Lured into Darkness The Psychological Web of the AI Girlfriend - thanks - audio_99.mp3"
+# image_path = "C:\\my\\__youtube\\videos\\2023-12-10_horror\\Lured into Darkness The Psychological Web of the AI Girlfriend - ytmb1.png"
+# output_filename = "C:\\my\\__youtube\\videos\\2023-12-10_horror\\final_video.mp4"
+# fps = 30
 
 
 def add_silence_to_audio(original_audio_clip, silence_duration=2.0):
