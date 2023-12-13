@@ -43,7 +43,7 @@ def create_video_with_images_and_audio(image_paths, audio_path, output_filename=
     for file in temp_video_files:
         os.remove(file)
 
-# Example usage
-image_paths = ['image1.jpg', 'image2.jpg', 'image3.jpg', ...]  # Add your image paths
-audio_path = 'your_audio_file.mp3'
-create_video_with_images_and_audio(image_paths, audio_path)
+# # Example usage
+# image_paths = ['image1.jpg', 'image2.jpg', 'image3.jpg', ...]  # Add your image paths
+# audio_path = 'your_audio_file.mp3'
+# create_video_with_images_and_audio(image_paths, audio_path)
