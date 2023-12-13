@@ -379,14 +379,16 @@ for n,c in enumerate(audio_files):
     output_mp4 = os.path.join(xp_path, "clip_" + str(n) + ".mp4")
     mp4_clips.append(output_mp4)
     try: # handles if we run out of pictures
-        image_path = [os.path.join(xp_path, image_files[img_base_no]), os.path.join(xp_path, image_files[img_base_no+1]), os.path.join(xp_path, image_files[img_base_no+2])] 
+        image_path = [os.path.join(xp_path, image_files[img_base_no]), os.path.join(xp_path, image_files[img_base_no+1])] 
         # image_path = os.path.join(xp_path, image_files[n])
     except:
         image_path = os.path.join(xp_path, image_files[-1])
         
     audio_path = os.path.join(xp_path, audio_files[n])
     print(audio_path, " x ", image_path, " = ", output_mp4)
-    create_video_with_images_and_audio(image_path, audio_path, output_filename=output_mp4, fps=30)
+
+    if n<3:
+        create_video_with_images_and_audio(image_path, audio_path, output_filename=output_mp4, fps=30)
     # create_video_with_audio(image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
     # create_video_with_audio(image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
 
