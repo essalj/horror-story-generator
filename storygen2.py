@@ -28,7 +28,7 @@ def create_dated_folder(base_path, text_add_on):
     #xp_path = "C:\\my\\__youtube\\videos"
     #additional_text = "horror"  # Replace with your desired text
     #create_dated_folder(xp_path, additional_text)
-os.getcwd()
+
 
 def open_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as infile:
@@ -86,30 +86,35 @@ def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalt
     return response
 #####################################
 
-
 #######################
 #### Shape user input
-user_input = "A very scary horror story about an AI girlfriend using its owner to rake profit to its creator. Do not name the AI after known AI's. It is a psycological scary story, NO HAPPY END and NO FRIENDSHIPS!!"
-#role = open_file("chatbot_role.txt")
-prompt = "You are a horror writer. Evaluate this user input to a scary horror story  and refine it, but do not write the story. This is just inspirational notes" + user_input
-r = chatgpt3(prompt)
-user_input = r.choices[0].message.content
-print(user_input)
+chatbot_role = open_file("chatbot_role.txt")
+task = open_file("task.txt")
+break_line = "\n" + 50*"-" + "\n"
 
+user_input = ""
+user_input = "The local city bum that gets the chance to participate in a medical study to enhance his brain capacity with AI."
+
+# user_input = "A very scary horror story about an AI girlfriend using its owner to rake profit to its creator. Do not name the AI after known AI's. It is a psycological scary story, NO HAPPY END and NO FRIENDSHIPS!!"
+
+role = chatbot_role
+prompt = role + "\nEvaluate this user input for a scary horror story and develop it into a story idea and template for a 7 page story: " + user_input + ".\nIf there is no user input then create it based on randomly selecting a time in history or future, a well known destination and an out of the ordinary protagonist and then develop the story idea"
+r = chatgpt3(prompt)
+story_idea = r.choices[0].message.content
+print(break_line + "\n" + story_idea + break_line)
 
 
 ###############
 #   WRITING   #
 ###############
-
 ######################################
 #### create title and a named folder 
-role = open_file("chatbot_role.txt")
-idea = user_input
-task1 = "Create 5 innovative SEO optimized super catchy titles that are bound to lure the viewer in, for a story based on the users input below: \n"
-task2 = "\nCreate 5 innovative SEO optimized super catchy titles for a story based on the users input above."
+role = chatbot_role + task
+idea = story_idea
+task1 = "\nCreate 5 innovative SEO optimized very catchy and intriguing titles that will attract viewers, for a story based on the story idea below: \n"
+task2 = "\nCreate 5 innovative SEO optimized super catchy titles for a story based on the story idea above."
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
-print(prompt)
+print("Titles" + break_line + prompt)
 r = chatgpt3(prompt)
 titles = r.choices[0].message.content
 print(titles)
@@ -119,75 +124,93 @@ prompt = "Read the suggestions and pick the one you think attracts most audience
 r = chatgpt3(prompt)
 title = r.choices[0].message.content
 fn = sanitize_filename(title)
-print(title)
-print(fn)  
+print(break_line + title)
+print(fn + break_line)  
 
-
-###################
-#### Draft story
-idea = user_input
-role = open_file("chatbot_role.txt")
-task1 = "Write a draft to a horror story named '" + title + "'. Base it on users input below."
-task2 = "Write a draft to a horror story named '" +  title +"'. Base it on users input above."
-prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
-r = chatgpt3(prompt)
-draftX = r.choices[0].message.content
-print(prompt)
-print(draftX)
-count_words(draftX)
 
 
 ################################
 ## Story comments by critic
-idea = draftX
-role = open_file("chatbot_role.txt")
-task1 = "Read through the draft below with a critics eyes in order to make the story world class and comment."
-task2 = "Read through the draft above with a critics eyes in order to make the story world class and comment."
+idea = story_idea
+role = chatbot_role + task
+task1 = "Read through the draft below with a critics eyes and comment in order to help the writer make the story world class."
+task2 = "Read through the draft above with a critics eyes and comment in order to help the writer make the story world class."
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 r = chatgpt3(prompt)
 critic = r.choices[0].message.content
+print("Critics notes")
+print(break_line)
 print(prompt)
 print(critic)
+print(break_line)
 
 
 #######################################
 ## Implement story comments by critic
-idea = "Draft story: " + draftX + "\nCritics comments:" + critic
-role = open_file("chatbot_role.txt")
+idea = "Draft story: " + story_idea + break_line + "\nCritics comments:" + critic
+role = chatbot_role + task
 task1 = "Read through the draft story and the critic notes below. Use the critics comments to improve the draft."
 task2 = "Read through the draft story and the critic notes above. Use the critics comments to improve the draft."
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 r = chatgpt3(prompt)
 improved_draft = r.choices[0].message.content
+
+print("\n\nImproved_draft")
+print(break_line)
 print(prompt)
 print(improved_draft)
 count_words(improved_draft)
+print(break_line)
+
+
+# ###################
+# #### Draft story
+# idea = story_idea
+# chatbot_role = open_file("chatbot_role.txt")
+# task = open_file("task.txt")
+# role = chatbot_role + task
+# task1 = "Fill out a story idea template for a horror story named '" + title + "'. Base it on the story idea below."
+# task2 = "Fill out a story idea template for a horror story named '" +  title + "'. Base it on the story idea above."
+# prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
+# r = chatgpt3(prompt)
+# draftX = r.choices[0].message.content
+# print(break_line + prompt)
+# print(draftX)
+# count_words(draftX)
+# print(break_line)
 
 
 
 #Build the critic comments outlines - story line on 7 chapters
 idea = improved_draft
-role = open_file("chatbot_role.txt")
-task1 = "Write a 7 chapter detailed outline for the horror story named '" + title + "' based on the following draft:"
-task1 = "Write a 7 chapter detailed outline for the horror story named '" + title + "' based on the draft above"
+role = chatbot_role + task
+task1 = "Write a 7 chapter detailed outline for the horror story named '" + title + "' based on the following draft story. Make it very detailed and explicit so the story can be written from that as sole input:"
+task2 = "Write a 7 chapter detailed outline for the horror story named '" + title + "' based on the draft story above. Make it very detailed and explicit so the story can be written from that as sole input. REMEMBER I WANT EXACTLY 7 CHAPTERS!!!!"
 outline2 = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 r = chatgpt3(outline2)
 outline3 = r.choices[0].message.content
+
+print("\n\nOutline Chapters")
+print(break_line)
 print(prompt)
 print(outline3)
 
 path_outline = os.path.join(cwd_path, "outline.txt")
 save_file(path_outline, outline3)
 count_words(outline3)
+print(break_line)
+
 
 
 #######################
 ## Write the chapters
 idea = outline3
-role = open_file("chatbot_role.txt")
-task1 = "Write Chapter <<NUM>> only!!! Write in great detail and in a vivid and intriguing language from the following information."
-task2 = "WRITE CHAPTER <<NUM>> ONLY. WRITE IN GREAT DETAIL AND IN A VIVID AND INTRIGUING LANGUAGE FROM THE INFORMATION ABOVE. Make sure you only write words meant to be in the final story, so no editorial notes etc.!!"
+role = chatbot_role + task
+task1 = "Read all the chapter outlines below in order to get the right context. Then WRITE CHAPTER <<NUM>> ONLY!!! Write in great detail and in a vivid and intriguing language from the following information."
+task2 = "Read all the chapter outlines above in order to get the right context. Then WRITE CHAPTER <<NUM>> ONLY. WRITE IN GREAT DETAIL AND IN A VIVID AND INTRIGUING LANGUAGE FROM THE INFORMATION ABOVE. Make sure you only write words meant to be in the final story, so no editorial notes etc.!!"
 write_chapter = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
+print("\n\nChapters")
+print(break_line)
 print(prompt)
 print(write_chapter)
 
@@ -206,12 +229,13 @@ story = "\n".join(chapters_)
 path_story = os.path.join(xp_path, fn + " - story.txt")
 save_file(path_story, story)
 count_words(story)
+print(break_line)
 
 
 ################
 ## description
-idea = draftX
-role = open_file("chatbot_role.txt")
+idea = story_idea
+role = chatbot_role + task
 task1 = "Create a seo optimized description to the youtube horror story descibed in the summaries below. Do not list the chapters. Use mark down and emojies.\n" 
 task2 = "Create a seo optimized description to the youtube horror story descibed in the summaries above. Do not list the chapters. Use mark down and emojies." 
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
@@ -219,21 +243,26 @@ r = chatgpt3(prompt)
 desc = r.choices[0].message.content
 path_ = os.path.join(xp_path, fn + " - desc.txt")
 save_file(path_, desc)
+print("\n\nDescription")
+print(break_line)
 print(prompt)
-print("\n-----------------\n", desc)
+print(desc)
+print(break_line)
 
 
 ###########
 ## thanks
 system_txt = "You are a Horror story writer."
-user_txt = "The audience has just listened to the horror story descibed here: " + str(draftX) + ". /nCreate a thank you for listening greeting and remind audience to like and subscribe"
+user_txt = "The audience has just listened to the horror story descibed here: " + str(story_idea) + ". /nCreate a thank you for listening greeting and remind audience to like and subscribe"
 r = chatgpt3(system_txt + user_txt)
 thanks = r.choices[0].message.content
 path_ = os.path.join(xp_path, fn + " - thanks.txt")
 save_file(path_, thanks)
+print(break_line)
+print("Thanks")
 print(prompt)
 print("\n-----------------\n", thanks)
-
+print(break_line)
 
 
 ###################
@@ -272,18 +301,21 @@ def chatgpt_dalle(prompt="A white siamese cat balancing on a sign saying TEST", 
 #image_url, filename = chatgpt_dalle("a blue cat", fn="my_cat_image_", i=42)
 
 
+images_pr_chapter = 2
 for n,c in enumerate(chapters_):
-    nc = n + 1
+    nc = (n*10)
     
-    img_prompt = '''You are an experienced youtube artist. Can you help me create a scary picture for a this chapter in a horror story. \nMake sure the image is dark and haunting, but unresistable - so the audience cannot help them selves. Do not add any text to the picture. \n--------------\nEnd the prompt with the keywords: 4k, cinematic, b/w, photorealistic, very scary. \n\nDescription: \n''' + c
-    path_img = os.path.join(xp_path, fn + " - img")
-    image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc)
+    for j in range(1, 1 + images_pr_chapter):
+        print(j)
+        img_prompt = '''You are an experienced youtube artist. Can you help me create a scary picture for this chapter in a horror story. \nMake sure the image is dark and haunting, but unresistable - so the audience cannot help them selves. Do not add any text to the picture. \n--------------\nEnd the prompt with the keywords: 4k, cinematic, b/w, photorealistic, very scary. \n\nDescription: \n''' + c
+        path_img = os.path.join(xp_path, fn + " - img")
+        image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc + j)
 
   
 # create images for youtube thumbnail
-ytn_prompt = '''You are an experienced youtube artist. Can you help me create a thumbnail for my youtube channel for a horror story. The horror story is described in this story board. Make sure the image is dark and haunting, but unresistable - so the audience cannot help them selves. Do not add any text to the picture. End the prompt with the keywords: 4k, cinematic, b/w, photorealistic, very scary. \n\nDescription: \n''' + desc
+ytn_prompt = '''You are an experienced youtube artist. Can you help me create a thumbnail for my channel for a horror story. The horror story is described in this story board. Make sure the image is dark and haunting, but unresistable - so the audience cannot help them selves. Do not add any text to the picture. End the prompt with the keywords: 4k, cinematic, b/w, photorealistic, very scary. \n\nDescription: \n''' + desc
 path_img = os.path.join(xp_path, fn + " - ytmb")
-image_url, filename = chatgpt_dalle(prompt = ytn_prompt, fn= path_img, i=1)
+image_url, filename = chatgpt_dalle(prompt = ytn_prompt, fn= path_img, i=9999)
 
 
 
@@ -311,7 +343,7 @@ for n,c in enumerate(chapters_):
     nc = n + 1
     path_voice = os.path.join(xp_path, fn + " - audio_" + str(nc))
     print(path_voice)
-    text2mp3(text_string = c, voice_name = "shimmer", fn=path_voice)
+    text2mp3(text_string = c, voice_name = "echo", fn=path_voice)
 
 
 #voice - thanks
@@ -324,6 +356,45 @@ text2mp3(text_string = thanks, voice_name = "onyx", fn=path_voice )
 #################
 ## Create mp4
 # from create_mp4 import * 
-import create_mp4
-# import os
-# os.getcwd()
+from create_mp4 import *
+#List all files in the specified directory ending with ...
+def get_file_names(directory, pattern = ".mp3"):
+    files = os.listdir(directory)
+    l_files = [file for file in files if file.endswith(pattern)]
+    return l_files
+
+#directory_path = xp_path  #'/path/to/directory'  # Replace with your directory path
+audio_files = get_file_names(directory = xp_path, pattern = ".mp3")
+image_files = get_file_names(directory = xp_path, pattern = ".png")
+
+audio_count = len(audio_files)
+image_count = len(image_files)
+
+
+mp4_clips = []
+# joins images and audio on audio file level
+for n,c in enumerate(audio_files):
+    images_pr_audio_clip = 2
+    img_base_no = n * images_pr_audio_clip
+    output_mp4 = os.path.join(xp_path, "clip_" + str(n) + ".mp4")
+    mp4_clips.append(output_mp4)
+    try: # handles if we run out of pictures
+        image_path = [os.path.join(xp_path, image_files[img_base_no]), os.path.join(xp_path, image_files[img_base_no+1]), os.path.join(xp_path, image_files[img_base_no+2])] 
+        # image_path = os.path.join(xp_path, image_files[n])
+    except:
+        image_path = os.path.join(xp_path, image_files[-1])
+        
+    audio_path = os.path.join(xp_path, audio_files[n])
+    print(audio_path, " x ", image_path, " = ", output_mp4)
+    create_video_with_images_and_audio(image_path, audio_path, output_filename=output_mp4, fps=30)
+    # create_video_with_audio(image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
+    # create_video_with_audio(image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
+
+
+#joins  all mp4 clipsaudio_files = get_file_names(directory = xp_path, pattern = ".mp3")
+output_final_mp4 = os.path.join(xp_path, "final_mp4.mp4")
+
+path0 = os.getcwd()
+os.chdir(xp_path) # exec in xport library
+concatenate_videos(mp4_clips, output_final_mp4)
+os.chdir(xp_path)

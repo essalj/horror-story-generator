@@ -2,8 +2,12 @@
 TASK PROMPT
 ===========
 
+
 <<ROLE>>
 ----------------
+
+RESOLVE THIS SUBTASK:
+----
 <<TASK1>>
 ----------------
 <<IDEA>>
