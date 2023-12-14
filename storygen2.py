@@ -358,6 +358,7 @@ text2mp3(text_string = thanks, voice_name = "onyx", fn=path_voice )
 # from create_mp4 import * 
 from create_mp4 import *
 
+# xp_path = 'C:\\my\\__youtube\\videos\\2023-12-13_horror'
 #List all files in the specified directory ending with ...
 def get_file_names(directory, pattern = ".mp3"):
     files = os.listdir(directory)
@@ -380,13 +381,13 @@ for n,c in enumerate(audio_files):
     output_mp4 = os.path.join(xp_path, "clip_" + str(n) + ".mp4")
     mp4_clips.append(output_mp4)
     try: # handles if we run out of pictures
-        image_path = [os.path.join(xp_path, image_files[img_base_no]), os.path.join(xp_path, image_files[img_base_no+1])] 
+        image_paths = [os.path.join(xp_path, image_files[img_base_no]), os.path.join(xp_path, image_files[img_base_no+1])] 
         # image_path = os.path.join(xp_path, image_files[n])
     except:
-        image_path = os.path.join(xp_path, image_files[-1])
+        image_paths = os.path.join(xp_path, image_files[-1])
         
     audio_path = os.path.join(xp_path, audio_files[n])
-    print(audio_path, " x ", image_path, " = ", output_mp4)
+    print(audio_path, " x ", image_paths, " = ", output_mp4)
 
     create_video_with_images_and_audio(image_paths=image_paths, audio_path=audio_path, output_filename=output_mp4, fps=30)
 
