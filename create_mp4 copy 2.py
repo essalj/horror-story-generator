@@ -17,6 +17,7 @@ def create_individual_video_clip(image_path, clip_duration, output_path, fps=30)
     # Create a video clip from a single image
     clip = ImageClip(image_path).set_duration(clip_duration)
     clip.write_videofile(output_path, fps=fps)
+    # return clip
 
 def concatenate_videos(video_files, output_path):
     # Load the video clips
@@ -28,29 +29,37 @@ def concatenate_videos(video_files, output_path):
 
 def create_video_with_images_and_audio(image_paths, audio_path, output_filename='final_video.mp4', fps=30):
     # Calculate duration of each image clip based on the audio duration
+    silence_duration = 2
     audio_clip = AudioFileClip(audio_path)
+    audio_clip = add_silence_to_audio(audio_clip, silence_duration=silence_duration) # add 2 sec silence between chapters
     audio_duration = audio_clip.duration
     clip_duration = audio_duration / len(image_paths)
 
     # Create individual video clips for each image
     temp_video_files = []
     for idx, image_path in enumerate(image_paths):
-        temp_output_path = f"temp_clip_{idx}.mp4"
+        temp_output_path = os.path.join(xp_path, f"temp_clip_{idx}.mp4")
+        temp_output_filename = os.path.join(xp_path, "clip_tmp.mp4")
+
+        # temp_output_path = f"temp_clip_{idx}.mp4"
         create_individual_video_clip(image_path, clip_duration, temp_output_path, fps)
         temp_video_files.append(temp_output_path)
+        # create_individual_video_clip(image_path, clip_duration, temp_output_path, fps)
+        # temp_video_files.append(temp_output_path)
+        # len(temp_video_files)
 
-    # Concatenate all video clips
-    concatenate_videos(temp_video_files, output_filename)
+    print("# Concatenate all video clips")
+    concatenate_videos(temp_video_files, temp_output_filename) # concat videos with only image
 
-    # Add the audio to the final video
-    final_clip = VideoFileClip(output_filename)
+    print("# Add the audio to the final video")
+    final_clip = VideoFileClip(temp_output_filename)
     final_clip = final_clip.set_audio(audio_clip)
     final_clip.write_videofile(output_filename, fps=fps)
 
     # Cleanup temporary files
     for file in temp_video_files:
         os.remove(file)
-
+    os.remove(temp_output_path)
 # # Example usage
 # image_paths = ['image1.jpg', 'image2.jpg', 'image3.jpg', ...]  # Add your image paths
 # audio_path = 'your_audio_file.mp3'

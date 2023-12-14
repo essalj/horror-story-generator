@@ -357,6 +357,7 @@ text2mp3(text_string = thanks, voice_name = "onyx", fn=path_voice )
 ## Create mp4
 # from create_mp4 import * 
 from create_mp4 import *
+
 #List all files in the specified directory ending with ...
 def get_file_names(directory, pattern = ".mp3"):
     files = os.listdir(directory)
@@ -387,12 +388,11 @@ for n,c in enumerate(audio_files):
     audio_path = os.path.join(xp_path, audio_files[n])
     print(audio_path, " x ", image_path, " = ", output_mp4)
 
-    if n<3:
-        create_video_with_images_and_audio(image_path, audio_path, output_filename=output_mp4, fps=30)
-    # create_video_with_audio(image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
+    create_video_with_images_and_audio(xp_path=xp_path, image_path, audio_path, output_filename=output_mp4, fps=30)
+        # create_video_with_audio(xp_path=xp_path, image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
     # create_video_with_audio(image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
 
-
+ 
 #joins  all mp4 clipsaudio_files = get_file_names(directory = xp_path, pattern = ".mp3")
 output_final_mp4 = os.path.join(xp_path, "final_mp4.mp4")
 
@@ -400,3 +400,13 @@ path0 = os.getcwd()
 os.chdir(xp_path) # exec in xport library
 concatenate_videos(mp4_clips, output_final_mp4)
 os.chdir(xp_path)
+
+
+# "C:\my\__youtube\videos\2023-12-13_horror\Ghost in the Machine A Chilling AI Experiment Story - audio_1.mp3"
+# ['C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img11.png', 'C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img12.png']
+
+# "C:\my\__youtube\videos\2023-12-13_horror\clip_0.mp4"
+
+# create_video_with_images_and_audio(xp_path=xp_path, image_path = ['C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img11.png', 'C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img12.png'], audio_path = "C:\my\__youtube\videos\2023-12-13_horror\Ghost in the Machine A Chilling AI Experiment Story - audio_1.mp3", 
+# output_filename=output_mp4 = "C:\my\__youtube\videos\2023-12-13_horror\clip_0.mp4", fps=30)
+
