@@ -388,7 +388,9 @@ for n,c in enumerate(audio_files):
     audio_path = os.path.join(xp_path, audio_files[n])
     print(audio_path, " x ", image_path, " = ", output_mp4)
 
-    create_video_with_images_and_audio(xp_path=xp_path, image_path, audio_path, output_filename=output_mp4, fps=30)
+    create_video_with_images_and_audio(image_paths=image_paths, audio_path=audio_path, output_filename=output_mp4, fps=30)
+
+    # create_video_with_images_and_audio(xp_path=xp_path, image_path, audio_path, output_filename=output_mp4, fps=30)
         # create_video_with_audio(xp_path=xp_path, image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
     # create_video_with_audio(image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
 
