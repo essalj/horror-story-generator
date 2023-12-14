@@ -1,4 +1,5 @@
 from moviepy.editor import *
+from moviepy.audio.AudioClip import AudioArrayClip
 import numpy as np
 
 def add_silence_to_audio(original_audio_clip, silence_duration=2.0):
@@ -42,7 +43,6 @@ def create_video_with_images_and_audio(image_paths, audio_path, output_filename=
 # image_paths = ['image1.jpg', 'image2.jpg', 'image3.jpg', ...]  # Add your image paths
 # audio_path = 'your_audio_file.mp3'
 # create_video_with_images_and_audio(image_paths, audio_path)
-
 
 # image_paths = ['C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img11.png' , 'C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img12.png']
 # audio_path = "C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - audio_1.mp3"
