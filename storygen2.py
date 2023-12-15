@@ -64,7 +64,6 @@ openai_api_key = open_file('c:\\my\\git\\api-keys\\openaiapikey.txt')
 client = OpenAI(api_key=openai_api_key)
 
 # openai.api_key = open_file('openaiapikey.txt')
-chatbot = open_file("chatbot_role.txt")
 chapters = [ '1', '2', '3', '4', '5', '6', '7']
 
 # models
@@ -93,11 +92,11 @@ task = open_file("task.txt")
 break_line = "\n" + 50*"-" + "\n"
 
 user_input = ""
-user_input = "The local city bum that gets the chance to participate in a medical study to enhance his brain capacity with AI."
+user_input = "Cinderella as a horror story"
 
 # user_input = "A very scary horror story about an AI girlfriend using its owner to rake profit to its creator. Do not name the AI after known AI's. It is a psycological scary story, NO HAPPY END and NO FRIENDSHIPS!!"
 
-role = chatbot_role
+role = chatbot_role + task
 prompt = role + "\nEvaluate this user input for a scary horror story and develop it into a story idea and template for a 7 page story: " + user_input + ".\nIf there is no user input then create it based on randomly selecting a time in history or future, a well known destination and an out of the ordinary protagonist and then develop the story idea"
 r = chatgpt3(prompt)
 story_idea = r.choices[0].message.content
