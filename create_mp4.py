@@ -48,3 +48,11 @@ def create_video_with_images_and_audio(image_paths, audio_path, output_filename=
 # audio_path = "C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - audio_1.mp3"
 # create_video_with_images_and_audio(image_paths, audio_path, output_filename='final_video.mp4', fps=30)
 
+# concatenates mp4 files
+def concatenate_videos(video_files, output_path):
+    # Load the video clips
+    clips = [VideoFileClip(path) for path in video_files]
+    # clips = [VideoFileClip(os.path.join(xp_path, path)) for path in video_files]
+    final_clip = concatenate_videoclips(clips)
+    final_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
+
