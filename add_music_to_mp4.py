@@ -47,9 +47,57 @@ def add_ambient_music_to_video(video_file_path, music_folder_path, output_file_p
     final_video.write_videofile(output_file_path, codec='libx264', audio_codec='aac')
 
 # Example usage
-# add_ambient_music_to_video(
-#     video_file_path='C:\\my\\__youtube\\videos\\2023-12-13_horror\\final_mp4 - test.mp4',
-#     music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
-#     output_file_path='C:\\my\\__youtube\\videos\\2023-12-13_horror\\final_mp4 - test_music added.mp4',
-#     music_volume=0.1  # Adjust volume as needed
-# )
+# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
