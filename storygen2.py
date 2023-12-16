@@ -400,3 +400,15 @@ os.chdir(xp_path)
 # Adding music sound track
 ###########################
 
+xp_path = 'C:\\my\\__youtube\\videos\\2023-12-16_horror'
+import add_music_to_mp4
+output_final_mp4_music = os.path.join(xp_path, "final_mp4_music.mp4")
+
+add_ambient_music_to_video(
+    video_file_path=output_final_mp4,
+    music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
+    output_file_path=output_final_mp4_music,
+    music_volume=0.1  # Adjust volume as needed
+    )
+
+
