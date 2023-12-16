@@ -66,13 +66,16 @@ client = OpenAI(api_key=openai_api_key)
 # openai.api_key = open_file('openaiapikey.txt')
 chapters = [ '1', '2', '3', '4', '5', '6', '7']
 
+chatbot_role = open_file("chatbot_role.txt")
+task = open_file("task.txt")
+
 # models
 # model = "gpt-4-1106-preview"
 # model = "gpt-3.5-turbo-1106"
-def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalty=0):
+def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalty=0, system_role=chatbot_role):
     messagein = [
         {"role": "user", "content": userinput },
-        {"role": "system", "content": chatbot}]
+        {"role": "system", "content": system_role}]
     # response = openai.ChatCompletion.create(
     response = client.chat.completions.create(
         model="gpt-3.5-turbo-1106",
@@ -92,7 +95,7 @@ task = open_file("task.txt")
 break_line = "\n" + 50*"-" + "\n"
 
 user_input = ""
-user_input = "Cinderella as a horror story"
+user_input = "Cinderella as a horror story, BUT CHANGE THE NAME TO SOMETHING ALKE"
 
 # user_input = "A very scary horror story about an AI girlfriend using its owner to rake profit to its creator. Do not name the AI after known AI's. It is a psycological scary story, NO HAPPY END and NO FRIENDSHIPS!!"
 
@@ -162,23 +165,6 @@ count_words(improved_draft)
 print(break_line)
 
 
-# ###################
-# #### Draft story
-# idea = story_idea
-# chatbot_role = open_file("chatbot_role.txt")
-# task = open_file("task.txt")
-# role = chatbot_role + task
-# task1 = "Fill out a story idea template for a horror story named '" + title + "'. Base it on the story idea below."
-# task2 = "Fill out a story idea template for a horror story named '" +  title + "'. Base it on the story idea above."
-# prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
-# r = chatgpt3(prompt)
-# draftX = r.choices[0].message.content
-# print(break_line + prompt)
-# print(draftX)
-# count_words(draftX)
-# print(break_line)
-
-
 
 #Build the critic comments outlines - story line on 7 chapters
 idea = improved_draft
@@ -235,8 +221,8 @@ print(break_line)
 ## description
 idea = story_idea
 role = chatbot_role + task
-task1 = "Create a seo optimized description to the youtube horror story descibed in the summaries below. Do not list the chapters. Use mark down and emojies.\n" 
-task2 = "Create a seo optimized description to the youtube horror story descibed in the summaries above. Do not list the chapters. Use mark down and emojies." 
+task1 = "Create a seo and youtube search optimized description to the youtube horror story descibed in the summaries below. Do not list the chapters. Use mark down and emojies.\n" 
+task2 = "Create a seo and youtube search optimized description to the youtube horror story descibed in the summaries above. Do not list the chapters. Use mark down and emojies." 
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 r = chatgpt3(prompt)
 desc = r.choices[0].message.content
@@ -306,7 +292,13 @@ for n,c in enumerate(chapters_):
     
     for j in range(1, 1 + images_pr_chapter):
         print(j)
-        img_prompt = '''You are an experienced youtube artist. Can you help me create a scary picture for this chapter in a horror story. \nMake sure the image is dark and haunting, but unresistable - so the audience cannot help them selves. Do not add any text to the picture. \n--------------\nEnd the prompt with the keywords: 4k, cinematic, b/w, photorealistic, very scary. \n\nDescription: \n''' + c
+        img_prompt = '''You are an experienced youtube artist. Can you help me create a scary picture for this chapter in a horror story. 
+        Make sure the image is dark and haunting, but unresistable. 
+        DO NOT PUT TEXT ON THE IMAGE!!!. 
+        If you get  an error when creating an image then rephrase and try again!
+        --------------
+        End the prompt with the keywords: 4k, cinematic, b/w, photorealistic, very scary. 
+        Description: \n''' + c
         path_img = os.path.join(xp_path, fn + " - img")
         image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc + j)
 
@@ -404,11 +396,7 @@ concatenate_videos(mp4_clips, output_final_mp4)
 os.chdir(xp_path)
 
 
-# "C:\my\__youtube\videos\2023-12-13_horror\Ghost in the Machine A Chilling AI Experiment Story - audio_1.mp3"
-# ['C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img11.png', 'C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img12.png']
-
-# "C:\my\__youtube\videos\2023-12-13_horror\clip_0.mp4"
-
-# create_video_with_images_and_audio(xp_path=xp_path, image_path = ['C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img11.png', 'C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img12.png'], audio_path = "C:\my\__youtube\videos\2023-12-13_horror\Ghost in the Machine A Chilling AI Experiment Story - audio_1.mp3", 
-# output_filename=output_mp4 = "C:\my\__youtube\videos\2023-12-13_horror\clip_0.mp4", fps=30)
+###########################
+# Adding music sound track
+###########################
 
