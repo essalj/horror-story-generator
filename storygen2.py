@@ -67,6 +67,8 @@ client = OpenAI(api_key=openai_api_key)
 chapters = [ '1', '2', '3', '4', '5', '6', '7']
 
 chatbot_role = open_file("chatbot_role.txt")
+chatbot_artist_role = open_file("chatbot_artist_role.txt")
+
 task = open_file("task.txt")
 
 # models
@@ -261,8 +263,6 @@ from io import BytesIO
 
 #Dalle3
 def chatgpt_dalle(prompt="A white siamese cat balancing on a sign saying TEST", fn="image", i=1):
-    # Presuming `client.images.generate` is a valid method call for the API client you're using
-    # response = openai.Image.create(
     response = client.images.generate(
         model="dall-e-3",
         prompt=prompt,
@@ -286,28 +286,80 @@ def chatgpt_dalle(prompt="A white siamese cat balancing on a sign saying TEST", 
 #image_url, filename = chatgpt_dalle("a blue cat", fn="my_cat_image_", i=42)
 
 
-images_pr_chapter = 2
-for n,c in enumerate(chapters_):
-    nc = (n*10)
-    
-    for j in range(1, 1 + images_pr_chapter):
-        print(j)
-        img_prompt = '''You are an experienced youtube artist. Can you help me create a scary picture for this chapter in a horror story. 
-        Make sure the image is dark and haunting, but unresistable. 
-        DO NOT PUT TEXT ON THE IMAGE!!!. 
-        If you get  an error when creating an image then rephrase and try again!
-        --------------
-        End the prompt with the keywords: 4k, cinematic, b/w, photorealistic, very scary. 
-        Description: \n''' + c
-        path_img = os.path.join(xp_path, fn + " - img")
-        image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc + j)
 
+
+# for n,c in enumerate(chapters_):
+#     nc = (n + 1) * 10
+    
+#     for j in range(1, 1 + images_pr_chapter):
+#         print(j)
+#         img_prompt = '''You are an experienced youtube artist. Can you help me create a scary image for this chapter in a horror story. 
+#         Make sure the image is dark and haunting, but unresistable. 
+#         DO NOT PUT TEXT ON THE IMAGE!!!. 
+#         End the prompt with the keywords: 4k, cinematic, b/w, photorealistic, very scary. 
+#         Please write the prompt so it does not violate any copyright rights or content issues.
+#         If you get an error from Dalle related to content policy or something else when creating an image then rephrase the prompt and try again!
+#         --------------
+#         Base your prompt on this chapter description: \n''' + c
+#         path_img = os.path.join(xp_path, fn + " - img")
+#         print(break_line + path_img)
+#         image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc + j)
+
+
+def images_for_story():
+    images_pr_chapter = 2
+    for n,c in enumerate(chapters_):
+        nc = (n + 1) * 10
+        
+        for j in range(1, 1 + images_pr_chapter):
+            print(j)
+            system_txt = chatbot_artist_role
+            user_txt = '''Can you help me create a perfect prompt for DALLE 3 for a horrifying image for this chapter in a horror story. 
+            Make sure the image is dark and haunting, but unresistable. 
+            DO NOT PUT TEXT ON THE IMAGE!!!. 
+            End the prompt with the keywords: 4k, cinematic,vibrant, photorealistic, very scary. 
+            Please write the prompt so it does not violate any copyright rights or content issues.
+            --------------
+            Base your prompt on this chapter description: \n''' + c
+
+            r = chatgpt3 (userinput = user_txt, system_role=system_txt)
+            img_prompt = r.choices[0].message.content
+
+            rephrase_txt = '''If you get an error from Dalle related to content policy or something else when creating an image
+            then rephrase the prompt and try again!
+            '''
+            dalle_prompt = img_prompt + break_line + rephrase_txt
+            path_img = os.path.join(xp_path, fn + " - img")
+            print(dalle_prompt + break_line + path_img)
+            image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc + j)
+
+images_for_story()
+  
   
 # create images for youtube thumbnail
-ytn_prompt = '''You are an experienced youtube artist. Can you help me create a thumbnail for my channel for a horror story. The horror story is described in this story board. Make sure the image is dark and haunting, but unresistable - so the audience cannot help them selves. Do not add any text to the picture. End the prompt with the keywords: 4k, cinematic, b/w, photorealistic, very scary. \n\nDescription: \n''' + desc
-path_img = os.path.join(xp_path, fn + " - ytmb")
-image_url, filename = chatgpt_dalle(prompt = ytn_prompt, fn= path_img, i=9999)
+def youtube_thumbnail():
+        system_txt = chatbot_artist_role
+        user_txt = '''Can you help me create a perfect prompt for DALLE 3 for the perfect thumbnail image for this horror story.
+        I want you yo use our extensive knowledge of how a thumbnail that attracts millions of clicks in youtube looks. 
+        Make sure the image is dark and haunting, but unresistable. 
+        End the prompt with the keywords: 4k, cinematic, photorealistic, horrifying  ambience. 
+        Please write the prompt so it does not violate any copyright rights or content issues.
+        --------------
+        Base your prompt on this story description: \n''' + desc
 
+        r = chatgpt3 (userinput = user_txt, system_role=system_txt)
+        img_prompt = r.choices[0].message.content
+
+        rephrase_txt = '''If you get an error from Dalle related to content policy or something else when creating an image
+          then rephrase the prompt and try again!
+        '''
+        dalle_prompt = img_prompt + break_line + rephrase_txt
+        path_img = os.path.join(xp_path, fn + " - img")
+        print(dalle_prompt + break_line + path_img)
+        path_img = os.path.join(xp_path, fn + " - ytmb")
+        image_url, filename = chatgpt_dalle(prompt = ytn_prompt, fn= path_img, i=9999)
+
+youtube_thumbnail()
 
 
 ##################
@@ -375,20 +427,18 @@ for n,c in enumerate(audio_files):
         image_paths = [os.path.join(xp_path, image_files[img_base_no]), os.path.join(xp_path, image_files[img_base_no+1])] 
         # image_path = os.path.join(xp_path, image_files[n])
     except:
-        image_paths = os.path.join(xp_path, image_files[-1])
+        image_paths = [os.path.join(xp_path, image_files[-1]), os.path.join(xp_path, image_files[-1])]
+
         
     audio_path = os.path.join(xp_path, audio_files[n])
     print(audio_path, " x ", image_paths, " = ", output_mp4)
 
     create_video_with_images_and_audio(image_paths=image_paths, audio_path=audio_path, output_filename=output_mp4, fps=30)
 
-    # create_video_with_images_and_audio(xp_path=xp_path, image_path, audio_path, output_filename=output_mp4, fps=30)
-        # create_video_with_audio(xp_path=xp_path, image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
-    # create_video_with_audio(image_path = image_path, audio_path = audio_path, output_filename=output_mp4, fps=30, silence_duration = 2)
-
  
 #joins  all mp4 clipsaudio_files = get_file_names(directory = xp_path, pattern = ".mp3")
-output_final_mp4 = os.path.join(xp_path, "final_mp4.mp4")
+# xp_path = 'C:\\my\\__youtube\\videos\\2023-12-16_horror'
+output_final_mp4 = os.path.join(xp_path, "concat_clips_mp4.mp4")
 
 path0 = os.getcwd()
 os.chdir(xp_path) # exec in xport library
@@ -399,9 +449,7 @@ os.chdir(xp_path)
 ###########################
 # Adding music sound track
 ###########################
-
-xp_path = 'C:\\my\\__youtube\\videos\\2023-12-16_horror'
-import add_music_to_mp4
+from add_music_to_mp4 import * 
 output_final_mp4_music = os.path.join(xp_path, "final_mp4_music.mp4")
 
 add_ambient_music_to_video(

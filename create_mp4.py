@@ -56,3 +56,4 @@ def concatenate_videos(video_files, output_path):
     final_clip = concatenate_videoclips(clips)
     final_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
 
+# concatenate_videos(mp4_clips, output_final_mp4)

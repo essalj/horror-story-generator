@@ -47,57 +47,24 @@ def add_ambient_music_to_video(video_file_path, music_folder_path, output_file_p
     final_video.write_videofile(output_file_path, codec='libx264', audio_codec='aac')
 
 # Example usage
-# 
+# add_ambient_music_to_video(
+#     video_file_path=output_final_mp4,
+#     music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
+#     output_file_path=output_final_mp4_music,
+#     music_volume=0.1  # Adjust volume as needed
+#     )
 
 
+###########################
+# Adding music sound track
+###########################
+from add_music_to_mp4 import * 
+output_final_mp4_music = os.path.join(xp_path, "final_mp4_music.mp4")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+add_ambient_music_to_video(
+    video_file_path=output_final_mp4,
+    music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
+    output_file_path=output_final_mp4_music,
+    music_volume=0.1  # Adjust volume as needed
+    )
 
