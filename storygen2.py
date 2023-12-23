@@ -97,12 +97,21 @@ task = open_file("task.txt")
 break_line = "\n" + 50*"-" + "\n"
 
 user_input = ""
-user_input = "Cinderella as a horror story, BUT CHANGE THE NAME TO SOMETHING ALKE"
+#user_input = "Cinderella as a horror story, BUT CHANGE THE NAME TO SOMETHING ALKE"
 
 # user_input = "A very scary horror story about an AI girlfriend using its owner to rake profit to its creator. Do not name the AI after known AI's. It is a psycological scary story, NO HAPPY END and NO FRIENDSHIPS!!"
 
 role = chatbot_role + task
-prompt = role + "\nEvaluate this user input for a scary horror story and develop it into a story idea and template for a 7 page story: " + user_input + ".\nIf there is no user input then create it based on randomly selecting a time in history or future, a well known destination and an out of the ordinary protagonist and then develop the story idea"
+prompt = role + "\nEvaluate this user input for a scary horror story." + '''
+                If there is no user input then randomly select:
+                 - a time in history or future; 
+                 - select an entirely random but well known location yjat fits with the time period;¨
+                 - select an uncanny location so NO woods or haunted houses;
+                 - select by random and an out of the ordinary protagonist;
+                Based on inspiratuon above develop a story template for a 7 page horror story that is different from anyting you have ever read.
+                I want the story to be very scary 
+                  '''
+
 r = chatgpt3(prompt)
 story_idea = r.choices[0].message.content
 print(break_line + "\n" + story_idea + break_line)
@@ -153,8 +162,8 @@ print(break_line)
 ## Implement story comments by critic
 idea = "Draft story: " + story_idea + break_line + "\nCritics comments:" + critic
 role = chatbot_role + task
-task1 = "Read through the draft story and the critic notes below. Use the critics comments to improve the draft."
-task2 = "Read through the draft story and the critic notes above. Use the critics comments to improve the draft."
+task1 = "Go through the draft story and the critic notes below. Consider carefully how you want to use the critics comments to improve the draft."
+task2 = "Go through the draft story and the critic notes above. Consider carefully how you want to use the critics comments to improve the draft."
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 r = chatgpt3(prompt)
 improved_draft = r.choices[0].message.content
@@ -171,8 +180,8 @@ print(break_line)
 #Build the critic comments outlines - story line on 7 chapters
 idea = improved_draft
 role = chatbot_role + task
-task1 = "Write a 7 chapter detailed outline for the horror story named '" + title + "' based on the following draft story. Make it very detailed and explicit so the story can be written from that as sole input:"
-task2 = "Write a 7 chapter detailed outline for the horror story named '" + title + "' based on the draft story above. Make it very detailed and explicit so the story can be written from that as sole input. REMEMBER I WANT EXACTLY 7 CHAPTERS!!!!"
+task1 = "Write a detailed outline for each of the 7 chapters in the horror story named '" + title + "' based on the following draft story. Write the outline one chapter at a time, Make it very detailed and explicit so the story can be written from that as sole input."
+task2 = "Write a detailed outline for each of the 7 chapters in the horror story named '" + title + "' based on the above draft story. Write the outline one chapter at a time, Make it very detailed and explicit so the story can be written from that as sole input."
 outline2 = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 r = chatgpt3(outline2)
 outline3 = r.choices[0].message.content
@@ -186,7 +195,6 @@ path_outline = os.path.join(cwd_path, "outline.txt")
 save_file(path_outline, outline3)
 count_words(outline3)
 print(break_line)
-
 
 
 #######################
@@ -287,27 +295,9 @@ def chatgpt_dalle(prompt="A white siamese cat balancing on a sign saying TEST", 
 
 
 
-
-# for n,c in enumerate(chapters_):
-#     nc = (n + 1) * 10
-    
-#     for j in range(1, 1 + images_pr_chapter):
-#         print(j)
-#         img_prompt = '''You are an experienced youtube artist. Can you help me create a scary image for this chapter in a horror story. 
-#         Make sure the image is dark and haunting, but unresistable. 
-#         DO NOT PUT TEXT ON THE IMAGE!!!. 
-#         End the prompt with the keywords: 4k, cinematic, b/w, photorealistic, very scary. 
-#         Please write the prompt so it does not violate any copyright rights or content issues.
-#         If you get an error from Dalle related to content policy or something else when creating an image then rephrase the prompt and try again!
-#         --------------
-#         Base your prompt on this chapter description: \n''' + c
-#         path_img = os.path.join(xp_path, fn + " - img")
-#         print(break_line + path_img)
-#         image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc + j)
-
-
 def images_for_story():
-    images_pr_chapter = 2
+    images_pr_chapter = 3
+    image_path = []
     for n,c in enumerate(chapters_):
         nc = (n + 1) * 10
         
@@ -329,7 +319,13 @@ def images_for_story():
             then rephrase the prompt and try again!
             '''
             dalle_prompt = img_prompt + break_line + rephrase_txt
-            path_img = os.path.join(xp_path, fn + " - img")
+            try:
+                path_img = os.path.join(xp_path, fn + " - img")
+            except:
+                path_img = image_path[j - 1]
+            image_path.append(path_img)
+            
+            
             print(dalle_prompt + break_line + path_img)
             image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc + j)
 
@@ -337,35 +333,35 @@ images_for_story()
   
   
 # create images for youtube thumbnail
+
+
 def youtube_thumbnail():
         system_txt = chatbot_artist_role
         user_txt = '''Can you help me create a perfect prompt for DALLE 3 for the perfect thumbnail image for this horror story.
-        I want you yo use our extensive knowledge of how a thumbnail that attracts millions of clicks in youtube looks. 
         Make sure the image is dark and haunting, but unresistable. 
-        End the prompt with the keywords: 4k, cinematic, photorealistic, horrifying  ambience. 
         Please write the prompt so it does not violate any copyright rights or content issues.
+        If you insert text then double and triple check to be absolute sure the spelling is right!!
         --------------
         Base your prompt on this story description: \n''' + desc
 
-        r = chatgpt3 (userinput = user_txt, system_role=system_txt)
-        img_prompt = r.choices[0].message.content
+        for j in range(1,8):
+            r = chatgpt3 (userinput = user_txt, system_role=system_txt)
+            img_prompt = r.choices[0].message.content
 
-        rephrase_txt = '''If you get an error from Dalle related to content policy or something else when creating an image
-          then rephrase the prompt and try again!
-        '''
-        dalle_prompt = img_prompt + break_line + rephrase_txt
-        path_img = os.path.join(xp_path, fn + " - img")
-        print(dalle_prompt + break_line + path_img)
-        path_img = os.path.join(xp_path, fn + " - ytmb")
-        image_url, filename = chatgpt_dalle(prompt = ytn_prompt, fn= path_img, i=9999)
-
+            rephrase_txt = '''If you get an error from Dalle related to content policy or something else when creating an image
+            then rephrase the prompt and try again!
+            '''
+            dalle_prompt = img_prompt + break_line + rephrase_txt
+            path_img = os.path.join(xp_path, fn + " - ytmb")
+            # path_img = os.path.join(xp_path, fn + " - img")
+            print(dalle_prompt + break_line + path_img)
+            image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=9990 + j)
 youtube_thumbnail()
 
 
 ##################
 #   VOICE OVER   #
 ##################
-
 #tt = story
 # scenes = tt.split("-----")
 
@@ -443,7 +439,7 @@ output_final_mp4 = os.path.join(xp_path, "concat_clips_mp4.mp4")
 path0 = os.getcwd()
 os.chdir(xp_path) # exec in xport library
 concatenate_videos(mp4_clips, output_final_mp4)
-os.chdir(xp_path)
+os.chdir(path0)
 
 
 ###########################
