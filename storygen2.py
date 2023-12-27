@@ -1,5 +1,5 @@
 #pip install Pillow
-
+# pip install pydub
 import re
 import os
 import openai
@@ -74,13 +74,13 @@ task = open_file("task.txt")
 # models
 # model = "gpt-4-1106-preview"
 # model = "gpt-3.5-turbo-1106"
-def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalty=0, system_role=chatbot_role):
+def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalty=0, system_role=chatbot_role, model = "gpt-3.5-turbo-1106"):
     messagein = [
         {"role": "user", "content": userinput },
         {"role": "system", "content": system_role}]
     # response = openai.ChatCompletion.create(
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo-1106",
+        model = model,
         temperature=temperature,
         frequency_penalty=frequency_penalty,
         presence_penalty=presence_penalty,
@@ -92,25 +92,25 @@ def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalt
 
 #######################
 #### Shape user input
-chatbot_role = open_file("chatbot_role.txt")
 task = open_file("task.txt")
 break_line = "\n" + 50*"-" + "\n"
 
-user_input = ""
-#user_input = "Cinderella as a horror story, BUT CHANGE THE NAME TO SOMETHING ALKE"
+user_input = "Write me a scifi horror story"
+#user_input = "Cinderella as a horror story, BUT CHANGE THE NAME TO SOMETHING ALIKE"
 
 # user_input = "A very scary horror story about an AI girlfriend using its owner to rake profit to its creator. Do not name the AI after known AI's. It is a psycological scary story, NO HAPPY END and NO FRIENDSHIPS!!"
 
 role = chatbot_role + task
-prompt = role + "\nEvaluate this user input for a scary horror story." + '''
+prompt = role + "\nEvaluate this user input for a scary horror story. User input: " + user_input + '''
                 If there is no user input then randomly select:
-                 - a time in history or future; 
-                 - select an entirely random but well known location yjat fits with the time period;¨
+                 - a fascinating time in history or future; 
+                 - select an entirely random but well known location that fits with the time period;¨
                  - select an uncanny location so NO woods or haunted houses;
                  - select by random and an out of the ordinary protagonist;
                 Based on inspiratuon above develop a story template for a 7 page horror story that is different from anyting you have ever read.
-                I want the story to be very scary 
-                  '''
+                I want the story to be very scary.
+                #   '''
+# print(prompt)
 
 r = chatgpt3(prompt)
 story_idea = r.choices[0].message.content
@@ -177,11 +177,11 @@ print(break_line)
 
 
 
-#Build the critic comments outlines - story line on 7 chapters
+#Build on the revised outlines - a story line on 7 chapters
 idea = improved_draft
 role = chatbot_role + task
-task1 = "Write a detailed outline for each of the 7 chapters in the horror story named '" + title + "' based on the following draft story. Write the outline one chapter at a time, Make it very detailed and explicit so the story can be written from that as sole input."
-task2 = "Write a detailed outline for each of the 7 chapters in the horror story named '" + title + "' based on the above draft story. Write the outline one chapter at a time, Make it very detailed and explicit so the story can be written from that as sole input."
+task1 = "Write a detailed outline for each of the 7 chapters in the horror story named '" + title + "' based on the following draft story. "
+task2 = "Write a detailed outline for each of the 7 chapters in the horror story named '" + title + "' based on the above draft story. Write the outline one chapter at a time, Make it very detailed and explicit so the story can be written from the outline as sole input."
 outline2 = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 r = chatgpt3(outline2)
 outline3 = r.choices[0].message.content
@@ -189,11 +189,13 @@ outline3 = r.choices[0].message.content
 print("\n\nOutline Chapters")
 print(break_line)
 print(prompt)
+print(break_line)
 print(outline3)
+count_words(outline3)
+print(break_line)
 
 path_outline = os.path.join(cwd_path, "outline.txt")
 save_file(path_outline, outline3)
-count_words(outline3)
 print(break_line)
 
 
@@ -201,8 +203,8 @@ print(break_line)
 ## Write the chapters
 idea = outline3
 role = chatbot_role + task
-task1 = "Read all the chapter outlines below in order to get the right context. Then WRITE CHAPTER <<NUM>> ONLY!!! Write in great detail and in a vivid and intriguing language from the following information."
-task2 = "Read all the chapter outlines above in order to get the right context. Then WRITE CHAPTER <<NUM>> ONLY. WRITE IN GREAT DETAIL AND IN A VIVID AND INTRIGUING LANGUAGE FROM THE INFORMATION ABOVE. Make sure you only write words meant to be in the final story, so no editorial notes etc.!!"
+task1 = "Read all the chapter outlines below in order to get the right context for your writing. Then WRITE CHAPTER <<NUM>> ONLY!!! Write in great detail and in a vivid and intriguing language from the following information."
+task2 = "Read all the chapter outlines above in order to get the right context for your writing. Then WRITE CHAPTER <<NUM>> ONLY. WRITE IN GREAT DETAIL AND IN A VIVID AND INTRIGUING LANGUAGE FROM THE INFORMATION ABOVE. Make sure you only write words meant to be in the final story, so no editorial notes etc.!!"
 write_chapter = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 print("\n\nChapters")
 print(break_line)
@@ -215,7 +217,7 @@ for chapter in chapters:
     # chap = open_file("chapters.txt")
     # wchapter = open_file("write_chapters.txt").replace("<<ROLE>>", role).replace("<<NUM>>", chapter).replace("<<CHAP>>", chap)
     wchapter = write_chapter.replace("<<NUM>>", chapter)
-    r = chatgpt3(wchapter)
+    r = chatgpt3(wchapter, model = "gpt-4-1106-preview")
     wchapter2 = r.choices[0].message.content
     chapters_.append(wchapter2)
     print(wchapter2)
@@ -367,22 +369,90 @@ youtube_thumbnail()
 
 # tts-1 is optimized for real-time use cases and tts-1-hd is optimized for
 # https://platform.openai.com/docs/guides/text-to-speech/voice-options - 6 preset voices (preferred grandmother = Shimmer, preferred male reader = Echo)
-def text2mp3(text_string = "testing", voice_name = "onyx", fn = fn):
-  speech_file_path = fn + ".mp3"
-  response = client.audio.speech.create(
-    model = "tts-1",
-    voice = "shimmer",
-    input = text_string
-  )
-  response.stream_to_file(speech_file_path)
-# text2mp3(text_string = tt, voice_name = "shimmer", fn="Lullaby")
+# def text2mp3(text_string = "testing", voice_name = "onyx", fn = fn):
+#   speech_file_path = fn + ".mp3"
+#   response = client.audio.speech.create(
+#     model = "tts-1",
+#     voice = "shimmer",
+#     input = text_string
+#   )
+#   response.stream_to_file(speech_file_path)
+# # text2mp3(text_string = tt, voice_name = "shimmer", fn="Lullaby")
+
+from moviepy.editor import AudioFileClip, concatenate_audioclips
+
+def split_text(text, max_length=4096):
+    """
+    Splits the text into chunks, each of maximum length `max_length`.
+    Tries to split at sentence ends for natural sounding speech.
+    """
+    words = text.split()
+    current_chunk = []
+    for word in words:
+        if len(' '.join(current_chunk + [word])) > max_length:
+            yield ' '.join(current_chunk)
+            current_chunk = [word]
+        else:
+            current_chunk.append(word)
+    yield ' '.join(current_chunk)
+from moviepy.editor import AudioFileClip, concatenate_audioclips
+import os
+
+
+def text2mp3(text_string="testing", voice_name="onyx", fn="output"):
+    if len(text_string) <= 4096:
+        # Process the entire text if it's shorter than 4096 characters
+        speech_file_path = f"{fn}.mp3"
+        response = client.audio.speech.create(
+            model="tts-1",
+            voice=voice_name,
+            input=text_string
+        )
+        response.stream_to_file(speech_file_path)
+    else:
+        # Split and process the text in chunks
+        audio_clips = []
+        temp_files = []
+        for index, text_chunk in enumerate(split_text(text_string)):
+            speech_file_path = f"{fn}_{index}.mp3"
+            temp_files.append(speech_file_path)
+            response = client.audio.speech.create(
+                model="tts-1",
+                voice=voice_name,
+                input=text_chunk
+            )
+            response.stream_to_file(speech_file_path)
+            audio_clip = AudioFileClip(speech_file_path)
+            audio_clips.append(audio_clip)
+
+        # Concatenate audio clips
+        concatenated_audio = concatenate_audioclips(audio_clips)
+        concatenated_audio.write_audiofile(fn + ".mp3")
+
+        # Close the clips and delete temporary files
+        for clip in audio_clips:
+            clip.close()
+
+        for file_path in temp_files:
+            os.remove(file_path)
+
+# Example usage
+# text2mp3(text_string="Your long text here...", voice_name="shimmer", fn="Lullaby")
+
+# Example usage
+# text2mp3(text_string="Your long text here...", voice_name="shimmer", fn="Lullaby")
+
+
+
+from moviepy.editor import AudioFileClip, concatenate_audioclips
 
 # create voice for chapters
 for n,c in enumerate(chapters_):
     nc = n + 1
     path_voice = os.path.join(xp_path, fn + " - audio_" + str(nc))
     print(path_voice)
-    text2mp3(text_string = c, voice_name = "echo", fn=path_voice)
+    if nc>4:
+        text2mp3(text_string = c, voice_name = "echo", fn=path_voice)
 
 
 #voice - thanks
@@ -425,14 +495,14 @@ for n,c in enumerate(audio_files):
     except:
         image_paths = [os.path.join(xp_path, image_files[-1]), os.path.join(xp_path, image_files[-1])]
 
-        
     audio_path = os.path.join(xp_path, audio_files[n])
     print(audio_path, " x ", image_paths, " = ", output_mp4)
 
     create_video_with_images_and_audio(image_paths=image_paths, audio_path=audio_path, output_filename=output_mp4, fps=30)
 
  
-#joins  all mp4 clipsaudio_files = get_file_names(directory = xp_path, pattern = ".mp3")
+#joins  all mp4 
+# clipsaudio_files = get_file_names(directory = xp_path, pattern = ".mp3")
 # xp_path = 'C:\\my\\__youtube\\videos\\2023-12-16_horror'
 output_final_mp4 = os.path.join(xp_path, "concat_clips_mp4.mp4")
 
@@ -446,13 +516,13 @@ os.chdir(path0)
 # Adding music sound track
 ###########################
 from add_music_to_mp4 import * 
-output_final_mp4_music = os.path.join(xp_path, "final_mp4_music.mp4")
 
+output_final_mp4_music = os.path.join(xp_path, "final_mp4_music.mp4")
 add_ambient_music_to_video(
     video_file_path=output_final_mp4,
     music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
     output_file_path=output_final_mp4_music,
-    music_volume=0.1  # Adjust volume as needed
+    music_volume=0.06  # Adjust volume as needed
     )
 
 

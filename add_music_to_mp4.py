@@ -1,4 +1,5 @@
 from moviepy.editor import *
+from moviepy.editor import AudioFileClip, concatenate_audioclips
 import os
 import random
 
@@ -25,10 +26,17 @@ def combine_ambient_tracks(folder_path, video_duration, volume=0.3):
 
     # Concatenate the looped audio tracks
     final_combined_audio = concatenate_audioclips(looped_tracks).set_duration(video_duration)
-
     return final_combined_audio.volumex(volume)
 
 
+def adjust_volume(audio_clip, target_dBFS=-20.0):
+    """
+    Adjust the volume of an audio clip to a target dBFS.
+    """
+    change_in_dBFS = target_dBFS - audio_clip.dBFS
+    return audio_clip.volumex(10 ** (change_in_dBFS / 20))
+
+# adjust_volume("C:\\my\\__youtube\\videos\horror_music\\Kirwani - Teental - Aditya Verma, Subir Dev - Copy.mp3", target_dBFS=-20.0)
 
 def add_ambient_music_to_video(video_file_path, music_folder_path, output_file_path, music_volume=0.3):
     # Load the original video
@@ -36,6 +44,9 @@ def add_ambient_music_to_video(video_file_path, music_folder_path, output_file_p
     
     # Load and combine ambient music tracks, adjust the volume, and ensure it covers the video duration
     ambient_audio = combine_ambient_tracks(music_folder_path, video.duration, volume=music_volume)
+
+    # equalize volume on music track
+    # equalized_music_tracks = adjust_volume(audio_clip=ambient_audio, target_dBFS=-20.0)
 
     # Combine the original audio with the ambient music
     final_audio = CompositeAudioClip([video.audio, ambient_audio])
@@ -51,7 +62,7 @@ def add_ambient_music_to_video(video_file_path, music_folder_path, output_file_p
 #     video_file_path=output_final_mp4,
 #     music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
 #     output_file_path=output_final_mp4_music,
-#     music_volume=0.1  # Adjust volume as needed
+#     music_volume=0.07  # Adjust volume as needed
 #     )
 
 
@@ -67,4 +78,15 @@ def add_ambient_music_to_video(video_file_path, music_folder_path, output_file_p
 #     output_file_path=output_final_mp4_music,
 #     music_volume=0.1  # Adjust volume as needed
 #     )
+
+
+# output_final_mp4_music = os.path.join(xp_path, "final_mp4_music.mp4")
+# add_ambient_music_to_video(
+#     video_file_path=output_final_mp4,
+#     music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
+#     output_file_path=output_final_mp4_music,
+#     music_volume=0.06  # Adjust volume as needed
+#     )
+
+
 
