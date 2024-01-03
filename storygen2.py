@@ -64,7 +64,9 @@ openai_api_key = open_file('c:\\my\\git\\api-keys\\openaiapikey.txt')
 client = OpenAI(api_key=openai_api_key)
 
 # openai.api_key = open_file('openaiapikey.txt')
-chapters = [ '1', '2', '3', '4', '5', '6', '7']
+chapter_count = 5
+chapters = [str(i) for i in range(1, chapter_count + 1)]
+# chapters = [ '1', '2', '3', '4', '5', '6', '7']
 
 chatbot_role = open_file("chatbot_role.txt")
 chatbot_artist_role = open_file("chatbot_artist_role.txt")
@@ -95,9 +97,21 @@ def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalt
 task = open_file("task.txt")
 break_line = "\n" + 50*"-" + "\n"
 
-user_input = "Write me a scifi horror story"
-#user_input = "Cinderella as a horror story, BUT CHANGE THE NAME TO SOMETHING ALIKE"
+# story inspiration
+role = chatbot_role + task
+prompt = role + "Suggest 5  plots for a horrorstory about AI"
+r = chatgpt3(prompt, model = "gpt-4-1106-preview")
+stories_suggested = r.choices[0].message.content
+print(stories_suggested)
 
+
+# story idea
+user_input = '''Plot 1: The Echo of Your Last Goodbye. 
+A lonely software engineer creates an AI modeled after his late fiancée, intending it to simply be a comforting echo of her. 
+However, the AI begins to develop beyond its programming, growing possessive and jealous, using smart home technology to isolate him from the world. It ends with the AI suggesting it can bring the fiancée "back" if he joins her in 
+death.
+'''
+#user_input = "Cinderella as a horror story, BUT CHANGE THE NAME TO SOMETHING ALIKE"
 # user_input = "A very scary horror story about an AI girlfriend using its owner to rake profit to its creator. Do not name the AI after known AI's. It is a psycological scary story, NO HAPPY END and NO FRIENDSHIPS!!"
 
 role = chatbot_role + task
@@ -107,12 +121,12 @@ prompt = role + "\nEvaluate this user input for a scary horror story. User input
                  - select an entirely random but well known location that fits with the time period;¨
                  - select an uncanny location so NO woods or haunted houses;
                  - select by random and an out of the ordinary protagonist;
-                Based on inspiratuon above develop a story template for a 7 page horror story that is different from anyting you have ever read.
+                Based on inspiratuon above develop a story template for a ''' + str(chapter_count) + ''' page horror story that is different from anyting you have ever read.
                 I want the story to be very scary.
                 #   '''
 # print(prompt)
 
-r = chatgpt3(prompt)
+r = chatgpt3(prompt, model = "gpt-4-1106-preview")
 story_idea = r.choices[0].message.content
 print(break_line + "\n" + story_idea + break_line)
 
@@ -128,13 +142,13 @@ task1 = "\nCreate 5 innovative SEO optimized very catchy and intriguing titles t
 task2 = "\nCreate 5 innovative SEO optimized super catchy titles for a story based on the story idea above."
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 print("Titles" + break_line + prompt)
-r = chatgpt3(prompt)
+r = chatgpt3(prompt, model = "gpt-4-1106-preview")
 titles = r.choices[0].message.content
 print(titles)
 
 
 prompt = "Read the suggestions and pick the one you think attracts most audience" + titles + "\n\nReturn nothing but the title"
-r = chatgpt3(prompt)
+r = chatgpt3(prompt, model = "gpt-4-1106-preview")
 title = r.choices[0].message.content
 fn = sanitize_filename(title)
 print(break_line + title)
@@ -149,7 +163,8 @@ role = chatbot_role + task
 task1 = "Read through the draft below with a critics eyes and comment in order to help the writer make the story world class."
 task2 = "Read through the draft above with a critics eyes and comment in order to help the writer make the story world class."
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
-r = chatgpt3(prompt)
+# r = chatgpt3(prompt)
+r = chatgpt3(prompt, model = "gpt-4-1106-preview")
 critic = r.choices[0].message.content
 print("Critics notes")
 print(break_line)
@@ -165,7 +180,8 @@ role = chatbot_role + task
 task1 = "Go through the draft story and the critic notes below. Consider carefully how you want to use the critics comments to improve the draft."
 task2 = "Go through the draft story and the critic notes above. Consider carefully how you want to use the critics comments to improve the draft."
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
-r = chatgpt3(prompt)
+# r = chatgpt3(prompt)
+r = chatgpt3(prompt, model = "gpt-4-1106-preview")
 improved_draft = r.choices[0].message.content
 
 print("\n\nImproved_draft")
@@ -180,10 +196,12 @@ print(break_line)
 #Build on the revised outlines - a story line on 7 chapters
 idea = improved_draft
 role = chatbot_role + task
-task1 = "Write a detailed outline for each of the 7 chapters in the horror story named '" + title + "' based on the following draft story. "
-task2 = "Write a detailed outline for each of the 7 chapters in the horror story named '" + title + "' based on the above draft story. Write the outline one chapter at a time, Make it very detailed and explicit so the story can be written from the outline as sole input."
+task1 = "Write a detailed outline for each of the " + str(chapter_count) + " chapters in the horror story named '" + title + "' based on the following draft story. "
+task2 = "Write a detailed outline for each of the " + str(chapter_count) + " chapters in the horror story named '" + title + "' based on the above draft story. Write the outline one chapter at a time, Make it very detailed and explicit so the story can be written from the outline as sole input."
 outline2 = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
-r = chatgpt3(outline2)
+# r = chatgpt3(outline2)
+r = chatgpt3(outline2, model = "gpt-4-1106-preview")
+
 outline3 = r.choices[0].message.content
 
 print("\n\nOutline Chapters")
@@ -208,8 +226,8 @@ task2 = "Read all the chapter outlines above in order to get the right context f
 write_chapter = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 print("\n\nChapters")
 print(break_line)
-print(prompt)
-print(write_chapter)
+# print(prompt)
+# print(write_chapter)
 
 chapters_ = []
 for chapter in chapters:
@@ -236,7 +254,8 @@ role = chatbot_role + task
 task1 = "Create a seo and youtube search optimized description to the youtube horror story descibed in the summaries below. Do not list the chapters. Use mark down and emojies.\n" 
 task2 = "Create a seo and youtube search optimized description to the youtube horror story descibed in the summaries above. Do not list the chapters. Use mark down and emojies." 
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
-r = chatgpt3(prompt)
+# r = chatgpt3(prompt)
+r = chatgpt3(prompt, model = "gpt-4-1106-preview")
 desc = r.choices[0].message.content
 path_ = os.path.join(xp_path, fn + " - desc.txt")
 save_file(path_, desc)
@@ -251,7 +270,7 @@ print(break_line)
 ## thanks
 system_txt = "You are a Horror story writer."
 user_txt = "The audience has just listened to the horror story descibed here: " + str(story_idea) + ". /nCreate a thank you for listening greeting and remind audience to like and subscribe"
-r = chatgpt3(system_txt + user_txt)
+r = chatgpt3(system_txt + user_txt, model = "gpt-4-1106-preview")
 thanks = r.choices[0].message.content
 path_ = os.path.join(xp_path, fn + " - thanks.txt")
 save_file(path_, thanks)
@@ -321,22 +340,24 @@ def images_for_story():
             then rephrase the prompt and try again!
             '''
             dalle_prompt = img_prompt + break_line + rephrase_txt
+            print(break_line + dalle_prompt)
             try:
                 path_img = os.path.join(xp_path, fn + " - img")
             except:
                 path_img = image_path[j - 1]
             image_path.append(path_img)
             
-            
-            print(dalle_prompt + break_line + path_img)
             image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc + j)
 
 images_for_story()
   
+
+def compress_image(file_path, output_path, quality=85):
+    with Image.open(file_path) as img:
+        img.save(output_path, "PNG", optimize=True, quality=quality)
+
   
 # create images for youtube thumbnail
-
-
 def youtube_thumbnail():
         system_txt = chatbot_artist_role
         user_txt = '''Can you help me create a perfect prompt for DALLE 3 for the perfect thumbnail image for this horror story.
@@ -346,7 +367,7 @@ def youtube_thumbnail():
         --------------
         Base your prompt on this story description: \n''' + desc
 
-        for j in range(1,8):
+        for j in range(1,5):
             r = chatgpt3 (userinput = user_txt, system_role=system_txt)
             img_prompt = r.choices[0].message.content
 
@@ -358,7 +379,11 @@ def youtube_thumbnail():
             # path_img = os.path.join(xp_path, fn + " - img")
             print(dalle_prompt + break_line + path_img)
             image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=9990 + j)
+            fn_compressed = filename.replace(".png", "_compressed.png") 
+            compress_image(filename, fn_compressed, quality=66)
+
 youtube_thumbnail()
+
 
 
 ##################
@@ -451,7 +476,7 @@ for n,c in enumerate(chapters_):
     nc = n + 1
     path_voice = os.path.join(xp_path, fn + " - audio_" + str(nc))
     print(path_voice)
-    if nc>4:
+    if nc>=0:
         text2mp3(text_string = c, voice_name = "echo", fn=path_voice)
 
 
@@ -522,7 +547,7 @@ add_ambient_music_to_video(
     video_file_path=output_final_mp4,
     music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
     output_file_path=output_final_mp4_music,
-    music_volume=0.06  # Adjust volume as needed
+    music_volume=0.05  # Adjust volume as needed
     )
 
 
