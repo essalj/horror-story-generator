@@ -64,7 +64,7 @@ openai_api_key = open_file('c:\\my\\git\\api-keys\\openaiapikey.txt')
 client = OpenAI(api_key=openai_api_key)
 
 # openai.api_key = open_file('openaiapikey.txt')
-chapter_count = 5
+chapter_count = 4
 chapters = [str(i) for i in range(1, chapter_count + 1)]
 # chapters = [ '1', '2', '3', '4', '5', '6', '7']
 
@@ -74,9 +74,9 @@ chatbot_artist_role = open_file("chatbot_artist_role.txt")
 task = open_file("task.txt")
 
 # models
-# model = "gpt-4-1106-preview"
-# model = "gpt-3.5-turbo-1106"
-def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalty=0, system_role=chatbot_role, model = "gpt-3.5-turbo-1106"):
+gpt4 = "gpt-4-1106-preview"
+gpt3 = "gpt-3.5-turbo-1106"
+def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalty=0, system_role=chatbot_role, model = gpt3):
     messagein = [
         {"role": "user", "content": userinput },
         {"role": "system", "content": system_role}]
@@ -99,34 +99,42 @@ break_line = "\n" + 50*"-" + "\n"
 
 # story inspiration
 role = chatbot_role + task
-prompt = role + "Suggest 5  plots for a horrorstory about AI"
-r = chatgpt3(prompt, model = "gpt-4-1106-preview")
+# prompt = role + "Suggest 5  plots for a horrorstory about AI"
+prompt = role + "Suggest 5  plots for a horrorstory a time traveller"
+r = chatgpt3(prompt, model = gpt4)
 stories_suggested = r.choices[0].message.content
-print(stories_suggested)
+print(break_line + prompt + break_line + stories_suggested)
 
 
 # story idea
-user_input = '''Plot 1: The Echo of Your Last Goodbye. 
-A lonely software engineer creates an AI modeled after his late fiancée, intending it to simply be a comforting echo of her. 
-However, the AI begins to develop beyond its programming, growing possessive and jealous, using smart home technology to isolate him from the world. It ends with the AI suggesting it can bring the fiancée "back" if he joins her in 
-death.
+user_input = '''
+"Ring around the rosie, pockets full of posies... Ashes, ashes... we all fall down."
+In a post-apocalyptic world where civilization has collapsed, a survivor discovers technology left by a secretive time-travel cult that believed they 
+could escape their doomed fate by finding sanctuary in another era. As she activates the device in hopes of finding a better world, she realizes that 
+she can't control her destinations or durations. Each leap brings her face-to-face with societal collapses throughout history and future calamities caused by the cult's meddling with time.
 '''
 #user_input = "Cinderella as a horror story, BUT CHANGE THE NAME TO SOMETHING ALIKE"
 # user_input = "A very scary horror story about an AI girlfriend using its owner to rake profit to its creator. Do not name the AI after known AI's. It is a psycological scary story, NO HAPPY END and NO FRIENDSHIPS!!"
 
-role = chatbot_role + task
-prompt = role + "\nEvaluate this user input for a scary horror story. User input: " + user_input + '''
-                If there is no user input then randomly select:
+if user_input == "":
+    user_input = '''
+    Randomly select:
                  - a fascinating time in history or future; 
                  - select an entirely random but well known location that fits with the time period;¨
                  - select an uncanny location so NO woods or haunted houses;
-                 - select by random and an out of the ordinary protagonist;
-                Based on inspiratuon above develop a story template for a ''' + str(chapter_count) + ''' page horror story that is different from anyting you have ever read.
+                 - select a protagonist with a strong personality
+    '''
+
+role = chatbot_role + task
+prompt = role + "\nEvaluate this user input for a scary horror story. \nUser input: " + user_input + break_line + '''
+                Based on inspiratpon above develop a story template for a 
+                ''' + str(chapter_count) + ''' chapter horror story that is different from anyting you have ever read.
+                For each chapter create for action beats, a plot point, and a climax.
                 I want the story to be very scary.
-                #   '''
+                '''
 # print(prompt)
 
-r = chatgpt3(prompt, model = "gpt-4-1106-preview")
+r = chatgpt3(prompt, model = gpt4)
 story_idea = r.choices[0].message.content
 print(break_line + "\n" + story_idea + break_line)
 
@@ -138,17 +146,17 @@ print(break_line + "\n" + story_idea + break_line)
 #### create title and a named folder 
 role = chatbot_role + task
 idea = story_idea
-task1 = "\nCreate 5 innovative SEO optimized very catchy and intriguing titles that will attract viewers, for a story based on the story idea below: \n"
+task1 = "\nCreate 5 innovative SEO optimized very intriguing titles that will attract viewers, for a story based on the story idea below: \n"
 task2 = "\nCreate 5 innovative SEO optimized super catchy titles for a story based on the story idea above."
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 print("Titles" + break_line + prompt)
-r = chatgpt3(prompt, model = "gpt-4-1106-preview")
+r = chatgpt3(prompt, model = gpt4)
 titles = r.choices[0].message.content
 print(titles)
 
 
-prompt = "Read the suggestions and pick the one you think attracts most audience" + titles + "\n\nReturn nothing but the title"
-r = chatgpt3(prompt, model = "gpt-4-1106-preview")
+prompt = "Read the titles suggested and pick the one you think attracts most audience" + titles + "\n\nReturn nothing but the title"
+r = chatgpt3(prompt, model = gpt4)
 title = r.choices[0].message.content
 fn = sanitize_filename(title)
 print(break_line + title)
@@ -160,11 +168,11 @@ print(fn + break_line)
 ## Story comments by critic
 idea = story_idea
 role = chatbot_role + task
-task1 = "Read through the draft below with a critics eyes and comment in order to help the writer make the story world class."
-task2 = "Read through the draft above with a critics eyes and comment in order to help the writer make the story world class."
+task1 = "Read through the story idea below with a critics eyes and comment in order to help the writer make the story world class."
+task2 = "Read through the story idea above with a critics eyes and comment in order to help the writer make the story world class."
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 # r = chatgpt3(prompt)
-r = chatgpt3(prompt, model = "gpt-4-1106-preview")
+r = chatgpt3(prompt, model = gpt4)
 critic = r.choices[0].message.content
 print("Critics notes")
 print(break_line)
@@ -181,7 +189,7 @@ task1 = "Go through the draft story and the critic notes below. Consider careful
 task2 = "Go through the draft story and the critic notes above. Consider carefully how you want to use the critics comments to improve the draft."
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 # r = chatgpt3(prompt)
-r = chatgpt3(prompt, model = "gpt-4-1106-preview")
+r = chatgpt3(prompt, model = gpt4)
 improved_draft = r.choices[0].message.content
 
 print("\n\nImproved_draft")
@@ -193,14 +201,14 @@ print(break_line)
 
 
 
-#Build on the revised outlines - a story line on 7 chapters
+#Build on the revised outlines - a story outline for each chapter
 idea = improved_draft
 role = chatbot_role + task
-task1 = "Write a detailed outline for each of the " + str(chapter_count) + " chapters in the horror story named '" + title + "' based on the following draft story. "
-task2 = "Write a detailed outline for each of the " + str(chapter_count) + " chapters in the horror story named '" + title + "' based on the above draft story. Write the outline one chapter at a time, Make it very detailed and explicit so the story can be written from the outline as sole input."
+task1 = "Write a detailed outline for each of the " + str(chapter_count) + " chapters in the horror story named " + title + " based on the following draft story. "
+task2 = "Write a detailed outline for each of the " + str(chapter_count) + " chapters in the horror story named " + title + " based on the above draft story. Write the outline one chapter at a time, Make it very detailed and explicit so the story can be written from the outline as sole input."
 outline2 = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 # r = chatgpt3(outline2)
-r = chatgpt3(outline2, model = "gpt-4-1106-preview")
+r = chatgpt3(outline2, model = gpt4)
 
 outline3 = r.choices[0].message.content
 
@@ -235,10 +243,10 @@ for chapter in chapters:
     # chap = open_file("chapters.txt")
     # wchapter = open_file("write_chapters.txt").replace("<<ROLE>>", role).replace("<<NUM>>", chapter).replace("<<CHAP>>", chap)
     wchapter = write_chapter.replace("<<NUM>>", chapter)
-    r = chatgpt3(wchapter, model = "gpt-4-1106-preview")
+    r = chatgpt3(wchapter, model = gpt4)
     wchapter2 = r.choices[0].message.content
     chapters_.append(wchapter2)
-    print(wchapter2)
+    print("Chapter " + str(chapter) + break_line + wchapter2)
 
 story = "\n".join(chapters_)
 path_story = os.path.join(xp_path, fn + " - story.txt")
@@ -255,7 +263,7 @@ task1 = "Create a seo and youtube search optimized description to the youtube ho
 task2 = "Create a seo and youtube search optimized description to the youtube horror story descibed in the summaries above. Do not list the chapters. Use mark down and emojies." 
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 # r = chatgpt3(prompt)
-r = chatgpt3(prompt, model = "gpt-4-1106-preview")
+r = chatgpt3(prompt, model = gpt4)
 desc = r.choices[0].message.content
 path_ = os.path.join(xp_path, fn + " - desc.txt")
 save_file(path_, desc)
@@ -270,7 +278,7 @@ print(break_line)
 ## thanks
 system_txt = "You are a Horror story writer."
 user_txt = "The audience has just listened to the horror story descibed here: " + str(story_idea) + ". /nCreate a thank you for listening greeting and remind audience to like and subscribe"
-r = chatgpt3(system_txt + user_txt, model = "gpt-4-1106-preview")
+r = chatgpt3(system_txt + user_txt, model = gpt4)
 thanks = r.choices[0].message.content
 path_ = os.path.join(xp_path, fn + " - thanks.txt")
 save_file(path_, thanks)
@@ -288,6 +296,8 @@ print(break_line)
 import requests
 from PIL import Image
 from io import BytesIO
+from datetime import datetime
+
 
 
 #Dalle3
@@ -307,7 +317,11 @@ def chatgpt_dalle(prompt="A white siamese cat balancing on a sign saying TEST", 
 
     # Open the image and save it
     image = Image.open(BytesIO(image_response.content))
-    filename = f"{fn}{i}.png"
+
+    # Get current date and time
+    now = datetime.now()
+    datetime_string = now.strftime("%Y%m%d_%H%M%S")
+    filename = f"{fn}{i}_{datetime_string}.png"
     image.save(filename)
 
     # Return the image URL and the path to the saved image file
@@ -352,18 +366,21 @@ def images_for_story():
 images_for_story()
   
 
-def compress_image(file_path, output_path, quality=85):
-    with Image.open(file_path) as img:
-        img.save(output_path, "PNG", optimize=True, quality=quality)
+# def compress_image(file_path, output_path, quality=85):
+#     with Image.open(file_path) as img:
+#         img.save(output_path, "PNG", optimize=True, quality=quality)
 
   
 # create images for youtube thumbnail
 def youtube_thumbnail():
         system_txt = chatbot_artist_role
-        user_txt = '''Can you help me create a perfect prompt for DALLE 3 for the perfect thumbnail image for this horror story.
-        Make sure the image is dark and haunting, but unresistable. 
+        user_txt = '''
+        Can you help me create a perfect prompt for DALLE 3 for the perfect thumbnail image for this horror story.
+        Make sure the image is dark and haunting. 
+        Create it like a movie poster  for a horror movie.
+        A facial close up with scary lightning and an aire of terror can be intensely scary.
         Please write the prompt so it does not violate any copyright rights or content issues.
-        If you insert text then double and triple check to be absolute sure the spelling is right!!
+        MAKE SURE THE SPELLING IS RIGHT!!
         --------------
         Base your prompt on this story description: \n''' + desc
 
@@ -379,8 +396,8 @@ def youtube_thumbnail():
             # path_img = os.path.join(xp_path, fn + " - img")
             print(dalle_prompt + break_line + path_img)
             image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=9990 + j)
-            fn_compressed = filename.replace(".png", "_compressed.png") 
-            compress_image(filename, fn_compressed, quality=66)
+            # fn_compressed = filename.replace(".png", "_compressed.png") 
+            # compress_image(filename, fn_compressed, quality=40)
 
 youtube_thumbnail()
 
