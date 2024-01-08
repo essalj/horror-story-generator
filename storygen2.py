@@ -100,7 +100,8 @@ break_line = "\n" + 50*"-" + "\n"
 # story inspiration
 role = chatbot_role + task
 # prompt = role + "Suggest 5  plots for a horrorstory about AI"
-prompt = role + "Suggest 5  plots for a horrorstory a time traveller"
+# prompt = role + "Suggest 5  plots for a horrorstory about a hacker hacking a neuro chip"
+prompt = role + "Suggest 5  plots for a horrorstory about the girl next door"
 r = chatgpt3(prompt, model = gpt4)
 stories_suggested = r.choices[0].message.content
 print(break_line + prompt + break_line + stories_suggested)
@@ -108,10 +109,10 @@ print(break_line + prompt + break_line + stories_suggested)
 
 # story idea
 user_input = '''
-"Ring around the rosie, pockets full of posies... Ashes, ashes... we all fall down."
-In a post-apocalyptic world where civilization has collapsed, a survivor discovers technology left by a secretive time-travel cult that believed they 
-could escape their doomed fate by finding sanctuary in another era. As she activates the device in hopes of finding a better world, she realizes that 
-she can't control her destinations or durations. Each leap brings her face-to-face with societal collapses throughout history and future calamities caused by the cult's meddling with time.
+**The Girl Who Wasn’t There**
+*Ashes, ashes, we all fall down.*
+Children in town have always been told about the 'girl next door' who wasn't allowed outside because she was "sick." She watches from her window as life goes by, a pale face among curtains. Then children start to dream of her—coming out at night and playing games with them that leave them waking up 
+exhausted and marked with bruises no one remembers inflicting. When adults finally take notice and confront her parents about her peculiar behavior, they are met with bewildered stares—the couple never had a daughter.
 '''
 #user_input = "Cinderella as a horror story, BUT CHANGE THE NAME TO SOMETHING ALIKE"
 # user_input = "A very scary horror story about an AI girlfriend using its owner to rake profit to its creator. Do not name the AI after known AI's. It is a psycological scary story, NO HAPPY END and NO FRIENDSHIPS!!"
@@ -129,7 +130,7 @@ role = chatbot_role + task
 prompt = role + "\nEvaluate this user input for a scary horror story. \nUser input: " + user_input + break_line + '''
                 Based on inspiratpon above develop a story template for a 
                 ''' + str(chapter_count) + ''' chapter horror story that is different from anyting you have ever read.
-                For each chapter create for action beats, a plot point, and a climax.
+                For each chapter create 6 action beats, a plot point, and a climax.
                 I want the story to be very scary.
                 '''
 # print(prompt)
