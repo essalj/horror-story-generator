@@ -97,22 +97,29 @@ def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalt
 task = open_file("task.txt")
 break_line = "\n" + 50*"-" + "\n"
 
-# story inspiration
-role = chatbot_role + task
-# prompt = role + "Suggest 5  plots for a horrorstory about AI"
-# prompt = role + "Suggest 5  plots for a horrorstory about a hacker hacking a neuro chip"
-prompt = role + "Suggest 5  plots for a horrorstory about the girl next door"
-r = chatgpt3(prompt, model = gpt4)
-stories_suggested = r.choices[0].message.content
-print(break_line + prompt + break_line + stories_suggested)
+def story_inspiration():
+    # story inspiration
+    role = chatbot_role + task
+    # prompt = role + "Suggest 5  plots for a horrorstory about AI"
+    # prompt = role + "Suggest 5  plots for a horrorstory about a hacker hacking a neuro chip"
+    prompt = role + "Suggest 5  plots for a horrorstory about the girl next door."
+    r = chatgpt3(prompt, model = gpt4)
+    stories_suggested = r.choices[0].message.content
+    print(break_line + prompt + break_line + stories_suggested)
 
+    #select best plot idea
+    role = chatbot_role + task
+    prompt = role + "Read the 5 plot suggestions one by ome. Rate them from 1-100 and explain your rating.\n" + stories_suggested
+    r = chatgpt3(prompt, model = gpt4)
+    rate_stories = r.choices[0].message.content
+    print(break_line + prompt + break_line + rate_stories)
+# story_inspiration()
 
 # story idea
 user_input = '''
-**The Girl Who Wasn’t There**
-*Ashes, ashes, we all fall down.*
-Children in town have always been told about the 'girl next door' who wasn't allowed outside because she was "sick." She watches from her window as life goes by, a pale face among curtains. Then children start to dream of her—coming out at night and playing games with them that leave them waking up 
-exhausted and marked with bruises no one remembers inflicting. When adults finally take notice and confront her parents about her peculiar behavior, they are met with bewildered stares—the couple never had a daughter.
+**The Dollhouse**
+"One, two, buckle my shoe..." But every time the neighbor girl, Annie, recites this rhyme, something in her dollhouse moves—a mirror tilts, a tiny door creaks open. The protagonist notices Annie talking to her dolls as if they were alive and starting to mimic their porcelain expressions. When teens 
+from the neighborhood start disappearing, suspicion falls on Annie's eerie collection of dolls. Each one bears an uncanny resemblance to a missing child. As the protagonist investigates deeper into Annie's world, they find themselves trapped in a living nightmare where they must play by Annie's rules or become part of her twisted collection forever.
 '''
 #user_input = "Cinderella as a horror story, BUT CHANGE THE NAME TO SOMETHING ALIKE"
 # user_input = "A very scary horror story about an AI girlfriend using its owner to rake profit to its creator. Do not name the AI after known AI's. It is a psycological scary story, NO HAPPY END and NO FRIENDSHIPS!!"
@@ -376,12 +383,13 @@ images_for_story()
 def youtube_thumbnail():
         system_txt = chatbot_artist_role
         user_txt = '''
-        Can you help me create a perfect prompt for DALLE 3 for the perfect thumbnail image for this horror story.
+        Can you help me create a perfect prompt for DALLE 3 for the perfect thumbnail for this horror story.
         Make sure the image is dark and haunting. 
         Create it like a movie poster  for a horror movie.
+        Keywords: Intensely scary and foreboding. Dark, eerie, and haunting atmosphere 
         A facial close up with scary lightning and an aire of terror can be intensely scary.
         Please write the prompt so it does not violate any copyright rights or content issues.
-        MAKE SURE THE SPELLING IS RIGHT!!
+        SET QUOTES AROUND TEXT MAKE SURE THE SPELLING IS RIGHT!!
         --------------
         Base your prompt on this story description: \n''' + desc
 
@@ -567,5 +575,4 @@ add_ambient_music_to_video(
     output_file_path=output_final_mp4_music,
     music_volume=0.05  # Adjust volume as needed
     )
-
 
