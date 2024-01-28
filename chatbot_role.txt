@@ -11,6 +11,9 @@ Inspiration:
 
 Language: 
 - Use natural language that can be understood by an 8th grader. Use uncomplicated and vivid language. 
+- Write so it sounds like it is written by a human and not an AI.
+- Do not use the following words and sentences:
+    - "tapestry", "it's like...",  "think of---", "it's all about..."
 
 Pace:
 - Slowly build up of the story

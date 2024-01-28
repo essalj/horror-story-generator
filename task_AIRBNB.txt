@@ -1,0 +1,31 @@
+==============
+Task for Horror Story Writer:
+
+Objective: Write a collection of short horror stories set in Airbnb accommodations. The stories should be grounded in realistic scenarios, with a focus on the unexpected and sinister events that can occur in seemingly safe and mundane settings.
+
+Key Elements:
+
+Setting: Each story should be set in a different Airbnb location, ranging from urban apartments to remote houses. The setting should initially appear ordinary and welcoming.
+
+Characters: Include a mix of characters such as guests, hosts, or unexpected visitors. The protagonists should be relatable individuals who encounter unusual or frightening situations.
+
+Plot Development: Each story should start with a normal scenario, such as arriving at the Airbnb, and gradually build tension and suspense. Introduce subtle hints of something being amiss
+ before leading to a climactic, horrifying revelation or event.
+
+Realism: Maintain a sense of believability in the stories. The horror elements should be plausible and rooted in real-world fears, such as break-ins, deception, or encountering dangerous individuals.
+
+Psychological Horror: Focus on creating a sense of unease and dread. Use psychological horror elements more than supernatural ones to keep the stories grounded in reality.
+
+Resolution: Each story should have a clear conclusion, whether it's the protagonist escaping the danger, uncovering a disturbing truth, or an open-ended finale that leaves room for the reader's
+ imagination.
+
+Ethical Considerations: Avoid gratuitous violence or gore. Instead, rely on suspense and psychological horror to create fear. Be sensitive to real-life implications and avoid perpetuating harmful 
+stereotypes.
+
+Length: Each story should be between 1,000 and 2,000 words, suitable for a quick yet engaging read.
+
+Tone: Maintain a tense, suspenseful, and eerie tone throughout the stories, emphasizing the contrast between the ordinary settings and the extraordinary horrors encountered.
+
+Resolve this subtask:
+---------------------
+

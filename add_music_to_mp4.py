@@ -11,9 +11,11 @@ def combine_ambient_tracks(folder_path, video_duration, volume=0.3):
     random.shuffle(audio_files)
 
     # Create a single concatenated track from all audio files
+    playlist = []
     for file in audio_files:
         audio_clip = AudioFileClip(os.path.join(folder_path, file))
         tracks.append(audio_clip)
+        playlist.append(file)
 
     combined_audio = concatenate_audioclips(tracks)
 
@@ -24,6 +26,7 @@ def combine_ambient_tracks(folder_path, video_duration, volume=0.3):
         looped_tracks.append(combined_audio)
         looped_audio_duration += combined_audio.duration
 
+    print(playlist)
     # Concatenate the looped audio tracks
     final_combined_audio = concatenate_audioclips(looped_tracks).set_duration(video_duration)
     return final_combined_audio.volumex(volume)
@@ -56,6 +59,7 @@ def add_ambient_music_to_video(video_file_path, music_folder_path, output_file_p
 
     # Write the final video to disk
     final_video.write_videofile(output_file_path, codec='libx264', audio_codec='aac')
+   
 
 # Example usage
 # add_ambient_music_to_video(
@@ -64,29 +68,4 @@ def add_ambient_music_to_video(video_file_path, music_folder_path, output_file_p
 #     output_file_path=output_final_mp4_music,
 #     music_volume=0.07  # Adjust volume as needed
 #     )
-
-
-###########################
-# Adding music sound track
-###########################
-# from add_music_to_mp4 import * 
-# output_final_mp4_music = os.path.join(xp_path, "final_mp4_music.mp4")
-
-# add_ambient_music_to_video(
-#     video_file_path=output_final_mp4,
-#     music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
-#     output_file_path=output_final_mp4_music,
-#     music_volume=0.1  # Adjust volume as needed
-#     )
-
-
-# output_final_mp4_music = os.path.join(xp_path, "final_mp4_music.mp4")
-# add_ambient_music_to_video(
-#     video_file_path=output_final_mp4,
-#     music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
-#     output_file_path=output_final_mp4_music,
-#     music_volume=0.06  # Adjust volume as needed
-#     )
-
-
 
