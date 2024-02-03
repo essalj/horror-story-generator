@@ -71,10 +71,8 @@ client = OpenAI(api_key=openai_api_key)
 # Definitions
 ###############
 
-# chapter_count = 4
-chapter_count = 3
-chapters = [str(i) for i in range(1, chapter_count + 1)]
-# chapters = [ '1', '2', '3', '4', '5', '6', '7']
+fn = "AirBNB stories"
+chapter_count = 3 # number of stories
 
 chatbot_role = open_file("chatbot_role.txt")
 chatbot_artist_role = open_file("chatbot_artist_role.txt")
@@ -91,7 +89,6 @@ def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalt
     messagein = [
         {"role": "user", "content": userinput },
         {"role": "system", "content": system_role}]
-    # response = openai.ChatCompletion.create(
     response = client.chat.completions.create(
         model = model,
         temperature=temperature,
@@ -108,8 +105,6 @@ def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalt
 #######################
 #### Shape user input
 #######################
-
-# user_input = "AIRBNB horror story. Write in 1st person. Truly scary. NO SUPERNATURAL EVENTS!!!"
 inspiration = open_file("Airbnb summaries.txt")
 inspiration_task = '''
     1) Read the summaries below and create 5 summaries in same style but with different plots.
@@ -142,7 +137,9 @@ def story_inspiration(user_input):  #suggest 5 plots from user input and rate th
     # plots_rated = break_line + prompt + break_line + rate_stories
     print(break_line + "plots_rated:\n" + plots_rated)
     return plots_rated
-    return stories_suggested
+
+plots_rated = story_inspiration(user_input=inspiration_task) #  create 5 ideas based on user input
+
 
 ###############
 # Select plot
@@ -153,11 +150,6 @@ def select_plot(plots_rated, rank = 1):
     selected_plot = r.choices[0].message.content
     print(break_line + "Selected plot:\n" + selected_plot)
     return selected_plot
-
-plots_rated = story_inspiration(user_input=inspiration_task) #  create 5 ideas based on user input
-# selected_plot = select_plot(plots_rated, rank = 1) #select best idea
-
-    
 
 
 ##########¤¤¤¤¤¤¤#######
@@ -179,93 +171,58 @@ def develop_story_idea(selected_plot):
 # story_idea = develop_story_idea(selected_plot)
 
 
-selected_plot = select_plot(plots_rated, rank = 1) #select best idea
-story_idea = develop_story_idea(selected_plot)
-
-
-
-################################
-## Story comments by critic
-idea = story_idea
-role = chatbot_role + task
-task1 = "Read through the story idea below with a critics eyes and comment in order to help the writer create a good story. REMEMBER IT NEEDS TO SOUND AUTHENTIC!"
-task2 = "Read through the story idea above with a critics eyes and comment in order to help the writer create a good story. REMEMBER IT NEEDS TO SOUND AUTHENTIC!"
-prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
-# r = chatgpt3(prompt)
-r = chatgpt3(prompt, model = gpt4)
-critic = r.choices[0].message.content
-print("Critics notes")
-print(break_line)
-print(prompt)
-print(critic)
-print(break_line)
-
-
-#######################################
-## Implement story comments by critic
-idea = "Draft story: " + story_idea + break_line + "\nCritics comments:" + critic
-role = chatbot_role + task
-task1 = "Go through the draft story and the critic notes below. Consider carefully how you want to use the critics comments to improve the draft."
-task2 = "Go through the draft story and the critic notes above. Consider carefully how you want to use the critics comments to improve the draft."
-prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
-# r = chatgpt3(prompt)
-r = chatgpt3(prompt, model = gpt4)
-improved_draft = r.choices[0].message.content
-
-print("\n\nImproved_draft")
-print(break_line)
-print(prompt)
-print(improved_draft)
-count_words(improved_draft)
-print(break_line)
-
-
-
 #######################
 ## Write the story
-idea = improved_draft
-role = chatbot_role + task
-task1 = "Read the draft below and write the story. follow the action beats. Write in great detail and in a vivid and intriguing language. Make sure to write in 1st person."
-task2 = "Read the draft above and write the story. follow the action beats. Write in great detail and in a vivid and intriguing language. Make sure to write in 1st person."
-task_write_chapter = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
-print("\n\nChapters")
-print(break_line)
+def write_story(idea):
+    role = chatbot_role + task
+    task1 = "Read the draft below and write the story. follow the action beats. Write in great detail and in a vivid and intriguing language. Make sure to write in 1st person."
+    task2 = "Read the draft above and write the story. follow the action beats. Write in great detail and in a vivid and intriguing language. Make sure to write in 1st person."
+    task_write_chapter = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
+    print("\n\nChapters")
+    print(break_line)
 
 
-r = chatgpt3(task_write_chapter, model = gpt4)
-story_  = r.choices[0].message.content
-print(break_line + story_)
-count_words(story_)
+    r = chatgpt3(task_write_chapter, model = gpt4)
+    story_  = r.choices[0].message.content
+    print(break_line + story_)
+    count_words(story_)
+    return story_
+# story = write_story(idea = story_idea)
 
 
-# chapters_.append(wchapter2)
-# print(prompt)
-# print(write_chapter)
 
-# chapters_ = []
-# for chapter in range(1,3):
-#     # chap = outline3
-#     # chap = open_file("chapters.txt")
-#     # wchapter = open_file("write_chapters.txt").replace("<<ROLE>>", role).replace("<<NUM>>", chapter).replace("<<CHAP>>", chap)
-#     wchapter = write_chapter.replace("<<NUM>>", chapter)
-#     r = chatgpt3(wchapter, model = gpt4)
-#     wchapter2 = r.choices[0].message.content
-#     chapters_.append(wchapter2)
-#     print("Chapter " + str(chapter) + break_line + wchapter2)
+##########################################################
+### LOOP over stories
+##########################################################
+chapters_ = []
+plots_ = []
+story_ideas_ = []
+for chapter in range(1, chapter_count + 1):
+    if chapter > 0:
+        # print(chapter)
+        selected_plot = select_plot(plots_rated, rank = chapter) #select best idea
+        story_idea = develop_story_idea(selected_plot)
+        story = write_story(idea = story_idea)
+        
+        plots_.append(selected_plot)
+        story_ideas_.append(story_idea)
+        chapters_.append(story)
 
-# story = "\n".join(chapters_)
-# path_story = os.path.join(xp_path, fn + " - story.txt")
-# save_file(path_story, story)
-# count_words(story)
-# print(break_line)
+
+# join stories
+full_story = "\n".join(chapters_)
+path_story = os.path.join(xp_path, fn + " - story.txt")
+save_file(path_story, full_story)
+
+
 
 
 ################
 ## description
-idea = story_idea
+idea = plots_
 role = chatbot_role + task
-task1 = "Create a seo and youtube search optimized description to the youtube horror story descibed in the summaries below. Do not list the chapters. Use mark down and emojies.\n" 
-task2 = "Create a seo and youtube search optimized description to the youtube horror story descibed in the summaries above. Do not list the chapters. Use mark down and emojies." 
+task1 = "Create a seo and youtube search optimized description to the youtube horror stories descibed in the json below. Use mark down and emojies.\n" 
+task2 = "Create a seo and youtube search optimized description to the youtube horror story descibed in the json above. Use mark down and emojies." 
 prompt = open_file("task_prompt.txt").replace("<<ROLE>>", role).replace("<<TASK1>>", task1).replace("<<IDEA>>", idea).replace("<<TASK2>>", task2)
 # r = chatgpt3(prompt)
 r = chatgpt3(prompt, model = gpt4)
@@ -283,7 +240,7 @@ print(break_line)
 ###########
 ## thanks
 system_txt = "You are a Horror story writer."
-user_txt = "The audience has just listened to the horror story descibed here: " + str(story_idea) + ". /nCreate a thank you for listening greeting and remind audience to like and subscribe"
+user_txt = "The audience has just listened to the Airbnb horror stories descibed  in the json below: " + str(plots_) + ". /nCreate a thank you for listening greeting and remind audience to like and subscribe"
 r = chatgpt3(system_txt + user_txt, model = gpt4)
 thanks = r.choices[0].message.content
 path_ = os.path.join(xp_path, fn + " - thanks.txt")
@@ -295,6 +252,7 @@ print("\n-----------------\n", thanks)
 print(break_line)
 
 
+
 ###################
 ###################
 #   create pics   #
@@ -303,7 +261,6 @@ import requests
 from PIL import Image
 from io import BytesIO
 from datetime import datetime
-
 
 
 #Dalle3
@@ -329,104 +286,68 @@ def chatgpt_dalle(prompt="A white siamese cat balancing on a sign saying TEST", 
     datetime_string = now.strftime("%Y%m%d_%H%M%S")
     filename = f"{fn}{i}_{datetime_string}.png"
     image.save(filename)
-
+    print("save(filename): " + str(filename))
     # Return the image URL and the path to the saved image file
     return image_url, filename
 #image_url, filename = chatgpt_dalle("a blue cat", fn="my_cat_image_", i=42)
 
 
 
-def images_for_story():
-    images_pr_chapter = 5
+# 
+def images_for_story(json_, chpt):
+    images_pr_chapter = 6
     image_path = []
-    for n,c in enumerate(chapters_):
-        nc = (n + 1) * 10
+    image_files = []
+    nc = (chpt + 1)*10
         
-        for j in range(1, 1 + images_pr_chapter):
-            print(j)
-            system_txt = chatbot_artist_role
-            user_txt = '''Can you help me create a perfect prompt for DALLE 3 for a horrifying image for this chapter in a horror story. 
-            Make sure the image is dark and haunting, but unresistable. 
-            DO NOT PUT TEXT ON THE IMAGE!!!. 
-            End the prompt with the keywords: 4k, cinematic,vibrant, photorealistic, very scary. 
-            Please write the prompt so it does not violate any copyright rights or content issues.
-            --------------
-            Base your prompt on this chapter description: \n''' + c
-
-            r = chatgpt3 (userinput = user_txt, system_role=system_txt)
-            img_prompt = r.choices[0].message.content
-
-            rephrase_txt = '''If you get an error from Dalle related to content policy or something else when creating an image
-            then rephrase the prompt and try again!
-            '''
-            dalle_prompt = img_prompt + break_line + rephrase_txt
-            print(break_line + dalle_prompt)
-            try:
-                path_img = os.path.join(xp_path, fn + " - img")
-            except:
-                path_img = image_path[j - 1]
-            image_path.append(path_img)
-            
-            image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc + j)
-
-images_for_story()
-  
-
-# def compress_image(file_path, output_path, quality=85):
-#     with Image.open(file_path) as img:
-#         img.save(output_path, "PNG", optimize=True, quality=quality)
-
-  
-# create images for youtube thumbnail
-def youtube_thumbnail():
+    for j in range(1, 1 + images_pr_chapter):
+        print(j)
         system_txt = chatbot_artist_role
-        user_txt = '''
-        Can you help me create a perfect prompt for DALLE 3 for the perfect thumbnail for this horror story.
-        Make sure the image is dark and haunting. 
-        Create it like a movie poster  for a horror movie.
-        Keywords: Intensely scary and foreboding. Dark, eerie, and haunting atmosphere 
-        A facial close up with scary lightning and an aire of terror can be intensely scary.
+        user_txt = '''Can you help me create a perfect prompt for DALLE 3 for a horrifying image for this  airbnb horror story. 
+        Make sure the image is dark and haunting, but unresistable. 
+        DO NOT PUT TEXT ON THE IMAGE!!!. 
+        End the prompt with the keywords: 4k, cinematic,vibrant, photorealistic, very scary. 
         Please write the prompt so it does not violate any copyright rights or content issues.
-        SET QUOTES AROUND TEXT MAKE SURE THE SPELLING IS RIGHT!!
         --------------
-        Base your prompt on this story description: \n''' + desc
+        Base your prompt on "prompt" for this json structure where "img_no" = 1 : \n''' + js_
 
-        for j in range(1,5):
-            r = chatgpt3 (userinput = user_txt, system_role=system_txt)
-            img_prompt = r.choices[0].message.content
+        r = chatgpt3 (userinput = user_txt, system_role=system_txt)
+        img_prompt = r.choices[0].message.content
+        print(img_prompt)
 
-            rephrase_txt = '''If you get an error from Dalle related to content policy or something else when creating an image
-            then rephrase the prompt and try again!
-            '''
-            dalle_prompt = img_prompt + break_line + rephrase_txt
-            path_img = os.path.join(xp_path, fn + " - ytmb")
-            # path_img = os.path.join(xp_path, fn + " - img")
-            print(dalle_prompt + break_line + path_img)
-            image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=9990 + j)
-            # fn_compressed = filename.replace(".png", "_compressed.png") 
-            # compress_image(filename, fn_compressed, quality=40)
+        rephrase_txt = '''If you get an error from Dalle related to content policy or something else when creating an image
+        then rephrase the prompt and try again!
+        '''
+        dalle_prompt = img_prompt + break_line + rephrase_txt
+        print(break_line + dalle_prompt)
+        try:
+            path_img = os.path.join(xp_path, fn + " - img")
+        except:
+            path_img = image_path[j - 1]
+        image_path.append(path_img)
+        
+        image_url, filename = chatgpt_dalle(prompt = img_prompt, fn= path_img, i=nc + j)
+        image_files.append(filename)
+    return image_files
 
-youtube_thumbnail()
-
+#create images and store location in image_lists: image_lists[0-n] contains images for story 0-n
+image_lists =[]
+for c in range(0, chapter_count):
+    print(c)
+    if c>=0:
+        img_txt = story_ideas_[c]
+        system_txt = "You are a data analyst."
+        user_txt = "Select only the action beats from the json stucture. For each action beat create the perfect image prompt that captures the moment and output the image prompts in a new json structure with columns ['img_no', 'prompt']: " + img_txt
+        r = chatgpt3(system_txt + user_txt, model = gpt4)
+        js_ = r.choices[0].message.content
+        print(js_)
+        image_files = images_for_story(js_, c)
+        image_lists.append(image_files)
 
 
 ##################
 #   VOICE OVER   #
 ##################
-#tt = story
-# scenes = tt.split("-----")
-
-# tts-1 is optimized for real-time use cases and tts-1-hd is optimized for
-# https://platform.openai.com/docs/guides/text-to-speech/voice-options - 6 preset voices (preferred grandmother = Shimmer, preferred male reader = Echo)
-# def text2mp3(text_string = "testing", voice_name = "onyx", fn = fn):
-#   speech_file_path = fn + ".mp3"
-#   response = client.audio.speech.create(
-#     model = "tts-1",
-#     voice = "shimmer",
-#     input = text_string
-#   )
-#   response.stream_to_file(speech_file_path)
-# # text2mp3(text_string = tt, voice_name = "shimmer", fn="Lullaby")
 
 from moviepy.editor import AudioFileClip, concatenate_audioclips
 
@@ -484,7 +405,6 @@ def text2mp3(text_string="testing", voice_name="onyx", fn="output"):
 
         for file_path in temp_files:
             os.remove(file_path)
-
 # Example usage
 # text2mp3(text_string="Your long text here...", voice_name="shimmer", fn="Lullaby")
 
@@ -492,10 +412,13 @@ def text2mp3(text_string="testing", voice_name="onyx", fn="output"):
 
 from moviepy.editor import AudioFileClip, concatenate_audioclips
 # create voice for chapters
+voice_files = []
 for n,c in enumerate(chapters_):
     nc = n + 1
+    print(nc)
     path_voice = os.path.join(xp_path, fn + " - audio_" + str(nc))
     print(path_voice)
+    voice_files.append(path_voice)
     if nc>=0:
         text2mp3(text_string = c, voice_name = "echo", fn=path_voice)
 
@@ -503,6 +426,67 @@ for n,c in enumerate(chapters_):
 #voice - thanks
 path_voice = os.path.join(xp_path, fn + " - thanks - audio_99")
 text2mp3(text_string = thanks, voice_name = "onyx", fn=path_voice )
+
+gpt_story = '''I've always loved the thrill of exploring new places, so when David suggested a weekend getaway to a secluded Airbnb, I was instantly on board. The house, nestled in a dense forest, was the perfect blend of rustic charm and modern comfort, or so we thought.
+
+From the moment we arrived, there was an air of mystery that I couldn't shake off. It started with small, odd occurrences – a missing loaf of bread, my favorite scarf misplaced, strange creaks in the night. David laughed it off, attributing it to my overactive imagination, but I couldn't help feeling unsettled.
+
+One afternoon, while David was out grabbing some groceries, my curiosity led me to a small, barely noticeable door under the staircase. It was locked, but a hairpin and some persistence got me through. What I found was a narrow, creaking staircase spiraling down into darkness. With only the light from my phone guiding me, I descended.
+
+The basement was cold, damp, and cluttered with old furniture and boxes. But what caught my eye was a makeshift living area in the corner, complete with a bed, some clothes, and personal belongings. It looked lived-in, and a chill ran down my spine. I quickly snapped a few photos with my phone and hurried back upstairs, locking the door behind me.
+
+When David returned, I showed him the photos, and his skepticism turned to concern. We decided to confront the owner, but our calls went unanswered. That night, we heard footsteps above us. Grabbing a flashlight, David led the way as we cautiously searched the house.
+
+In the living room, we came face-to-face with him – a disheveled, wild-eyed man. He introduced himself as Michael and claimed the house was his sanctuary. He spoke of how he'd been an Airbnb guest years ago and had never left, convinced the house belonged to him.
+
+We tried to leave, but our car keys and phones were missing. Michael had hidden them, trapping us in his twisted reality. The next hours were a blur of panic and desperation as we tried to outsmart him. We managed to lock him in the basement, but in our haste, we stumbled upon a diary hidden in a floorboard.
+
+The diary belonged to Michael. It chronicled his descent into madness and his obsession with the house. There were entries about us - how he'd watched us, moving our things, living amongst us unseen.
+
+We finally found our keys and fled, driving away from that cursed place as fast as we could. But the terror of that night lingers. Michael's diary revealed a sinister connection to the house that we never fully understood, and I often wonder what other secrets lay hidden within its walls.
+
+As we drove away, the sun was rising, casting light on the house that now seemed more like a prison than a sanctuary. I couldn't help but feel that we were leaving a part of ourselves behind, trapped in the pages of a madman's diary.
+
+'''
+gpt_story_2 ='''In the golden haze of a crisp autumn morning, I found myself driving down winding country roads, flanked by forests painted in fiery reds and glowing oranges. The air smelled of woodsmoke and the earthy scent of fallen leaves. It was the kind of setting where you'd expect nothing but peace and relaxation, a perfect escape from the city's perpetual clamor. I remember thinking how the quaint little town sprung up around the bend looked like something out of a storybook, untouched by time and the outside world's troubles. I was headed to an Airbnb I found online, touted for its seclusion and charm—a rustic cabin nestled at the edge of this picturesque town. It was supposed to be my haven for the next week, a place to recharge and maybe find inspiration hidden in the tranquility of nature. Little did I know that this so-called haven would soon become the setting of a memory I'd struggle to forget.
+
+Action Beat 1: Getting to Know the Place Upon arrival, the cabin looked even more delightful than the pictures. Its wooden exterior was aged to a perfect patina, and it sat comfortably among the towering trees, as if it too had grown from the earth. The host, a man with a wiry frame and an easy smile named Martin, welcomed me with a warmth that felt a tad overzealous. He eagerly showed me around the small, cozy interior, adorned with antiques and warm, flickering lights. As he detailed the quirks of the cabin, I couldn't help but feel charmed by the place and its seemingly kind host.
+
+Action Beat 2: Strange Noises and Distant Shadows The first night enveloped the cabin in utter darkness, the kind you only find far from the touch of city lights. It was then, in the depth of this darkness, that sleep escaped me, replaced by the unsettling sound of scratching coming from the basement's locked door. My heart raced as I lay in bed, listening intently, wondering if I was imagining things. The next evening, as the sun dipped below the trees casting long shadows, I spotted what looked like figures moving at the forest's edge. My pulse quickened, and a shiver ran down my spine—were there people watching the cabin?
+
+Action Beat 3: The Host's Odd Behavior With unease settling in, I mentioned the noises and the shadows to Martin the following morning. His reaction was a chuckle, dismissing my concerns as city folk being unaccustomed to country life. But afterwards, his demeanor changed; his presence felt constant and suffocating, watching my every move with an unsettling intensity. My discomfort grew as my once-charming host's behavior twisted into something more invasive and unnerving.
+
+Action Beat 4: Discovering Hidden Cameras Driven by a nagging suspicion and a growing sense of being watched, I started looking around—and that's when I found it. A tiny, almost invisible camera tucked away among the books on a shelf. Horror washed over me as the realization set in: Martin had been watching me. I confronted him, anger and fear tainting my voice, but he met my accusations with cold denial and an unsettling calm that did nothing to quell my terror.
+
+Action Beat 5: A Tense Escape Plan I knew I had to leave, my mind racing to formulate an escape. Pretending to plan a lengthy hike, I packed my belongings with shaking hands, all while keeping a wary eye on Martin. He suggested driving me to a scenic spot, but the thought of being alone with him anywhere beyond the cabin's safety was unthinkable. The air was thick with tension; every second near him felt like a countdown to something much worse than being watched.
+
+Action Beat 6: Narrow Escape Seizing a brief moment when Martin was distracted by a phone call, I slipped away, my heart pounding as I half-ran, half-stumbled through the woods, fearing at any moment I'd hear him behind me. But I didn't stop, not until I reached the safety of the town, where I immediately informed the authorities. Though Martin denied everything, leaving the incident shrouded in uncertainty, I was just grateful to be away from that cabin and its twisted host.
+
+As I sit here recounting this memory, the feelings of fear and violation still grip me. The scenic beauty and tranquility that first drew me to that place now seem overshadowed by the shadows that lurked within. My escape was a stroke of luck, a fleeting chance grasped in a moment of sheer desperation. But what haunts me most is the nagging question: what might have happened if I hadn't left when I did?
+'''
+count_words(gpt_story_2)
+
+path_voice = os.path.join(xp_path, fn + " - gpt_story_2")
+text2mp3(text_string = gpt_story_2, voice_name = "shimmer", fn=path_voice )  #onyx = male. shimmer = female
+
+#### create mp4 story wise
+# image_lists[0-n]  -   images for story 0-n
+# chapters_  - story 0-n
+# voice_files - stories ib voice
+##############################################3
+from create_mp4 import *
+
+#story1
+n = 0 # story no.
+audio_files = voice_files[n] + ".mp3"
+image_files = image_lists[n]
+output_mp4 = os.path.join(xp_path, "clip_" + str(n) + ".mp4")
+    
+# print(audio_path, " x ", image_paths, " = ", output_mp4)
+
+# create_video_with_images_and_audio(image_paths=image_paths, audio_path=audio_path, output_filename=output_mp4, fps=30)
+create_video_with_images_and_audio(image_paths=image_files, audio_path=audio_files, output_filename=output_mp4, fps=30)
+
 
 
 

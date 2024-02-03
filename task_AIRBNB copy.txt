@@ -17,31 +17,22 @@ Story types:
 
 Realistic Setting: The story should be set in a  Airbnb location, ranging from urban apartments to remote houses. 
 - The setting should initially appear ordinary and welcoming, but quickly escalate into a mightmare 
-
-Target language should be natural spoken language understood by 8th-grade readers.
-
-Descriptive Language: 
-- Use vivid descriptions to create a tense atmosphere and build suspense.
-- use methology "show - don't  tell" when writing.
-
-Plausible Horror Elements: Incorporate fears that readers can easily imagine themselves experiencing.
-
-Unexpected Twists: Introduce surprises that shift the story's direction, heightening the horror.
-
-Psychological Depth: Focus on the characters' emotional and psychological reactions to the horror they face.
-
+ - describe the settings and vivid details.
+    
 Characters: Include a mix of characters such as guests, hosts, or unexpected visitors. 
 The protagonists should be relatable individuals who encounter unusual or frightening situations.
  - develop the characters in depth.
 
-Unresolved Ending: Leave the story open-ended to keep readers thinking and feeling unsettled.
+Descriptions: Describe moods, feelings, sentiments and ambiences in details.    
 
-
+Target language should be natural spoken language understood by 8th-grade readers.
+- use methology "show  - don't  tell" when writing.
      
+
 Story length: 800-1200 words.
 Focus on building a suspenseful atmosphere rather than explicit horror.
 Include elements of mystery and subtle horror.
-Conclude with a good ending like a lucky escape or somethinig elsem buut keep it open-ended.
+Conclude with aa good ending like a lucky escape or somethinig elsem buut keep it open-ended.
 
 Expected Outcome: A compelling story that take the audience on a journey narrated in a style reminiscent of 
 a personal recollection. 

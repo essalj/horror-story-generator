@@ -2,13 +2,25 @@ from moviepy.editor import *
 from moviepy.audio.AudioClip import AudioArrayClip
 import numpy as np
 
+
+def create_silence_audio_clip(silence_duration=2.0):
+    silent_array = np.zeros((int(silence_duration * 44100), 2))  # 44100 samples/sec, 2 channels for stereo
+    silent_clip = AudioArrayClip(silent_array, fps=44100)
+    return silent_clip
+
 def add_silence_to_audio(original_audio_clip, silence_duration=2.0):
     silent_array = np.zeros((int(silence_duration * 44100), 2))  # 44100 samples/sec, 2 channels for stereo
     silent_clip = AudioArrayClip(silent_array, fps=44100)
     return concatenate_audioclips([original_audio_clip, silent_clip])
 
 def create_video_with_images_and_audio(image_paths, audio_path, output_filename='final_video.mp4', fps=30):
-    audio_clip = AudioFileClip(audio_path)
+    silent_clip = create_silence_audio_clip(silence_duration=2.0)
+    audio_clip_in = AudioFileClip(audio_path)
+    audio_clip = concatenate_audioclips([silent_clip, audio_clip_in])
+    print("audio_clip_in:" + str(audio_clip_in.duration))
+    print("silent_clip:" + str(silent_clip.duration))
+    print("audio_clip:" + str(audio_clip.duration))
+
     audio_duration = audio_clip.duration
 
     # Determine the duration for each image and audio segment
@@ -38,6 +50,9 @@ def create_video_with_images_and_audio(image_paths, audio_path, output_filename=
     # Set the concatenated audio to the video
     final_video = concatenated_video.set_audio(final_audio)
     final_video.write_videofile(output_filename, fps=fps)
+
+    # create_video_with_images_and_audio(image_paths=image_files, audio_path=audio_file, output_filename=output_mp4, fps=30)
+
 
 # # Example usage
 # image_paths = ['image1.jpg', 'image2.jpg', 'image3.jpg', ...]  # Add your image paths
