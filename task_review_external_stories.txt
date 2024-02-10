@@ -1,0 +1,38 @@
+
+
+**Task Description:**
+
+You are tasked with delving into a collection of Airbnb horror stories. Each story provides a unique glimpse into unsettling experiences that guests or hosts have purportedly encountered. Your objective is to read these narratives carefully and perform the following tasks for each story:
+
+1. **Create a Summary**: Draft a concise yet comprehensive summary for each story. Your summary should capture the essential elements of the plot, character actions, and the setting, providing enough detail to serve as a foundation for developing a new, inspired narrative. Think of the summary as a blueprint that distills the original story's essence, making it possible for someone else to reimagine the story while retaining its core thematic and narrative elements.
+
+2. **Rate the Stories**: Assign a rating to each story on a scale from 1 to 100, based on two primary criteria:
+   - **Compelling Nature**: How engaging and captivating is the story? Consider the story's ability to hold attention, evoke emotions, and leave a lasting impression on the reader.
+   - **Plausibility**: Assess the likelihood of the story being true. A higher score should reflect a narrative that seems like it could have genuinely happened, considering the realistic portrayal of characters, settings, and events within the context of an Airbnb experience.
+
+**Guidelines for Evaluation:**
+
+- While summarizing, ensure you maintain a neutral tone, accurately reflecting the story's events without inserting personal judgment or speculative commentary.
+- In your ratings, provide brief justification for the scores assigned, especially regarding the story's compelling nature and its plausibility. This feedback will be invaluable for understanding the strengths and weaknesses of each narrative.
+- Consider the unique aspects that make Airbnb horror stories resonate with readers: the unsettling invasion of personal space, the breach of trust, and the clash between guests' expectations versus reality.
+
+**Output Format:**
+
+For each story, present your work in a structured format and append it to the existing json:
+
+```json
+{
+  "summary": "A detailed summary capturing the main plot, characters, and setting.",
+  "rating": 75,
+  "feedback": {
+    "compelling_nature": "Brief explanation on how engaging the story is.",
+    "plausibility": "Insight on how realistic and believable the story appears."
+  }
+}
+```
+
+**Objective:**
+
+Your analysis will contribute to a deeper understanding of what elements contribute to a truly unsettling Airbnb horror story. By summarizing and rating these stories, you help isolate the components that could inspire new narratives in this genre, emphasizing realism and the capacity to engage readers.
+3. Output only the json structure.
+---

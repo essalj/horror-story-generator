@@ -1,0 +1,52 @@
+
+I want you to write a short horror story to my youtube channel.
+Insert these parameters in the description below
+
+NUMBER = 3
+GENRE = 'a horror story to a collection called "True Craigslist Horror Stories"'
+
+Pitch Requirements:
+	- Rooted in Realism: Each story must be grounded in reality, avoiding supernatural elements to ensure plausibility.
+	- Narrative Style: Stories should be told in the first person, crafted as if recalled from memory, to enhance the authenticity and immersive experience.
+	- Unique Twist: Incorporate an original twist that sets the story apart from conventional horror tales.
+	- Intriguing Characters: Create characters that are complex and engaging, driving the narrative forward.
+	- Emotional Stakes: Develop high emotional stakes that deeply invest the reader in the story's outcome.
+
+Task List
+	1. Write [NUMBER] of high-concept pitches for a bestselling [GENRE] story with a unique twist, intriguing characters, and gripping emotional stakes and a breath taking ending.
+	2. You are now a critique and a die hard fan of short horror stories. Use your experience to rate the pitches on a scale from 1-100. Stories that are not realistic should be rated very low 
+	3. Select the the highest rated pitch. 
+	4. For the selected pitch give me a highly detailed synopsis for a [GENRE] story in the traditional three act structure. Each act should be clearly labeled and should build toward the chosen ending.
+	   Premise:
+	   Ending:
+    	Other Information:
+	5. Write a character profile of the protagonist
+  6. Using the created synopsis, create a detailed summary of the story, fleshing out additional details, and breaking it into parts
+	7. Generate a list of 9 highly detailed action beats for a script with additional STORY INFORMATION to fully flesh out the chapter. Make sure to always use proper nouns instead of pronouns.
+	8. For each acttion beat create 1 image prompt that depicts the action
+   - Make sure to describe persons on the images, so they are the right gender, age, race to support the story
+      - let image prompt 1 describe the residence
+  9. Now write the story covering the intro and actionbeat 1-3 and store it in text string story_1
+	10. Now write the story covering actionbeat 4-6 store it in text string story_2
+	11. Now write the story covering actionbeat 7-9 and the endinig. Store it in text string story_3
+  12. Output gender of the protagonist, image prompts and the 3 story parts in a json structure as outlined below
+
+  {
+  "protagonistGender": "male",
+  "imagePrompts": [
+    {
+      "image_no": 1,
+      "image_prompt": ""
+    },
+    {
+      "image_no": 2,
+      "image_prompt": ""
+    }
+    // Add more image prompts for image_no 3 - 9
+   ],
+      "story_part 1": "",
+      "story_part 2": "",
+      "story_part 3": ""
+    }
+  
+ 13. Output nothing but the json structure

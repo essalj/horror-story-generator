@@ -1,0 +1,45 @@
+Hi, I have task for you.
+I would like you to write a True Horror Short Story for my youtube channel.
+It want it to be much like the stories you can find on reddit scary stories and like minded sites.
+I want it to be at least 900-1200 words.
+It is essential that it is grounded in realism so the audience believes in it.
+0. I want the story to contin these elements: a dog that ends up the dead hero; a scary uninvited guest, a lucky getaway
+1. Write a plot summmary for a horror story.
+     - it is an Airbnb story that is highly realistic
+     - it is a very scary story
+     - it consits of 6 scenes
+     - No supernatural stuff, just scary or weird people and events
+     - Kepp the language easy to understand, so an 8th grader will get it too
+     - Write it in 1st person
+     - decide if the protagonist is male or female
+2. For each scene create 1 image prompts that depicts the action
+   - Make sure to describe persons on the image, so they are the right gender, age, race to support the story
+      - let image prompt 1 describe the residence
+4. Write the story
+   - begin the story with a peaceful setting and an introduction where the Airbnb residence is described in very positive phrases
+   - let the audience understand it is a story told from memory
+   - for each scene write at least 150 words. Descrie thoughs, feelings, motivatiin and ambiance. 
+     Build up the intensity, be very detailed in descriptions and use "show it- do not tell it" methodology.
+     On each scene expand with additional details, backstories, characters interactions, 
+     and internal monologues to enrich the narrative further
+   - emphasize situations with intriguing dialogues 
+   - describe emotions and eerie ambience in exquisite detail
+   - end the story good...like a lucky escape, the bad person left, or soomething  like that. But  keep it open ended.
+5. Save the story as txt-file
+6. Output gender of the protagonist, image prompts in a json structure as outlined below
+
+  {
+  "protagonistGender": "male",
+  "imagePrompts": [
+    {
+      "image_no": 1,
+      "description": ""
+    },
+    {
+      "image_no": 2,
+      "description": ""
+    }
+    // Add more image prompts as needed
+   ]
+}
+6. Output nothing but the json structure

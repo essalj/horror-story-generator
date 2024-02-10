@@ -73,7 +73,7 @@ client = OpenAI(api_key=openai_api_key)
 ###############
 fn = "AirBNB stories"  #file name
 # chapter_count = 3 # number of stories
-action_beats_count = 7
+action_beats_count = 5
 
 chatbot_role = open_file("chatbot_role.txt")
 chatbot_artist_role = open_file("chatbot_artist_role.txt")
@@ -101,15 +101,42 @@ def chatgpt3 (userinput, temperature=0.8, frequency_penalty=0.2, presence_penalt
 #####################################
 
 #################
+# tools
+#######
+#extracts text elements from json structure
+def json_extract(json, user_prompt):
+    # system_txt = chatbot_artist_role
+    system_txt = "You are a helpful data scientist."
+    r = chatgpt3(userinput = user_prompt, system_role=system_txt, model = gpt4)
+    json_extract = r.choices[0].message.content
+    print(break_line + "json extract: \n" + json_extract)
+    return json_extract
+
+
+def json_extract_keyword(json, keyword):
+    user_prompt = "Select '" + keyword + "' from the json structure: \n" + json + "\nOutput only the content of '"  + keyword + "'. Output it as a string."
+    system_txt = "You are a helpful data scientist."
+    r = chatgpt3(userinput = user_prompt, system_role=system_txt, model = gpt4)
+    json_extract = r.choices[0].message.content
+    print(break_line + "json extract: \n" + json_extract)
+    return json_extract
+    #proposed_action = json_extract_keyword(json=r3_json, keyword="proposed action")
+
+    
+
+#################
 # create story
 #################
 
 story_no = 1
 user_input = ""
-user_input = "Airbnb host is protagonist, guests are evil, a setup but the host manage to get well out of it"
+
+# user_input = "A loyal dog saves the day but ends up dying from it"
+
+# user_input = "Airbnb host is protagonist, guests are bad persons, a scam, the host manage to get well out of it"
 
 if len(user_input)>5:
-    user_input ="Build the story based on these user_inputs:\n" + user_input + "." 
+    user_input ="Build the plot based on these user_inputs:\n" + user_input + "." 
 p_gender = "male"  # select male or female voice
 if p_gender == "female":
     sel_voice = "shimmer"
@@ -119,68 +146,83 @@ else:
 main_task = open_file("task_AIRBNB.txt")
 analysis = open_file("Airbnb story analysis.txt")
 airbnb_stories = open_file("C:\\my\\__youtube\\videos\\Horror Stories - inspiration\\Airbnb stories - All.txt")
-guide_lines = " - " + p_gender + ''' protagonist.'''
+guide_lines = "\n - " + p_gender + ''' protagonist.\n - ALWAYS WRITE IN 1ST PERSON!'''
 
 
-
-# task_1 = main_task + '''
-# 1. Read the file Airbnb stories - All.txt
-# 2. Write a suggestion for a plot to a new Airbnb horror story like the ones you just read.
-#    - Outline the central conflict and resolution. This serves as your story's backbone, guiding the narrative direction.
-# 3. Based on your suggested plot develop a story template for an Airbnb horror story with ''' + str(action_beats_count) + ''' scenes.
-#    Follow these guidelines: \n''' + guide_lines + ''' 
-# 4. Insert the story template in a json stucture with the column ['story_template"].
-# 5. Based on the story template create ''' + str(action_beats_count) + ''' action beats. One for each scene. 
-# 6. For each action beat create 1 image prompts that depicts the action.
-# 7. Add the action beats and the image prompts in the json stucture ['action_beat_no.", 'action_beat_desc", "image_prompt"]
-# 8. Create 1 image prompt that depicta the Airbnb resince and its settings and add it to the json structure with the column 
-# name ["first-image"].
-# 9. Output nothing but the created json structure
-# Airbnb stories:''' + airbnb_stories
-
-# task_2 = main_task + '''
-# 1. Read the story template and the action beats from the json structure to understand the plot.
-# 2. Write following these guide lines: ''' + guide_lines + '''
-# 3. Write the intro of the Airbnb horror story. Make the intro peaceful and about the Airbnb residence.
-# 4. Continue writing and integrate the action beats one by one. Describe them in vivid de with "show - dont  tell" methodology.
-# 5. Write the ending. Make it a good one, but leave it open ended.
-# 6. Output nothing but the story.
-# JSON:
-# '''
-
-
-task_1 = main_task + '''
-1a. Read the analysis of Airbnb stories.
-1b. Read the file Airbnb stories - All.txt
-2. Write a suggestion for a plot to a new Airbnb horror story like the ones you just read.
+# 0b. Read the file Airbnb stories - All.txt
+task_0 = main_task + '''
+0. Read the analysis of Airbnb stories.
+1. Create 5 ideas for a plot to a new True Airbnb horror story drawing inspiration from the analysis of airbnb stories.
 ''' + user_input + '''
-   - Outline the central conflict and resolution. This serves as your story's backbone, guiding the narrative direction.
-3. Decide on Key action beats: Identify ''' + str(action_beats_count) + ''' pivotal moments that advance the plot. 
-   These action beats should highlight character development, escalate tension, and move the story towards its climax.
-4. Based on your suggested plot develop a story template for an Airbnb horror story with ''' + str(action_beats_count) + ''' action beats.
-   Follow these guidelines: \n''' + guide_lines + ''' 
-5. Insert the story template in a json stucture with the column ['story_template"].
-6. For each action beat create 1 image prompts that depicts the action.
-7. Add the action beats and the image prompts in the json stucture ['action_beat_no.", 'action_beat_desc", "image_prompt"]
-8. Create 1 image prompt that depicts the Airbnb residence and its settings and add it to the json structure with the column 
-name ["first-image"].
-9. Output nothing but the created json structure. ''' + break_line + '''
-Airbnb analysis: ''' + analysis + break_line + '''
-Airbnb stories:''' + airbnb_stories + break_line
+   - For each plot idea outline the central conflict and resolution. This is the story's backbone, guiding the narrative direction.
+   - insert the the full description in a new json stucture with the column 'plot idea'-
+2. Take on the role as a critic and die hard fan of the genre and rate the 5 plot ideas on a scale from 1-100. 
+   - **Rating: For each "plot idea" in the json structure assign a rating on a scale from 1 to 100. A score of 100 signifies that the story idea has potential as an exemplary piece of horror literature, perfectly marrying imaginative horror elements with a realistic setting that is very likely to be a true story, while a score of 1 indicates significant areas for improvement.
+   - **Explain Your Rating**: Provide a detailed explanation for your rating, considering plot consistency, character depth, the effectiveness of the horror elements within a realistic framework, and the story’s overall ability to engage and horrify the reader.
 
-task_2 = main_task + '''
+  - For each "plot idea" from the existing json add your rating, an explanation for the rating and a rank from 1-5 to the existing json stucture with the columns ['rating', 'raters comment','rank'].
+  3. The json structure should be as in this example:\n
+  ```json
+[
+    {
+        "plot idea": "The Counterfeit Vacation.
+        An Airbnb host discovers his guests are using his property to create and distribute counterfeit currency.
+        The host outsmarts the guests by gathering evidence and anonymously tipping off the authorities, leading to their arrest while he remains safe.",
+        "rating": 78,
+        "raters comment": "The idea of a scam unfolding within the confines of an Airbnb property is intriguing and has potential for psychological depth, but it may lack direct horror elements.",
+        "rank": 3
+    }
+    ...
+    ]
+    ```
+4. Output nothing but the created json structure. 
+''' + break_line + '''
+Airbnb analysis: ''' + analysis + break_line
+
+task_1 = main_task + break_line + '''\n
+1. From the json input select the plot idea with the highest rank. 
+ - For the selected plot idea decide on key action beats.
+    - Identify ''' + str(action_beats_count) + ''' pivotal moments that advance the plot. 
+    - These action beats should highlight character development, escalate tension, and move the story towards its climax.
+2. Based on your suggested plot develop a story template for an Airbnb horror story with ''' + str(action_beats_count) + ''' action beats.
+   Follow these guidelines: \n''' + guide_lines + ''' 
+3. Insert the story template into a new  json stucture with the column ['story_template"].
+4. For each action beat create 1 image prompts that depicts the action.
+5. Add the action beats and the image prompts in the json stucture ['action_beat_no.", 'action_beat_desc", "image_prompt"]
+6. Create 1 image prompt that depicts the Airbnb residence and its settings and add it to the json structure with the column 
+name ["first-image"].
+7. Output nothing but the created json structure. ''' + break_line + '''\nJSON input:'''
+
+# + '''
+# Airbnb analysis: ''' + analysis + break_line + '''
+# Airbnb stories:''' + airbnb_stories + break_line
+
+task_2 = main_task + break_line + '''
 1. Read the story template and the action beats from the json structure to understand the plot.
 2. Write following these guide lines: ''' + guide_lines + '''
-3. Write the intro of the Airbnb horror story. Make the intro peaceful and about the Airbnb residence.
-4. Continue with the action beats. Take them one by one and develop them in full detail describing vividly details and emotions.
+3. First develop the characters in depth.
+  - Deepen character development by exploring their backstories, motivations, and fears more thoroughly to create a stronger emotional connection with the reader.
+4. Write the intro of the Airbnb horror story. Make the intro peaceful and about the Airbnb residence.
+ - Introduce foreshadowing elements early in the story to create anticipation and sow seeds of unease that will pay off during climactic moments.
+ - Enhance the buildup of suspense by introducing more subtle and nuanced horror elements throughout the story, rather than relying on abrupt occurrences.
+5. Continue with the action beats. Take them one by one and develop them in full detail describing back stories, consequences, details and emotions.
    Do not rush it, let the story unfold little by little. Remember we are aiming for 12000 words.
    Use "show - dont tell" methodology.
-5. Write a detailed ending. Make it a good one - like a lucky escape, the bad person did not cone back, or something like that. 
+6. Write a detailed ending. Make it a good one - like a lucky escape, the bad person did not cone back, or something like that. 
 But leave it open ended. And if you feel for it a little aftermath (a realisation after coming home, a letter, a call, a photo...
 ..or something entirely diferent).
-6. Output nothing but the story.
-JSON:
-'''
+7. Output nothing but the story.
+\nJSON input:''' 
+#suggets plot
+def test_plot_ideas(task):  
+    print(break_line + "story_plot")
+    role = chatbot_role + task
+    prompt = role
+    print(break_line + "prompt: \n" + prompt)
+    r = chatgpt3(prompt, model = gpt4)
+    gpt_out = r.choices[0].message.content
+    print(break_line + gpt_out)
+    return gpt_out
 
 def story_plot(task):  
     print(break_line + "story_plot")
@@ -191,10 +233,10 @@ def story_plot(task):
     gpt_out = r.choices[0].message.content
     print(break_line + gpt_out)
     return gpt_out
-r1_json =story_plot(task_1)
-print(r1_json)
+# r1_json =story_plot(task_1)
+# print(r1_json)
 
-
+#write story
 def write_story(task):  
     print(break_line + "story_plot")
     role = chatbot_role + task
@@ -205,12 +247,53 @@ def write_story(task):
     print(break_line + gpt_out)
     return gpt_out
  
+# task_2_ = task_2 + r1_json
+# # story = story_plot(task_2_)
+# story = write_story(task_2_)
+# count_words(story)
+# path_story = os.path.join(xp_path, fn + " - story " + str(story_no) + ".txt")
+# save_file(path_story, story)
+
+
+#evaluate story
+def evaluate_story(task):
+    prompt = task
+    r = chatgpt3(prompt, model = gpt4)
+    gpt_out = r.choices[0].message.content
+    return gpt_out
+
+# task_3 = open_file("task_critic.txt") + "\n**Story:\n" + story + break_line + "**Current JSON Structure:\n" + r1_json
+# r3_json = evaluate_story(task_3)
+# print(r3_json)
+r0_json = ""
+r1_json = ""
+r3_json = ""
+story = ""
+# def full_write_process():
+# global r1_json, r3_json, story
+
+# task 0
+r0_json =test_plot_ideas(task=task_0)
+
+# task 1
+r1_json =story_plot(task_1 + r0_json)
+print(r1_json)
+
+# task 2
 task_2_ = task_2 + r1_json
-story = story_plot(task_2_)
+story = write_story(task_2_)
 count_words(story)
 path_story = os.path.join(xp_path, fn + " - story " + str(story_no) + ".txt")
 save_file(path_story, story)
 
+# task 3
+task_3 = open_file("task_critic.txt") + "\n**Story:\n" + story + break_line + "**Current JSON Structure:\n" + r1_json
+r3_json = evaluate_story(task_3)
+print(r3_json)
+
+# task_eval_stories = open_file("task_review_external_stories.txt") + "\nStories to review:\n" + break_line + airbnb_stories + break_line
+# r4_json = evaluate_story(task_eval_stories)
+# print(r4_json)
 
 ###################
 ###################
@@ -220,15 +303,6 @@ import requests
 from PIL import Image
 from io import BytesIO
 from datetime import datetime
-
-#extracts text elements from json structure
-def json_extract(json, user_prompt):
-    # system_txt = chatbot_artist_role
-    system_txt = "You are a helpful data scientist."
-    r = chatgpt3(userinput = user_prompt, system_role=system_txt, model = gpt4)
-    json_extract = r.choices[0].message.content
-    print(break_line + "json extract: \n" + json_extract)
-    return json_extract
 
 
 #Dalle3 - create image
@@ -392,6 +466,7 @@ def text2mp3(text_string="testing", voice_name="onyx", fn="output"):
 # Example usage
 # text2mp3(text_string="Your long text here...", voice_name="shimmer", fn="Lullaby")
 
+# story = open_file('gpt_story.txt')
 path_voice = os.path.join(xp_path, fn + " - " + str(story_no))
 text2mp3(text_string = story, voice_name = sel_voice, fn=path_voice )
 audio_file = path_voice + ".mp3"

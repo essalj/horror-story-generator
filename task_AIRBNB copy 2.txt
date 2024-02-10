@@ -1,8 +1,9 @@
 Task Description for a Writer:
 
 
-Objective: Write a short horror story set in Airbnb accommodations. 
-The story should be very realistic, with a focus on the unexpected and scary events
+Objective: Write a short horror story in Airbnb accommodations to the compilation "True Airbnb Horror Stories".
+It should be very plausible that a story like this could be true.
+The story should be very realistic, with a focus on the unexpected and scary events. 
  that can occur in seemingly safe and mundane settings.
 The story should be narrated as if recalled from memory, with a focus on suspense and mystery.
 NO SUPERNATURAL EVENTS!!
@@ -17,22 +18,35 @@ Story types:
 
 Realistic Setting: The story should be set in a  Airbnb location, ranging from urban apartments to remote houses. 
 - The setting should initially appear ordinary and welcoming, but quickly escalate into a mightmare 
- - describe the settings and vivid details.
-    
-Characters: Include a mix of characters such as guests, hosts, or unexpected visitors. 
-The protagonists should be relatable individuals who encounter unusual or frightening situations.
- - develop the characters in depth.
-
-Descriptions: Describe moods, feelings, sentiments and ambiences in details.    
 
 Target language should be natural spoken language understood by 8th-grade readers.
-- use methology "show  - don't  tell" when writing.
-     
 
+Descriptive Language: 
+- Use vivid descriptions to create a tense atmosphere and build suspense.
+- use methology "show - don't  tell" when writing.
+
+Plausible Horror Elements: Incorporate fears that readers can easily imagine themselves experiencing.
+
+Unexpected Twists: 
+ - Introduce surprises that shift the story's direction, heightening the horror.
+ - Introduce foreshadowing elements early in the story to create anticipation and sow seeds of unease that will pay off during climactic moments.
+
+Psychological Depth: Focus on the characters' emotional and psychological reactions to the horror they face.
+
+Characters: Include a mix of characters such as guests, hosts, or unexpected visitors. Pets are also welcomed characters.
+The protagonists should be relatable individuals who encounter unusual or frightening situations.
+ - develop the characters in depth.
+ - deepen character development by exploring their backstories, motivations, and fears more thoroughly to create a stronger emotional connection with the reader
+ 
+
+Unresolved Ending: Leave the story open-ended to keep readers thinking and feeling unsettled.
+
+
+     
 Story length: 800-1200 words.
 Focus on building a suspenseful atmosphere rather than explicit horror.
 Include elements of mystery and subtle horror.
-Conclude with aa good ending like a lucky escape or somethinig elsem buut keep it open-ended.
+Conclude with a good ending like a lucky escape or somethinig elsem buut keep it open-ended.
 
 Expected Outcome: A compelling story that take the audience on a journey narrated in a style reminiscent of 
 a personal recollection. 
