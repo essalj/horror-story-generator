@@ -8,12 +8,19 @@ from time import time,sleep
 import datetime
 
 
+def open_file(filepath):
+    with open(filepath, 'r', encoding='utf-8') as infile:
+        return infile.read()
+    
+
+def save_file(filepath, content):
+    with open(filepath, 'w', encoding='utf-8') as outfile:
+        outfile.write(content)
+        
 
 ###########
 openai_api_key = open_file('c:\\my\\git\\api-keys\\openaiapikey.txt')
 client = OpenAI(api_key=openai_api_key)
-
-
 
 chatbot_role = open_file("chatbot_role.txt")
 chatbot_artist_role = open_file("chatbot_artist_role.txt")
@@ -103,7 +110,8 @@ def text2mp3(text_string="testing", voice_name="onyx", fn="output"):
 # text2mp3(text_string="Your long text here...", voice_name="shimmer", fn="Lullaby")
 
 # story = open_file('gpt_story.txt')
-path_voice = os.path.join(xp_path, fn + " - " + str(story_no))
-text2mp3(text_string = story, voice_name = sel_voice, fn=path_voice )
-audio_file = path_voice + ".mp3"
-count_words(story)
+            
+# path_voice = os.path.join(xp_path, fn + " - " + str(story_no))
+# text2mp3(text_string = story, voice_name = sel_voice, fn=path_voice )
+# audio_file = path_voice + ".mp3"
+# count_words(story)

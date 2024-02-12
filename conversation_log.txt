@@ -1,7 +1,0 @@
-2024-01-01 16:12:05: User: Hi, I am Lasse
-2024-01-01 16:27:06: User: hello i am lasse
-2024-01-01 16:29:35: User: helloo
-2024-01-01 16:32:40: User: main_written_communication()
-2024-01-01 16:33:41: User: main_written_communication()
-2024-01-01 16:36:40: User: main_written_communication()
-2024-01-01 18:59:11: User: main_written_communication()
