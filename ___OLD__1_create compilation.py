@@ -13,13 +13,10 @@ import datetime
 ####################
 
 #ideas - Valentines Day Stories; Tinder Stories; Home ALone Stories
-fn = "Stories"  #file name
-count_action_beats = 7
+# fn = "Stories"  #file name
 
-no_of_pitches = 3
-genre = "True Craigslist Horror Stories"
+genre = "True Craigslist Horror Stories - COMPILATION"
 # user_input = "Make the story about a buyer that comes to a scary place to pick up a bought item" 
-user_input = ""
 
 
 def create_dated_folder(base_path, text_add_on):
@@ -50,12 +47,6 @@ def save_file(filepath, content):
     with open(filepath, 'w', encoding='utf-8') as outfile:
         outfile.write(content)
         
-
-def count_words(my_string):
-  words = re.findall(r'\b\w+\b', my_string)
-  number_of_words = len(words)
-  print("Number of words:", number_of_words)
-
 
 
 #############################
