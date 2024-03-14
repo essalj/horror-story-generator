@@ -545,7 +545,7 @@ text2mp3(text_string = thanks, voice_name = "onyx", fn=path_voice )
 #################
 ## Create mp4
 # from create_mp4 import * 
-from create_mp4 import *
+from tools_create_mp4 import *
 
 # xp_path = 'C:\\my\\__youtube\\videos\\2023-12-13_horror'
 #List all files in the specified directory ending with ...
@@ -595,7 +595,7 @@ os.chdir(path0)
 ###########################
 # Adding music sound track
 ###########################
-from add_music_to_mp4 import * 
+from tools_add_music_to_mp4 import * 
 
 
 output_final_mp4_music = os.path.join(xp_path,fn + "final_mp4_music.mp4")

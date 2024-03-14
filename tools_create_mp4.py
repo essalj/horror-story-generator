@@ -64,7 +64,7 @@ def create_video_with_images_and_audio(image_paths, audio_path, output_filename=
 # create_video_with_images_and_audio(image_paths, audio_path, output_filename='final_video.mp4', fps=30)
 
 # concatenates mp4 files
-def concatenate_videos(video_files, output_path):
+def concatenate_videos_old(video_files, output_path):
     # Load the video clips
     clips = [VideoFileClip(path) for path in video_files]
     # clips = [VideoFileClip(os.path.join(xp_path, path)) for path in video_files]
@@ -72,3 +72,36 @@ def concatenate_videos(video_files, output_path):
     final_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
 
 # concatenate_videos(mp4_clips, output_final_mp4)
+
+from moviepy.editor import VideoFileClip, concatenate_videoclips
+
+def concatenate_videos(video_files, output_path):
+    # Initialize a list to hold VideoFileClip objects
+    clips = []
+    
+    for path in video_files:
+        try:
+            # Load the video clip and ensure it's compatible by setting target resolution and fps
+            clip = VideoFileClip(path)
+            # Optionally, you can ensure all clips have the same fps and size
+            # For example: clip = clip.set_fps(target_fps).resize(new_size=(target_width, target_height))
+            clips.append(clip)
+        except Exception as e:
+            print(f"Error processing {path}: {e}")
+    
+    if clips:
+        try:
+            # Concatenate video clips
+            # The method="compose" argument can help avoid size mismatch issues
+            final_clip = concatenate_videoclips(clips, method="compose")
+            # Write the result to a file
+            final_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
+        except Exception as e:
+            print(f"Error during concatenation: {e}")
+    else:
+        print("No video clips were successfully loaded.")
+
+# Example usage
+# video_files = ['path/to/video1.mp4', 'path/to/video2.mp4']
+# output_path = 'path/to/output_video.mp4'
+# concatenate_videos(video_files, output_path)

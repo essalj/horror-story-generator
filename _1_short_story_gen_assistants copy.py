@@ -1,6 +1,8 @@
 
 #pip install Pillow
 # pip install pydub
+
+
 import re
 import os
 import openai
@@ -26,13 +28,13 @@ count_action_beats = 9
 no_of_pitches = 3 # to select the best story
 
 
+genre = "True Scary Tinder Dating Stories"
 # genre = "True Walmart Horror Stories"
 # genre = "Childhood stories"
-
 # genre = "True AirBNB Horror Stories"
 # genre = "True Exorcism Horror Stories"
 # genre = "True Valentines Day Horror Stories"
-genre = "True Ouija Board Horror Stories"
+# genre = "True Ouija Board Horror Stories"
 # genre = "True Craigslist Horror Stories"
 # user_input = "Make the story about a buyer that comes to a scary place to pick up a bought item" 
 # user_input = "Make the story super scary and a psycological rollercoaster."
@@ -42,7 +44,8 @@ genre = "True Ouija Board Horror Stories"
 # user_input = '''Eleanor stumbles upon a hidden violin case in her inherited mansion, captivated by its melody and unsettling aura. Despite an inscription warning of untold secrets, she repairs the instrument. As she plays, the spirit of the previous owner appears, demanding she finish his unfinished music. Eleanor hesitates, sensing danger, but her passion for music compels her to play. The final notes echo, leaving her unconscious and the spirit vanished. When she awakens, she possesses unmatched skill, but her music holds no soul, hinting at the spirit's lingering influence.'''
 # user_input = '''The protagonist arrives late at night in bad weather and has a hard time finding the key'''
 #user_input = '''The story chronicles the experiences of a 10-year-old boy, Jake, who moves to a new town and forms a peculiar companionship with a neighborhood kid, Liam. Liam's strange behavior, including an unnerving welcome to his untidy home, makes Jake feel uncomfortable, forcing him to distance himself from Liam. The discomfort escalates into fear when Liam climbs into Jake's room at night. This culminates in a terrifying incident where Liam shatters Jake's window to enter his room, prompting Jake's parents to confront Liam's family and address the situation. While the immediate threat is averted, Jake is left with lingering unease as he moves on from the horrific incidents, pondering on what kind of adult Liam could have become.'''
-user_input = '''After a failed Ouija board attempt with their sister, a lone narrator tries again, inspired by online horror stories.  Footsteps and a muffled female voice emanate from upstairs, growing clearer as the narrator approaches their brother's room. The disembodied voice of their deceased grandmother echoes repeatedly, leaving the narrator terrified and shaken. This deeply personal encounter instills a lasting, vivid memory of terror.'''
+# user_input = '''After a failed Ouija board attempt with their sister, a lone narrator tries again, inspired by online horror stories.  Footsteps and a muffled female voice emanate from upstairs, growing clearer as the narrator approaches their brother's room. The disembodied voice of their deceased grandmother echoes repeatedly, leaving the narrator terrified and shaken. This deeply personal encounter instills a lasting, vivid memory of terror.'''
+user_input = ""
 ############################
 
 
@@ -189,7 +192,34 @@ t1_occultism = f'''
 4. **Output the Winning Pitch:** Present the selected pitch, its rating, and a detailed explanation for its top score. Highlight how it stands out in terms of its realistic approach to the occult, its emotional depth, and its unique, chilling twist.
 '''
 
+t1_tinder = f'''
+**Template for Creating Tinder Dating Horror Stories**
 
+**Task: Craft a Short Horror Story for My YouTube Channel**
+
+**Pitch Requirements:**
+
+**Rooted in Digital Dating Realism:** The story should delve into the eerie and unsettling experiences within the world of Tinder dating, portraying scenarios that are plausible and resonant with the realities of digital dating, yet tinged with horror.
+
+**Narrative Style:** The narrative should be presented in the first person, offering an intimate recounting of a Tinder dating experience gone horribly wrong. This style should immerse the audience, making them feel as if they're listening to a friend share a deeply personal and terrifying story.
+
+**Unique Dating Twist:** Incorporate a unique twist that transforms an ordinary Tinder date into an unforgettable horror story. This twist should be innovative and heighten the sense of dread, setting your story apart from typical dating horror tales.
+
+**Complex Characters on Tinder:** Craft characters that are rich in depth and intricacy, with their motivations, backgrounds, and actions driving the narrative forward. Their interactions through Tinder should be central to the story, adding layers of complexity and suspense.
+
+**High Emotional Stakes:** Build the story with significant emotional investment, where the stakes are personal and potentially devastating. The emotional journey should be compelling, intensifying the horror of the dating experience and making the story resonate on a deeper level.
+
+Task List:
+
+1. Generate High-Concept Pitches: Write {no_of_pitches} high-concept pitches for a captivating horror story set against the backdrop of Tinder dating. Each pitch should boast a unique twist, engaging characters, high emotional stakes, and a memorable ending that leaves the audience chilled. The narratives should be particularly harrowing, told in the first person to emphasize the personal horror of the dating experience. Include {user_input} for personalized pitches, if provided.
+
+2. Critique and Rate Pitches: Take on the dual roles of critic and enthusiastic fan of short horror stories. Assess the pitches on a scale from 1-100, giving preference to those that skillfully combine psychological terror with the authenticity of digital dating experiences. Rate pitches that fail to capture the essence of Tinder dating lower, while those that excel in creating a palpable sense of fear and realism should score higher.
+
+3. Select the Best Pitch: Identify the pitch that excels in depicting a Tinder dating scenario with genuine horror elements, scoring it based on its realism, psychological impact, and the creativity of its dating horror twist.
+
+4. Output the Winning Pitch: Showcase the chosen pitch, its score, and the rationale behind its selection. Emphasize its strength in portraying a Tinder dating horror story that is both believable and deeply unsettling, with a unique twist and emotional depth that truly engages and horrifies the audience.
+
+'''
 
 t1_ouija = f'''
 **Template for Ouija Board and Occultism Horror Story Creation**
@@ -344,8 +374,9 @@ Remember:
 Write in the first person (as if recalling the experience).
 Avoid supernatural elements.
 Additional Notes: Feel free to add details to enhance the atmosphere and build tension. Focus on crafting the pitch within the YouTube format, maintaining audience engagement throughout. By omitting supernatural elements and focusing on the psychological impact of mundane events and bizarre behavior, this refined task description aims to create a more unsettling and thought-provoking real-life horror story. '''
+t1 = t1_tinder
 # t1 = t1_childhood_stories
-t1 = t1_ouija
+# t1 = t1_ouija
 # t1 = t1_airbnb
 # t1 = t1_walmart
 # t1 = t1_event_focused
@@ -496,7 +527,7 @@ audio_file = create_voice_over(gender)
 # story_no -  current story no.
 #   
 ##############################################
-from create_mp4 import *
+from tools_create_mp4 import *
 def create_mp4(output_mp4):
     create_video_with_images_and_audio(image_paths=image_files, audio_path=audio_file, output_filename=output_mp4, fps=30)
     count_words(story)
