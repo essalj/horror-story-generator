@@ -54,6 +54,7 @@ def create_intro_mp4(gender='male', xp_path="", story = "Horror stories that wil
     image_files = [os.path.join(xp_path, file) for file in os.listdir(xp_path) if file.endswith(".png")]
     # image_file = [image_files[0]]
     output_final_mp4 = os.path.join(xp_path, "clip_0_intro.mp4")
+    
     create_mp4(output_mp4 = output_final_mp4, image_files=image_files, audio_file=audio_file)
 
 

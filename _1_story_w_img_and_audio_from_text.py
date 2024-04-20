@@ -326,7 +326,7 @@ count_words(story)
 # story_no -  current story no.
 #   
 ##############################################
-from tools_create_mp4 import *
+from tools_create_mp4_delete import *
 
 output_mp4 = os.path.join(xp_path, "clip_" + str(story_no) + ".mp4")
 create_video_with_images_and_audio(image_paths=image_files, audio_path=audio_file, output_filename=output_mp4, fps=30)

@@ -13,11 +13,10 @@ def story_generator(
     from time import time,sleep
     import datetime
 
+    error_list = []
     ####################
     # Story settings
     ####################
-
-
 
     # select model
     gpt4 = "gpt-4-turbo-preview"
@@ -25,30 +24,17 @@ def story_generator(
     selected_gpt = gpt4
 
 
-    #ideas - Valentines Day Stories; Tinder Stories; Home ALone Stories
+    narration_style = "Opt for a first-person narrative to deepen the story's immersive quality."
+    # narration_style = "Choose what you think suits the story best."
+    
     fn = "Stories"  #file name
-    count_action_beats = 9
+    beats_split = ['7','1-2','3-5','6-7']  # count. part 1, 2, 3
+    # beats_split = ['6','1-2','3-4','5-6']  # count. part 1, 2, 3
+    count_action_beats = int(beats_split[0])
+
+
     no_of_pitches = 3 # to select the best story
 
-
-    # genre = "True Scary Tinder Dating Stories"
-    # genre = "True Walmart Horror Stories"
-    # genre = "Childhood stories"
-    # genre = "True AirBNB Horror Stories"
-    # genre = "True Exorcism Horror Stories"
-    # genre = "True Valentines Day Horror Stories"
-    # genre = "True Ouija Board Horror Stories"
-    # genre = "True Craigslist Horror Stories"
-    # user_input = "Make the story about a buyer that comes to a scary place to pick up a bought item" 
-    # user_input = "Make the story super scary and a psycological rollercoaster."
-    # user_input = "A Tinder date on Valentines Day that turns out horribly wrong. Make it super scary and a psycological rollercoaster."
-    # user_input = "A story about occultism, a young woman, a shaman, demons and exorcism - all happening in New York City. Make it super scary and a psycological rollercoaster."
-    # user_input = '''While browsing an antique store, Anna is drawn to a music box that releases a hidden amulet. The amulet possesses her, triggering strange occurrences around her. Seeking help, Anna learns the amulet is a dangerous artifact, but it becomes permanently attached to her, unleashing a demonic entity that attacks her friend Mark.'''
-    # user_input = '''Eleanor stumbles upon a hidden violin case in her inherited mansion, captivated by its melody and unsettling aura. Despite an inscription warning of untold secrets, she repairs the instrument. As she plays, the spirit of the previous owner appears, demanding she finish his unfinished music. Eleanor hesitates, sensing danger, but her passion for music compels her to play. The final notes echo, leaving her unconscious and the spirit vanished. When she awakens, she possesses unmatched skill, but her music holds no soul, hinting at the spirit's lingering influence.'''
-    # user_input = '''The protagonist arrives late at night in bad weather and has a hard time finding the key'''
-    #user_input = '''The story chronicles the experiences of a 10-year-old boy, Jake, who moves to a new town and forms a peculiar companionship with a neighborhood kid, Liam. Liam's strange behavior, including an unnerving welcome to his untidy home, makes Jake feel uncomfortable, forcing him to distance himself from Liam. The discomfort escalates into fear when Liam climbs into Jake's room at night. This culminates in a terrifying incident where Liam shatters Jake's window to enter his room, prompting Jake's parents to confront Liam's family and address the situation. While the immediate threat is averted, Jake is left with lingering unease as he moves on from the horrific incidents, pondering on what kind of adult Liam could have become.'''
-    # user_input = '''After a failed Ouija board attempt with their sister, a lone narrator tries again, inspired by online horror stories.  Footsteps and a muffled female voice emanate from upstairs, growing clearer as the narrator approaches their brother's room. The disembodied voice of their deceased grandmother echoes repeatedly, leaving the narrator terrified and shaken. This deeply personal encounter instills a lasting, vivid memory of terror.'''
-    # user_input = ""
     ############################
 
 
@@ -83,9 +69,9 @@ def story_generator(
             
 
     def count_words(my_string):
-    words = re.findall(r'\b\w+\b', my_string)
-    number_of_words = len(words)
-    print("Number of words:", number_of_words)
+        words = re.findall(r'\b\w+\b', my_string)
+        number_of_words = len(words)
+        print("Number of words:", number_of_words)
 
 
 
@@ -196,6 +182,48 @@ def story_generator(
     '''
 
     t1_tinder = f'''
+    **Template for First-Person Tinder Dating Horror Narratives**
+
+    **Objective: Develop a Short, Memorable Horror Story for My YouTube Channel**
+
+    **Core Elements:**
+
+    - **Authentic Digital Dating Dilemmas:** Weave a narrative that deeply explores the unsettling aspects of Tinder dating, rooted in genuine online interaction experiences. Stories should mirror plausible situations that take a horrifying turn, making listeners question the safety of their own digital dating ventures.
+
+    - **Recollections of Horror:** Employ a first-person perspective to recount the tale as a vivid, unsettling memory. This approach should pull the audience into the narrative, as if they're hearing a distressing story from a trusted confidant, enhancing the personal connection and the story’s impact.
+
+    - **Innovative Twist on Terror:** Center your story around a creative and shocking twist that morphs an ordinary Tinder encounter into a deeply disturbing event. This twist should be distinctive, adding a fresh layer of horror to the digital dating experience.
+
+    - **Memorable Characters Through Memory:** Character development is key, with each persona richly painted through the protagonist's recollections. Their motivations, digital interactions, and eventual unraveling should be intricately detailed, contributing to the narrative’s suspense and horror.
+
+    - **Emotional Depth and Resonance:** Construct your narrative to deeply resonate on an emotional level, with the protagonist's fears, desires, and nightmares at the forefront. The story should not only terrify but also evoke empathy, making the horror feel intensely personal and real.
+
+    **Themes for Inspiration:**
+    - Catfishing Nightmares: Encounters that unveil the shocking realities behind deceptively crafted online identities, leading to unexpected and sometimes dangerous discoveries.
+    - Vanishing Acts: Tales of deep connections abruptly ending with one party disappearing without warning or explanation, leaving behind a haunting absence.
+    - Stalker Shadows: Chilling accounts of relentless pursuit and harassment by a date, transforming initial attraction into a terrifying ordeal of fear and invasion.
+    -Ex-Partner Encroachments: Horrific run-ins with dates' exes, whose unexpected interventions range from awkward disruptions to threatening confrontations.
+    - Perilous Meetings: Stories of dates turning dangerous, where seemingly charming encounters escalate into life-threatening situations requiring quick escapes.
+    - Manipulative Motives: Experiences of being exploited for money, information, or other sinister aims, masked under the pretense of romantic interest.
+    - Creepy Companions: Interactions with individuals whose off-putting behavior or unsettling communications hint at deeper, darker inclinations.
+    - Shocking Revelations: Dates that take a turn for the worse with surprising disclosures, revealing hidden lives, lies, or criminal pasts.
+    - Ignored Intuitions: Retrospectives on missed warning signs and gut feelings, leading to perilous realizations and narrow escapes from potential harm.
+    - Desperate Departures: Narratives of dates requiring clever or drastic measures to safely end, highlighting the extremes taken to evade uncomfortable or unsafe scenarios.
+
+    
+    **Detailed Tasks:**
+    1. **Generate Memory-Based Horror Pitches:** Create {no_of_pitches} compelling pitches for horror stories framed as personal recollections from Tinder dating gone awry. Reddit true stories style. Each pitch should blend believable digital dating scenarios with a unique, horrifying twist, perhaps inspired by the suggested themes. Tailor pitches with {user_input} if provided.
+    Let the story unfold in the first person, offering a personal, memory-like narrative. Write it in Reddit true stories style and write it in 1st person.
+
+    2. **Evaluate for Psychological and Emotional Impact:** Adopt the dual perspective of a critic and a devoted horror enthusiast. Assess each pitch on a 1-100 scale, rewarding those that convincingly deliver a sense of psychological terror and emotional depth, as if dredged up from the protagonist's most distressing memories. rate stories not told in 1st person low.
+
+    3. **Select the Most Compelling Memory Narrative:** Choose the pitch that excels in portraying an online dating horror story as a vivid, believable memory. Evaluation criteria should focus on the narrative's realism, emotional pull, and the creativity of its horror elements.
+
+    4. **Showcase the Standout Memory Narrative:** Present the chosen pitch, explaining its selection based on its strength in offering a genuine, first-person horror story. Highlight how it successfully taps into real-world fears about digital dating, while engaging the audience with a narrative that feels like a personal and haunting recollection.
+
+    '''
+
+    t1_tinder_old = f'''
     **Template for Creating Tinder Dating Horror Stories**
 
     **Task: Craft a Short Horror Story for My YouTube Channel**
@@ -212,9 +240,16 @@ def story_generator(
 
     **High Emotional Stakes:** Build the story with significant emotional investment, where the stakes are personal and potentially devastating. The emotional journey should be compelling, intensifying the horror of the dating experience and making the story resonate on a deeper level.
 
+    **Commmon Themes:**
+     - "Catfishing dangers, cult entrapment, deceitful web, escape challenge."
+     - "Baited Hook, Online dating scam, emotional manipulation, financial exploitation, malevolent     scheme."
+     - "Blackmail horror, intimate deception, digital betrayal, ransom demand."
+     - "Tinder Horror, Date gone wrong, unexpected danger, escalating fear."
+    
+    
     Task List:
 
-    1. Generate High-Concept Pitches: Write {no_of_pitches} high-concept pitches for a captivating horror story set against the backdrop of Tinder dating. Each pitch should boast a unique twist, engaging characters, high emotional stakes, and a memorable ending that leaves the audience chilled. The narratives should be particularly harrowing, told in the first person to emphasize the personal horror of the dating experience. Include {user_input} for personalized pitches, if provided.
+    1. Generate High-Concept Pitches: Write {no_of_pitches} high-concept pitches for a captivating horror story set against the backdrop of Tinder dating. Avoid using the name Alex for the characters. Draw inspiration from the common themes.Each pitch should be very realistic and believable so that no one doubts that it could be true. It should boast a unique twist, engaging characters, high emotional stakes, and a memorable ending that leaves the audience chilled. The narratives should be particularly harrowing, told in the first person to emphasize the personal horror of the dating experience. Include {user_input} for personalized pitches, if provided.
 
     2. Critique and Rate Pitches: Take on the dual roles of critic and enthusiastic fan of short horror stories. Assess the pitches on a scale from 1-100, giving preference to those that skillfully combine psychological terror with the authenticity of digital dating experiences. Rate pitches that fail to capture the essence of Tinder dating lower, while those that excel in creating a palpable sense of fear and realism should score higher.
 
@@ -223,8 +258,32 @@ def story_generator(
     4. Output the Winning Pitch: Showcase the chosen pitch, its score, and the rationale behind its selection. Emphasize its strength in portraying a Tinder dating horror story that is both believable and deeply unsettling, with a unique twist and emotional depth that truly engages and horrifies the audience.
 
     '''
-
     t1_ouija = f'''
+    Ouija Board Horror Story Generation Task
+
+    Objective: Create an intensely scary Ouija board horror story.
+
+    Story Foundation:
+    -Central Theme: An unsettling encounter with a Ouija board. Explore the eerie atmosphere, dynamics among participants, and their beliefs about the supernatural.
+    -Psychological and Supernatural Elements: Combine psychological terror with the consequences of contacting the spirit world. Characters face fears, unexpected truths, and the aftermath of their actions.
+    -First-Person Recollection: Narrate as a personal memory, mimicking the authentic accounts found in Reddit's true horror stories for realism and impact.
+    -Climax and Revelation: Include a revelation or twist that changes the narrator’s understanding, like a betrayal, a misinterpreted message, or a lingering haunting.
+    
+    Inspiration & Story Ideas:
+    1. The Last Message: Attempting to contact a deceased loved one leads to a nightmare when an unwelcome spirit answers, detailing the terrifying events that follow.
+    2. An Uninvited Presence: A fun night with friends turns into horror as a spirit contacted through the Ouija board refuses to leave, seen through the eyes of a terrified participant.
+    3. Whispers Across the Veil: A skeptic changes their view when a Ouija board session’s predictions horrifyingly come true, compelling them to confront the reality of their actions.
+    4. The Forgotten Pact: Years after a seemingly innocent Ouija board game, the participants start experiencing haunting consequences of a forgotten pact made with a spirit.
+    5. Echoes of the Damned: A haunted Ouija board brings forth the voices of the damned, pulling the narrator into a cycle of nightmares that blur the line between reality and the supernatural.
+    
+    Task Execution:
+    1. Choose Your Narrative Lens: Opt for a first-person narrative to deepen the story's immersive quality.
+    2. Develop the Story Pitch: Craft a pitch that encapsulates the essence of a Ouija board encounter, focusing on psychological depth and supernatural aspects.
+    3. Inspiration Utilization: Draw from the provided story ideas, blend them, or use original concepts. The goal is to create a pitch that's authentic, engaging, and frightening.
+    4. Evaluation Criteria: Judge your pitch based on its portrayal of a Ouija board horror story, its integration of psychological and supernatural elements, and its potential to elicit fear.
+    '''
+    
+    t1_ouija_old = f'''
     **Template for Ouija Board and Occultism Horror Story Creation**
 
     **Task: Create a Short Horror Story for My YouTube Channel**
@@ -245,10 +304,69 @@ def story_generator(
     3. **Select the Best Pitch:** Choose the pitch with the highest rating based on its psychological terror, and how effectively it employs the occult and ouija board elements.
     4. **Output the Winning Pitch:** Present the selected pitch, its rating, and a detailed explanation for its top score. Highlight how it stands out in terms of its realistic approach to the occult, its emotional depth, and its unique, chilling twist.
     '''
+
+    t1_highschool = f'''
+    **Template for High School Horror Story Creation**
+
+    **Task: Create a Short Horror Story for My YouTube Channel**
+
+    **Pitch Requirements:**
+    - High School Authenticity: Ground the story in the daily anxieties and social dynamics of high school life. The horror should stem from a twisted exaggeration of those everyday experiences.
+    - Rooted in Realism: The story must be grounded in reality, avoiding supernatural elements to ensure plausibility.
+    - Narrative Style: First-person perspective is ideal. Make it feel like the storyteller is reliving a terrifying personal experience from their time in high school.
+    - Unique High School Fears: Tap into anxieties specific to the teenage experience: social pressures, academic stress, hidden secrets, complex relationships. The horror should transform these ordinary fears into something gigantic, but stay away from supernatural events.
+    - Complex Characters: Ditch stereotypes. Create characters with flaws, contradictions, and secrets. It could be those hidden aspects that lead them into danger.
+    - Escalating Stakes: Start with everyday problems teenagers might face, then relentlessly raise the stakes as the horror unfolds. By the end, there should be a profound sense of loss or change, not just a cheap scare.
+    
+    **Examples & Inspirational Pointers**
+    - These examples can be used as inspiration, but you do not have to do it. Spark Your Horror Imagination: Mix, Match, and Twist These Themes for a Truly Terrifying High School Tale.
+    
+    - Lockdown Drill Gone Wrong:  The practice meant to keep them safe turns into a real nightmare, as students become unsure if the current threat is real or part of the simulation.
+    - Lockdown Trap:  A lockdown is initiated, but it soon becomes clear that the danger isn't outside the school... it's trapped inside with the students and staff.
+    - When Curiosity Goes Too Far:  The forbidden book, the locked room, the experiment that shouldn't be done... the pursuit of knowledge that leads to horrifying consequences.
+    - The Price of Silence: Witnessing something terrible and the struggle between speaking out and keeping a deadly secret for protection, reputation, or fear of repercussions.
+    - Predators Hiding in Plain Sight:  People who seem friendly, charming, or trustworthy reveal a much darker nature. Explores grooming behavior, manipulation, and the ability of evil to blend in.
+    - Past Sins Come Back to Haunt:  Choices made long ago have unforeseen consequences that ripple into the present. Perfect for exploring intergenerational trauma or the lingering darkness of hidden actions.
+
+
+    **Task List:**
+    1. Generate High-Concept Pitches: Write {no_of_pitches} high-concept pitches for a bestselling horror story set within the social hierarchy of high school. The stories should feature a unique twist, engaging characters, escalating stakes, and a chilling ending. These pitches should feel especially terrifying with a high school setting in mind. Base the pitches on user input ("{user_input}") if provided.
+    2. Critique and Rate Pitches: Rate the pitches on a scale from 1-100, prioritizing those that evoke the unique anxieties and pressures of high school life. Stories that feel too generic, or don't have genuine emotional stakes, should be rated lower.
+    3. Select the Best Pitch: Choose the most compelling pitch based on its originality, its understanding of high school fears, and the potential for real psychological depth.
+    4. Output the Winning Pitch: Present the selected pitch, its rating, and a detailed reason for its selection. Highlight the specific elements that make it perfect for the horrors of high school.
+    '''
+    
+    t1_south_korean_horror = f'''
+    **Template for South Korean Horror Story Creation**
+
+    **Task: Create a Short Horror Story for My YouTube Channel**
+
+    **Pitch Requirements:**
+    - Tap into the Anxieties of Modern Korea: Consider the pressures of academic hyper-competition, social hierarchies, rapid technological change, the beauty industry, or the lingering anxieties of a divided country. Make everyday Korean life the catalyst for terror.
+    - Psychological Focus: Build a slow-burning atmosphere of unease. Focus on the character's fracturing mental state, unreliable perspectives, and creeping doubt rather than jump scares.
+    - Social Horror or Folktale?: Choose your focus: Will the story be a chilling commentary on a broken aspect of society or draw upon the disturbing imagery of traditional Korean ghost stories (Gwishin) or shamanistic concepts?
+    - Ambiguity is Key: Leave room for the unsettling and unresolved. The audience should be left with lingering questions and a deep sense of unease long after the story ends.
+    
+
+    **Examples & Inspirational Pointers**
+    - These examples can be used as inspiration, but you do not have to do it.
+    - The Ghost in the Exam Room: A student obsessed with academic perfection becomes convinced a ghost is sabotaging their studies. Are they succumbing to pressure, or is there a truly sinister force at play?
+    - The Beauty App That Steals: A popular social media app promises flawless selfies but slowly erases the user's unique features. Taps into anxieties about beauty standards and the loss of identity in the digital age.
+    - Cursed Village on the DMZ: Hikers stumble upon a seemingly abandoned village near the border with North Korea. Ancient rituals, forgotten folklore, and present-day tensions collide in this isolated setting.
+
+    
+    **Task List:**
+    1. Generate High-Concept Pitches: Write {no_of_pitches} pitches for a potential story of this genre: {genre}. 
+    Each pitch should have a unique angle, resonate with the themes above, and leave room for terrifying possibilities. Base the pitches on user input ("{user_input}") if provided. 
+    For each of the {no_of_pitches} pitches, decide whether the story unfolds in the first person, offering a personal, memory-like narrative, or in the third person, providing a broader view of the characters world. This choice should enhance the thematic elements and deepen the audience's immersion.
+    2. Critique and Rate Pitches: Rate the pitches on a scale from 1-100. Prioritize pitches that feel authentically tied to Korean anxieties, have strong potential for psychological horror, and leave room for the haunting ambiguity signature to K-horror.
+    3. Select the Best Pitch: Choose the pitch that excites you most about its potential to create genuine unease and resonate with the viewers.
+    4. Output the Winning Pitch: Present the chosen pitch, its rating, and why you selected it. Highlight the aspects that make it stand out within the realm of South Korean horror.
+    '''
+
+
     t1_airbnb = '''Task Description:
     I want you to help me create a pitch for a psychological horror story for my YouTube channel.
-
-
     Key points:
     - Rooted in Realism: The story should be grounded in reality, avoiding supernatural elements and focusing instead on the unsettling potential of ordinary events and human behavior.
     - Narrative Style: First person, told as if recalling a personal experience. The storytelling should effectively convey the growing sense of unease and fear.
@@ -265,94 +383,82 @@ def story_generator(
     - An unusual Airbnb host with unsettling behavior.
     - A series of seemingly mundane but increasingly disturbing events that take place in the Airbnb.
     - An open ending that leaves the audience questioning the nature of reality and the host's motives.
-
     
     Remember:
     * Write in the first person (as if recalling the experience).
     * Avoid supernatural elements.
 
-
     Additional Notes:
     Feel free to add details to enhance the atmosphere and build tension.
     Focus on crafting the pitch within the YouTube format, keeping the audience engaged throughout.
     By omitting supernatural elements and focusing on the psychological impact of mundane events and bizarre behavior, this refined task description aims to create a more unsettling and thought-provoking horror story.'''
-
 
     t1_walmart = '''
-    Task Description:
-    I want you to help me create a pitch for a psychological horror story for my YouTube channel.
+    ### Task Template: Crafting Walmart Horror Story Pitches
+
+    **Objective:** Generate story pitches for horror stories set in a Walmart, based on user-defined subjects. The stories should be crafted in a deeply scary manner, focusing on realistic, non-supernatural elements. Each story should be told in the first person, resembling a personal account of a past experience. The narrative should aim to evoke psychological terror and engage readers as if sharing a true, harrowing retail experience.
+
+    **Structure & Elements:**
+
+    1. **Narrative Perspective:** First-person, resembling a personal recollection. The narrator should sound genuine, as if they are recounting a disturbing event that happened to them personally in a Walmart.
+    
+    2. **Setting:** A typical Walmart store, which should be described in detail to set the scene. Include elements like the time of day, specific sections of the store, and other environmental details to enhance the immersion.
+
+    3. **Plot Development:** Each story should have a clear beginning, tension-building middle, and a climax that resolves the narrative in a shocking or unsettling way.
+
+    4. **Character Involvement:** Characters can include store employees, other shoppers, or the narrator themselves. Characters should be relatable and realistically portrayed, contributing to the building tension and horror.
+
+    5. **Horror Elements:** Focus on realistic horrors that could plausibly occur in a Walmart setting—such as encounters with dangerously unstable people, horrific accidents, or intense situations of threat or survival. Avoid supernatural elements.
+
+    6. **Emotional Impact:** The story should aim to leave readers feeling disturbed or uneasy, using psychological tension and realistic fears rather than gore or violence.
 
 
-    Key points:
-    - Rooted in Realism: The story should be grounded in reality, avoiding supernatural elements and focusing instead on the unsettling potential of ordinary events and human behavior within the confines of a Walmart.
-    - Narrative Style: First person, told as if recalling a personal experience. The storytelling should effectively convey the growing sense of unease and fear.
-    - Compelling Hook: Start with a powerful opening that draws the audience into the unsettling atmosphere of the Walmart and introduces the strange occurrences.
-    - Unique Twist: Instead of a supernatural revelation, the story should have an open ending that leaves viewers questioning reality and their own perceptions.
-    - Intriguing Characters: Create compelling characters, particularly Walmart employees or other shoppers with their own complexities.
-    - Emotional Stakes: Highlight the protagonist's emotional journey as they navigate the unsettling situation within Walmart and question their own sanity.
+    **Story Inspirations (Voluntary):**
+    1. **After Hours:** The narrator gets locked inside a Walmart overnight. What starts as an amusing situation quickly turns terrifying as they encounter increasingly threatening and erratic behavior from another person trapped inside.
+
+    2. **Lost Child:** The narrator, a parent, loses sight of their child in a crowded Walmart. The search becomes increasingly desperate and eerie as it seems like the child may have been taken, and store security footage reveals more questions than answers.
+
+    3. **The Return:** The narrator is a Walmart employee who encounters a customer who has been quietly returning used, slightly altered products. One day, they follow the customer to uncover a chilling scene.
+
+    4. **Black Friday:** The narrator recounts their experience working during a Black Friday, focusing on the extreme and frightening behavior of shoppers pushed to their limits, resulting in a catastrophic and traumatic event.
+
+    5. **Hidden Camera:** The narrator discovers a hidden camera in a less frequented section of the store and decides to watch the footage, uncovering a series of disturbing events that suggest a sinister presence within the staff or shoppers.
+
+    **Instructions:** Feel free to use these inspiration ideas directly, combine them, or derive new concepts that fit into the non-supernatural, realistic horror theme set in Walmart. Utilizing these ideas is completely voluntary. Ensure each pitch includes detailed scenarios that maintain the thematic focus, character development, and psychological terror essential for engaging and chilling narratives.
+        '''
+
+    # t1_walmart = '''
+    # Task Description:
+    # I want you to help me create a pitch for a psychological horror story for my YouTube channel.
+
+    # Key points:
+    # - Rooted in Realism: The story should be grounded in reality, avoiding supernatural elements and focusing instead on the unsettling potential of ordinary events and human behavior within the confines of a Walmart.
+    # - Narrative Style: First person, told as if recalling a personal experience. The storytelling should effectively convey the growing sense of unease and fear.
+    # - Compelling Hook: Start with a powerful opening that draws the audience into the unsettling atmosphere of the Walmart and introduces the strange occurrences.
+    # - Unique Twist: Instead of a supernatural revelation, the story should have an open ending that leaves viewers questioning reality and their own perceptions.
+    # - Intriguing Characters: Create compelling characters, particularly Walmart employees or other shoppers with their own complexities.
+    # - Emotional Stakes: Highlight the protagonist's emotional journey as they navigate the unsettling situation within Walmart and question their own sanity.
 
 
-    Task:
-    Write 1 high-concept pitch for a YouTube horror story centered around an unsettling Walmart experience. Base them on user input ("{user_input}") if any.  
+    # Task:
+    # Write 1 high-concept pitch for a YouTube horror story centered around an unsettling Walmart experience. Base them on user input ("{user_input}") if any.  
 
 
-    Incorporate the following elements:
-    - A protagonist (not named) looking for a quick, mundane shopping trip turned nightmarish.
-    - An unusual Walmart employee or fellow shopper with unsettling behavior.
-    - A series of seemingly mundane but increasingly disturbing events that take place within the Walmart.
-    - An open ending that leaves the audience questioning the nature of reality and the motives of the people they encountered.
+    # Incorporate the following elements:
+    # - A protagonist (not named) looking for a quick, mundane shopping trip turned nightmarish.
+    # - An unusual Walmart employee or fellow shopper with unsettling behavior.
+    # - A series of seemingly mundane but increasingly disturbing events that take place within the Walmart.
+    # - An open ending that leaves the audience questioning the nature of reality and the motives of the people they encountered.
 
+    # Remember:
+    # * Write in the first person (as if recalling the experience).
+    # * Avoid supernatural elements.
 
-    Remember:
-    * Write in the first person (as if recalling the experience).
-    * Avoid supernatural elements.
+    # Additional Notes:
+    # Feel free to add details to enhance the atmosphere and build tension.
+    # Focus on crafting the pitch within the YouTube format, keeping the audience engaged throughout.
+    # By omitting supernatural elements and focusing on the psychological impact of mundane events and bizarre behavior, this refined task description aims to create a more unsettling and thought-provoking horror story.'''
 
-
-    Additional Notes:
-    Feel free to add details to enhance the atmosphere and build tension.
-    Focus on crafting the pitch within the YouTube format, keeping the audience engaged throughout.
-    By omitting supernatural elements and focusing on the psychological impact of mundane events and bizarre behavior, this refined task description aims to create a more unsettling and thought-provoking horror story.'''
-
-
-
-    t1_event_focused = f'''
-    I want you to write a short {genre} story for my YouTube channel.
-    Pitch Requirements:
-        - Rooted in Realism: The story must be grounded in reality, avoiding elements that conflict with the genre's plausibility, yet allowing for one extraordinary event or act that intensifies the narrative.
-        - Narrative Style: Stories should be told in the first person, crafted as if recalled from memory. The storytelling should effectively convey the intensity and scariness of the extraordinary event, making it feel real and immediate.
-        - Compelling Hook: Start with a powerful opening that sets up the extraordinary event or act. The hook should be intriguing, drawing the audience in to uncover the mystery or deal with the aftermath.
-        - Unique Twist: Incorporate an original twist related to the extraordinary event that sets the story apart from conventional {genre} tales.
-        - Intriguing Characters: Create characters that are complex and engaging, with their fates intertwined with the extraordinary event. Their reactions and decisions should drive the narrative forward.
-        - Emotional Stakes: Develop high emotional stakes centered around the extraordinary event, deeply investing the reader in the story's outcome.
-
-    Task List:
-        1. Write {no_of_pitches} high-concept pitches for a bestselling {genre} story, each centered around an extraordinary event or act that, given the circumstances and the way it is told, makes the story intense and scary. Include a compelling hook, a unique twist, intriguing characters, and gripping emotional stakes with a breathtaking ending. Base them on user input ("{user_input}") if any. The pitches must align with the {genre} theme.
-        Try not to use the most common names like Alex, Jamie, etc.
-        REMEMBER TO WRITE IN 1ST PERSON. Write as if someone is telling the story from memory.
-        2. You are now a critique and a die-hard fan of {genre} stories. Use your experience to rate the pitches on a scale from 1-100, especially considering the effectiveness of the extraordinary event in making the story intense and scary, realism within the {genre} context, and other elements valued in {genre}.
-        3. Select the highest rated pitch based on its effectiveness in leveraging the extraordinary event to create intensity and fear, realism, and genre alignment.
-        4. Output the selected pitch, its rating, and the reason for why it got the best rating, with a focus on how the extraordinary event enhances the story's intensity and scariness.
-    '''
-    #realism
-    t1_realism = f'''
-    I want you to write a short horror story to my youtube channel.
-    Pitch Requirements:
-        - Rooted in Realism: The story must be grounded in reality, avoiding supernatural elements to ensure plausibility.
-        - Narrative Style: Stories should be told in the first person, crafted as if recalled from memory, to enhance the authenticity and immersive experience.
-        - Unique Twist: Incorporate an original twist that sets the story apart from conventional horror tales.
-        - Intriguing Characters: Create characters that are complex and engaging, driving the narrative forward.
-        - Emotional Stakes: Develop high emotional stakes that deeply invest the reader in the story's outcome.
-
-    Task List
-        1. Write {no_of_pitches} of high-concept pitches for a bestselling {genre} story with a unique twist, intriguing characters, 
-        and gripping emotional stakes and a breath taking ending. Base them on user input ("{user_input}") if any.
-        The pitches must be very scary.
-        Try not to use the most common names like Alex, Jamie etc.
-        REMEMBER TO WRITE IN 1ST PERSON. Write as if someone is telling the story from memory.
-        2. You are now a critique and a die hard fan of short horror stories. Use your experience to rate the pitches on a scale from 1-100. Stories that are not realistic should be rated very low. Psychological terror should rate high.
-        3. Select the the highest rated pitch. 
-        4. Output the selected pitch, its rating and the reason for why it got the best rating.
-    '''
 
     t1_childhood_stories = ''' Task Description: I want you to help me create a pitch for a real-life horror story based on disturbing childhood memories for my YouTube Channel.
 
@@ -378,6 +484,31 @@ def story_generator(
     Avoid supernatural elements.
     Additional Notes: Feel free to add details to enhance the atmosphere and build tension. Focus on crafting the pitch within the YouTube format, maintaining audience engagement throughout. By omitting supernatural elements and focusing on the psychological impact of mundane events and bizarre behavior, this refined task description aims to create a more unsettling and thought-provoking real-life horror story. '''
 
+
+    t1_voodoo_dark_magic = '''
+    **Voodoo and Dark Magic Horror Story Creation Template**
+
+    **Objective: Craft a Short Horror Story for My YouTube Channel**
+
+    **Pitch Essentials:**
+    - **Voodoo & Dark Magic Lore:** Immerse in the mystique of Voodoo, capturing its rituals, spirits (Loas), and impacts on reality. Showcase Voodoo's dual capacity for healing and harm.
+    - **Psychological Depth & Supernatural Influence:** Weave psychological complexity with the palpable effects of dark magic. Characters should grapple with internal conflicts, ethical quandaries, and the unforeseen consequences of occult engagements.
+    - **Cultural & Historical Authenticity:** Situate your tale in a setting imbued with Voodoo's rich cultural and historical backdrop. Utilize the locale's atmosphere and lore to deepen the story's suspense and authenticity.
+    - **Moral Ambiguity & Ethical Dilemmas:** Introduce characters facing intricate moral choices, spurred by their dealings with Voodoo. Their predicaments should invite reflection and challenge the audience's moral compass.
+
+    **Inspiration & Story Ideas:**
+    - **The Loas Whisper:** Narrated as a haunting memory, a person recounts their chilling pact with a Loa during a time of desperation. Power comes at a harrowing price, revealing the perilous edge of spiritual bargains.
+    - **Echoes from the Bayou:** Told through the fog of recollection, a groups encounter with an ancient curse in the heart of Louisiana becomes a test of sanity and survival, blending local myths with the raw fear of the unseen.
+    - **The Priestess’s Burden:** A Voodoo priestess navigates her role as a community guardian against a backdrop of dark forces. This story, while more traditional, explores her profound connection to Voodoo and the daunting responsibilities it entails.
+
+    **Task Outline:**
+    1. **Define Storytelling Perspective:** For each of the {no_of_pitches} pitches, decide whether the story unfolds in the first person, offering a personal, memory-like narrative, or in the third person, providing a broader view of the characters world. This choice should enhance the thematic elements and deepen the audience's immersion.
+    2. **Create Engaging Pitches:** Develop pitches that resonate with the thematic elements above. For personal experience stories, ensure they convey the intensity and intimacy of first-hand encounters with the supernatural. If applicable, include {user_input}.
+    3. **Evaluate & Rate:** Score the pitches on a 1-100 scale, favoring those that authentically represent Voodoo, intertwine psychological and supernatural elements effectively, and navigate complex moral landscapes.
+    4. **Select the Premier Pitch:** Identify the pitch that stands out for its compelling narrative, depth of cultural lore, and potential to engage and terrify the audience through its unique perspective and storytelling approach.
+    5. **Detail the Selection:** Share the top-rated pitch, explaining why it excels in lore authenticity, character depth, and viewer engagement potential, particularly highlighting its chosen narrative perspective.
+    '''
+    
     match story_type.lower():    
         case "tinder":
             t1 = t1_tinder
@@ -385,47 +516,52 @@ def story_generator(
             t1 = t1_ouija
         case "walmart":
             t1 = t1_walmart
+        case "highschool":
+            t1 = t1_highschool
+        case "south korean":
+            t1 = t1_south_korean_horror
+        case "voodoo_dark_magic":
+            t1 = t1_voodoo_dark_magic
         case _:
             t1 = t1_occultism
 
-    # t1 = t1_childhood_stories
-    # t1 = t1_ouija
-    # t1 = t1_airbnb
-    # t1 = t1_walmart
-    # t1 = t1_event_focused
-    # t1 = t1_realism
+    
+  
     r = new_msg(t1)
     print(r)
 
 
     t2 = f'''
     Tasks for writing the story
-        5. For the selected pitch give me a highly detailed synopsis for a {genre} story in the traditional three act structure. Each act should be clearly labeled and should build toward the chosen ending.
-        Premise:
+    5. For the selected pitch give me a highly detailed synopsis for a {genre} story in the traditional three act structure. Each act should be clearly labeled and should build toward the chosen ending.
+        Premise:    
         Ending:
-            Other Information:
-        6. Character Profile Creation
-        - Protagonist Profile: Begin by choosing a gender for the protagonist. Describe their physical appearance in detail, including height, body type, race, hair color and style, eye color, and any distinctive features such as scars or tattoos. Mention their typical attire or clothing style, fitting the story's context. Include personality traits, skills, and backstory relevant to their role in the story.
-        - Supporting Characters Profiles (up to 2): Identify up to two key supporting characters and provide a detailed description for each, following the same structure as for the protagonist. Ensure these characters have distinct appearances, attire, and personalities to complement the protagonist and contribute to the story's dynamics.
+        Other Information:
+    6. Narration style: {narration_style}
+    7. Character Profile Creation
+    - Protagonist Profile: Begin by choosing a name and a gender for the protagonist. DO NOT USE THE NAME ALEX!! Describe their physical appearance in detail, including height, body type, race, hair color and style, eye color, and any distinctive features such as scars or tattoos. Mention their typical attire or clothing style, fitting the story's context. Include personality traits, skills, and backstory relevant to their role in the story.
+    - Supporting Characters Profiles (up to 2): Identify up to two key supporting characters and provide a detailed description for each, following the same structure as for the protagonist. Ensure these characters have distinct appearances, attire, and personalities to complement the protagonist and contribute to the story's dynamics.
 
-        7. Detailed Story Summary
-        - Using the created synopsis, craft a structured summary of the story, integrating the protagonist and up to two key supporting characters. Describe how these characters interact with each other and the plot.
-        - Break down the narrative into intro and compelling hook, beginning, middle, and end, including setting descriptions, key events, character development arcs, main conflict, and resolution. Make sure to begin with a compelling hook that makes the audience want to stay.
-        - Organize the story into distinct parts or chapters, detailing the roles and evolution of the protagonist and supporting characters throughout.
+    8. Detailed Story Summary with a Compelling Hook
+    - Begin with a Compelling Hook: Start your story summary by crafting a powerful opening that immediately grabs the audience's attention. This could be a mysterious event, a chilling revelation, a provocative question, or a foreboding statement that hints at the horror to come. The hook should be closely tied to the core horror element of your story, such as an unsettling encounter with Voodoo magic or a terrifying brush with dark forces, setting the tone for the rest of the narrative.
+    - Introduction and Setup: Following the hook, describe the initial setting, introduce the protagonist and key supporting characters, and establish the story’s normal world before the main conflict begins. This part should build on the intrigue created by the hook, drawing the audience deeper into the story’s atmosphere.
+    - Beginning, Middle, and End: Detail the progression of the story from the inciting incident through to the climax and resolution. Include how the characters’ relationships evolve, key events that escalate the conflict, settings that enhance the horror, and how the characters confront and ultimately resolve (or fail to resolve) their situation.
+    - Character Development Arcs: Explain the protagonist's and key supporting characters’ growth or transformation throughout the story, influenced by their encounters with the supernatural or their journey into the dark aspects of Voodoo and magic.
+    - Ensure that each part of your summary maintains the tension and mystery introduced by your opening hook, weaving a cohesive and engaging narrative that keeps the audience listening or reading with bated breath.
 
-        8. Action Beats for Script
-        - List {count_action_beats} detailed action beats crucial for the storys development, ensuring the protagonist remains the focal point while integrating up to two supporting characters in these scenes.
-        - For each action beat, provide comprehensive STORY INFORMATION, including setting, character emotions and motivations, and the beat's outcome. Highlight interactions between the protagonist and supporting characters, showcasing their importance to the story and character development.
+    9. Action Beats for Script
+    - List {count_action_beats} detailed action beats crucial for the story's development, ensuring the protagonist remains the focal point while integrating up to two supporting characters in these scenes. Each action beat should contribute to building the suspense and horror, echoing the unsettling tone set by your opening hook.
+    - For each action beat, provide comprehensive STORY INFORMATION, including setting, character emotions and motivations, and the beat's outcome. Highlight interactions between the protagonist and supporting characters, showcasing their importance to the story and character development.
     '''
 
     r2 = new_msg(t2)
     print(r2)
 
-    s1 = new_msg("Now write part 1 of the story covering the intro and actionbeat 1-3. Output nothing but part 1 of the story.") 
+    s1 = new_msg(f'''Now write part 1 of the story covering a compelling hook and intro and actionbeat {beats_split[1]}. Output nothing but part 1 of the story.''') 
     # print(s1)
-    s2 = new_msg("Now write part 2 of the story covering actionbeat 4-6. Output nothing but part 2 of the story.") 
+    s2 = new_msg(f'''Now write part 2 of the story covering actionbeat {beats_split[2]}. Output nothing but part 2 of the story.''') 
     # print(s2)
-    s3 = new_msg("Now write part 3 of the story covering actionbeat 7-9 and the ending. Output nothing but part 3 of the story.") 
+    s3 = new_msg(f'''Now write part 3 of the story covering actionbeat {beats_split[3]} and the ending. Output nothing but part 3 of the story.''') 
     # print(s3)
 
     story = s1 + s2 + s3
@@ -452,6 +588,7 @@ def story_generator(
     import tools_create_images as tci
 
     def create_images():
+        image_error_path =r"C:\my\__youtube\videos\Horror Stories - audio_video_defaults\horror_stories_error_default_image.png"
         image_desc = []
         for i in range(1, count_action_beats+1):
         # for i in range(1, 2+1):
@@ -480,7 +617,14 @@ def story_generator(
                 image_url, filename = tci.chatgpt_dalle(prompt = img_prompt, fn= path_img, i=10 + i)
                 image_files.append(filename)
             except:
-                image_files.append(image_files[-1])
+                 try:
+                    img_prompt = new_msg(f"This prompt was declined by Dall-e. Please rephrase it  carefully: {img_prompt}")
+                 except:
+                    if i>1:
+                        image_files.append(image_files[-1])
+                    else:
+                        image_files.append(image_error_path)
+                        error_list.append(f"Error_default_image in position {i} in function create_images()")
 
             image_desc.append(str(img_prompt))
         
@@ -511,16 +655,12 @@ def story_generator(
     def create_voice_over(gender):
         path_voice = os.path.join(xp_path, fn + " - " + str(story_no))
 
-        search_term = "female"
-        if search_term.lower() in gender.lower():
-            gender = "female"
-        else:
-            gender = "male"
-
-        if gender=="female":
+        search_term = gender  #"female"
+        if search_term.lower()=="female":
             voice = "shimmer"
         else:
             voice = "onyx"
+        print(gender, voice)
         tvo.text2mp3(text_string = story, voice_name = voice, fn=path_voice )
         audio_file = path_voice + ".mp3"
         return audio_file
@@ -540,9 +680,9 @@ def story_generator(
     # story_no -  current story no.
     #   
     ##############################################
-    from tools_create_mp4 import *
+    import tools_create_mp4_delete as tcm4 
     def create_mp4(output_mp4):
-        create_video_with_images_and_audio(image_paths=image_files, audio_path=audio_file, output_filename=output_mp4, fps=30)
+        tcm4.create_video_with_images_and_audio(image_paths=image_files, audio_path=audio_file, output_filename=output_mp4, fps=30)
         count_words(story)
 
     output_final_mp4 = os.path.join(xp_path, "clip_" + str(story_no) + ".mp4")
@@ -562,4 +702,4 @@ def story_generator(
     #     music_volume=0.05  # Adjust volume as needed
     #     )
 
-return output_final_mp4
+    return xp_path, error_list
