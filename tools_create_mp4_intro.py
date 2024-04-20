@@ -52,6 +52,11 @@ def create_intro_mp4(gender='male', xp_path="", story = "Horror stories that wil
     audio_file = create_voice_over(gender=gender, xp_path = xp_path, story = story, fn=fn)
     
     image_files = [os.path.join(xp_path, file) for file in os.listdir(xp_path) if file.endswith(".png")]
+    # if there is no png files then return error
+    if not image_files:
+        print("No png files for introfound in " + xp_path)
+        return
+        
     # image_file = [image_files[0]]
     output_final_mp4 = os.path.join(xp_path, "clip_0_intro.mp4")
     

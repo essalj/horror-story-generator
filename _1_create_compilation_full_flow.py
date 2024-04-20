@@ -78,14 +78,6 @@ general_seo_phrases = "true horror stories","true scary stories", "reddit storie
 # ----
 intro_speech_0 = f"Welcome to {genre}" #gets spoken in the intro  - DO NOT CHANGE!
 
-# l_user_input = [
-#     "Catfishing dangers, cult entrapment, deceitful web, escape challenge.",
-#     "Baited Hook, Online dating scam, emotional manipulation, financial exploitation, malevolent scheme.",
-#     "Blackmail horror, intimate deception, digital betrayal, ransom demand.",
-#     "Tinder Horror, Date gone wrong, unexpected danger, escalating fear."
-# ]
-
-
 
 lStory = []
 datetime_string = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
@@ -168,8 +160,9 @@ sub_text = "Smash like and subscribe to tread the thin line between reality and 
 intro_speech = intro_0 + sub_text
 
 
-#create intro mp4 clip
+#create intro mp4 clip - creates the intro of the video - using an image from the folder xp_path
 import tools_create_mp4_intro as tcmi
+
 tcmi.create_intro_mp4(gender='male', xp_path=xp_path, story = intro_speech, fn="000_intro"  )
 intro_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
 
