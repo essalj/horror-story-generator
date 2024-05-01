@@ -5,14 +5,14 @@ from time import time  , sleep
 import datetime
 import _1_short_story_gen_assistants as story_gen
 ###########################
-############# walmart stories
-title_compilation = "TRUE Scary Walmart Stories"
-num_stories = 7
-story_type = "Walmart" # controls the storygenerator functions
-genre = "Truly Scary Walmart Stories"
-user_input = ""
-optimized_search_phrases ="Scary Walmart Stories", "Walmart Horror Stories"
-general_seo_phrases = "true horror stories","true scary stories", "reddit stories"
+# ############# walmart stories
+# title_compilation = "TRUE Scary Walmart Stories"
+# num_stories = 7
+# story_type = "Walmart" # controls the storygenerator functions
+# genre = "Truly Scary Walmart Stories"
+# user_input = ""
+# optimized_search_phrases ="Scary Walmart Stories", "Walmart Horror Stories"
+# general_seo_phrases = "true horror stories","true scary stories", "reddit stories"
 # ##########################
 
 
@@ -66,12 +66,23 @@ general_seo_phrases = "true horror stories","true scary stories", "reddit storie
 
 ###########################
 ############# ouija stories
-# title_compilation = "TRUE Scary ouija board Stories From The Internet | True Scary Stories"
-# num_stories = 5
-# story_type = "Ouija" # controls the storygenerator functions
-# genre = "Truly Scary Ouija Stories"
+title_compilation = "TRUE Scary ouija board Stories From The Internet | True Scary Stories"
+num_stories = 6
+story_type = "Ouija" # controls the storygenerator functions
+genre = "Truly Scary Ouija Stories"
+user_input = ""
+optimized_search_phrases ="Scary Ouija Board Stories", "Ouija Board Horror Stories"
+general_seo_phrases = "true horror stories","true scary stories", "reddit stories"
+# ##########################
+
+###########################
+# ############# walmart stories
+# title_compilation = "TRUE Scary Walmart Stories"
+# num_stories = 7
+# story_type = "Walmart" # controls the storygenerator functions
+# genre = "Truly Scary Walmart Stories"
 # user_input = ""
-# optimized_search_phrases ="Scary Ouija Board Stories", "Ouija Board Horror Stories"
+# optimized_search_phrases ="Scary Walmart Stories", "Walmart Horror Stories"
 # general_seo_phrases = "true horror stories","true scary stories", "reddit stories"
 # ##########################
 

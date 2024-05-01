@@ -19,7 +19,8 @@ def story_generator(
     ####################
 
     # select model
-    gpt4 = "gpt-4-turbo-preview"
+    # gpt4 = "gpt-4-turbo-preview"
+    gpt4 = "gpt-4-turbo"
     gpt3 = "gpt-3.5-turbo"
     selected_gpt = gpt4
 
@@ -137,7 +138,7 @@ def story_generator(
         run = client.beta.threads.runs.create(
             thread_id=thread.id,
             assistant_id=assistant.id,
-            instructions="Please address user as Sir."
+            instructions="Please address user as Sir. Refrain nfrom using the name Alex in the stories you write"
         )
 
         #Check the run status
@@ -680,7 +681,7 @@ def story_generator(
     # story_no -  current story no.
     #   
     ##############################################
-    import tools_create_mp4_delete as tcm4 
+    import tools_create_mp4 as tcm4 
     def create_mp4(output_mp4):
         tcm4.create_video_with_images_and_audio(image_paths=image_files, audio_path=audio_file, output_filename=output_mp4, fps=30)
         count_words(story)
