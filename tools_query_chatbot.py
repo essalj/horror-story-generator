@@ -33,7 +33,8 @@ client = OpenAI(api_key=openai_api_key)
 break_line = "\n" + 50*"-" + "\n"
 
 # models
-gpt4 = "gpt-4-1106-preview"
+# gpt4 = "gpt-4-1106-preview"
+gpt4 = "gpt-4o"
 gpt3 = "gpt-3.5-turbo-1106"
 
 #chatbot

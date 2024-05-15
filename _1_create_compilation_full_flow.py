@@ -1,7 +1,7 @@
+
 import os
-# from tools_create_mp4 import *
 import tools_create_mp4 as tcm
-from time import time  , sleep
+from time import time, sleep
 import datetime
 import _1_short_story_gen_assistants as story_gen
 ###########################
@@ -67,7 +67,7 @@ import _1_short_story_gen_assistants as story_gen
 ###########################
 ############# ouija stories
 title_compilation = "TRUE Scary ouija board Stories From The Internet | True Scary Stories"
-num_stories = 6
+num_stories = 2
 story_type = "Ouija" # controls the storygenerator functions
 genre = "Truly Scary Ouija Stories"
 user_input = ""
@@ -87,6 +87,8 @@ general_seo_phrases = "true horror stories","true scary stories", "reddit storie
 # ##########################
 
 # ----
+
+gpt4 = "gpt-4o" # gpt4 model selection
 intro_speech_0 = f"Welcome to {genre}" #gets spoken in the intro  - DO NOT CHANGE!
 
 
@@ -147,7 +149,9 @@ error_list = [item[1] for item in lStory] # error list from story_generator
 #           r"C:\my\__youtube\videos\2024-04-13_2159_Truly Scary Walmart Stories",
 #           r"C:\my\__youtube\videos\2024-04-13_2216_Truly Scary Walmart Stories",
 #           r"C:\my\__youtube\videos\2024-04-13_2231_Truly Scary Walmart Stories"]
-# story_paths = [item for item in lStory]
+
+# lStory = ['C:\\my\\__youtube\\videos\\2024-05-12_1142_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1156_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1209_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1224_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1237_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1249_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1303_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1316_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1329_Truly Scary Ouija Stories', 'C:\my\__youtube\videos\2024-05-11_1006_Truly Scary Ouija Stories', 'C:\my\__youtube\videos\2024-05-11_0105_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0050_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0035_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0018_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0001_Truly Scary Ouija Stories']
+# story_paths = [item[0] for item in lStory]
 # lStory.append([r'C:\my\__youtube\videos\2024-03-14_1251_True Scary Tinder Dating Stories', []])
 
 import pickle
@@ -162,6 +166,10 @@ with open(path_pickl_list, 'wb') as file:
 #     story_paths = pickle.load(file)
 
 
+# concatenate  files "Stories - story 1.txt" from all the dirs in story_path to a file
+stories_str = "\n".join([open_file(os.path.join(path, "Stories - story 1.txt")) for path in story_paths])
+path_desc = os.path.join(xp_path, "stories_text.txt")
+save_file(path_desc, str(stories_str))
 
 
 ############## concat intro and stories ####
@@ -173,7 +181,6 @@ intro_speech = intro_0 + sub_text
 
 #create intro mp4 clip - creates the intro of the video - using an image from the folder xp_path
 import tools_create_mp4_intro as tcmi
-
 tcmi.create_intro_mp4(gender='male', xp_path=xp_path, story = intro_speech, fn="000_intro"  )
 intro_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
 
@@ -182,7 +189,7 @@ intro_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
 file_paths = [path + "\\clip_1.mp4" for path in story_paths]
 mp4_clips =  intro_clip + file_paths
 # mp4_clips = [os.path.join(xp_path, file) for file in os.listdir(xp_path) if file.endswith(".mp4")]
-# mp4_clips = ['C:\\my\\__youtube\\videos\\2024-04-13_2053_Truly Scary Walmart Stories\\clip_1.mp4', 'C:\\my\\__youtube\\videos\\2024-04-13_2109_Truly Scary Walmart Stories\\clip_1.mp4']
+# 2024-05-11: include  mp4_clips = ['C:\\my\\__youtube\\videos\\2024-05-11_0916_Truly Scary Ouija Stories_compilation\\clip_0_intro.mp4', 'C:\\my\\__youtube\\videos\\2024-05-11_0001_Truly Scary Ouija Stories\\clip_1.mp4', 'C:\\my\\__youtube\\videos\\2024-05-11_0018_Truly Scary Ouija Stories\\clip_1.mp4', 'C:\\my\\__youtube\\videos\\2024-05-11_0035_Truly Scary Ouija Stories\\clip_1.mp4', 'C:\\my\\__youtube\\videos\\2024-05-11_0050_Truly Scary Ouija Stories\\clip_1.mp4', 'C:\\my\\__youtube\\videos\\2024-05-11_0105_Truly Scary Ouija Stories\\clip_1.mp4']
 
 print(mp4_clips)
 output_concat_mp4 = os.path.join(xp_path, "" + genre + ".mp4")
@@ -238,7 +245,7 @@ I want you to optimize in order to rank #1 on google for these phrases: {optimiz
 3. Go thru the desc again line by line and make sure to use these search phrases at least 10 times each in the desc: {optimized_search_phrases}.  If not then add  some text to implement it where it makes sense.
 4. Output only the final and latest optimized description.\n------------'''
 
-r = tqc.chatgpt(userinput, system_role=system_role)
+r = tqc.chatgpt(userinput, system_role=system_role, moed=gpt4)
 desc = r.choices[0].message.content
 
 descx = start_times_str + "\n" + desc

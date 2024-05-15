@@ -115,3 +115,35 @@ def text2mp3(text_string="testing", voice_name="onyx", fn="output"):
 # text2mp3(text_string = story, voice_name = sel_voice, fn=path_voice )
 # audio_file = path_voice + ".mp3"
 # count_words(story)
+
+# text2mp3(text_string="Your long text here...", voice_name="shimmer", fn="Lullaby")
+
+# write a function where i can test how the voice is working with different inputs. Output the mp3 file
+# in this folder: "C:\my\__youtube\videos\Horror_stories_test"
+def test_voice_over(text_string="testing", voice_name="onyx", fn="output"):
+    """
+    Tests the voice-over functionality with the given text, voice name, and output filename.
+
+    Args:
+        text_string (str): The text to be converted to speech.
+        voice_name (str): The name of the voice to use.
+        fn (str): The filename for the output MP3 file.
+    """
+
+    # Create the output directory if it doesn't exist
+    output_dir = "C:\\my\\__youtube\\videos\\Horror_stories_test"
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Generate the MP3 file
+    text2mp3(text_string, voice_name, os.path.join(output_dir, fn))
+
+    # Print a success message
+    print(f"MP3 file created: {os.path.join(output_dir, fn)}.mp3")
+
+# Example usage
+# # time stamps in brackets are not said --- [08:38]  but text like [DO NOT SAY THIS] is
+# test_text = '''[08:38] quaint gathering with my friends had taken a curious turn when [DO NOT SAY THIS] Mia always Enchanted by the Arcane had Unearthed the board from the attic. [08:45] just for fun she had claimed yet as everyone took their places around the ancient board I couldn't shake off a for booting sense of dread as if compelled by an unseen Force we all delicately placed our fingers on the old wooden planchet the candl light flickered casting Eerie Shadows that seemed to play tricks on our eyes is there anyone here with us Mia asked with a mixture of
+# '''
+
+
+# test_voice_over(text_string=test_text, voice_name="onyx", fn="test_output")

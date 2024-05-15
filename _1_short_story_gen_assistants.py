@@ -20,6 +20,7 @@ def story_generator(
 
     # select model
     # gpt4 = "gpt-4-turbo-preview"
+    # gpt4 = "gpt-4o"
     gpt4 = "gpt-4-turbo"
     gpt3 = "gpt-3.5-turbo"
     selected_gpt = gpt4
@@ -94,17 +95,9 @@ def story_generator(
 
     openai_api_key = open_file('c:\\my\\git\\api-keys\\openaiapikey.txt')
     client = OpenAI(api_key=openai_api_key)
-
-    # # models
-    # gpt4 = "gpt-4-turbo-preview"
-    # gpt3 = "gpt-3.5-turbo"
-
     system_role = open_file("chatbot_horror_writer_role.txt")
     # task = open_file("assistant_horror_task.txt")
     sleep(5)
-
-
-
 
 
 
@@ -428,43 +421,9 @@ def story_generator(
     **Instructions:** Feel free to use these inspiration ideas directly, combine them, or derive new concepts that fit into the non-supernatural, realistic horror theme set in Walmart. Utilizing these ideas is completely voluntary. Ensure each pitch includes detailed scenarios that maintain the thematic focus, character development, and psychological terror essential for engaging and chilling narratives.
         '''
 
-    # t1_walmart = '''
-    # Task Description:
-    # I want you to help me create a pitch for a psychological horror story for my YouTube channel.
-
-    # Key points:
-    # - Rooted in Realism: The story should be grounded in reality, avoiding supernatural elements and focusing instead on the unsettling potential of ordinary events and human behavior within the confines of a Walmart.
-    # - Narrative Style: First person, told as if recalling a personal experience. The storytelling should effectively convey the growing sense of unease and fear.
-    # - Compelling Hook: Start with a powerful opening that draws the audience into the unsettling atmosphere of the Walmart and introduces the strange occurrences.
-    # - Unique Twist: Instead of a supernatural revelation, the story should have an open ending that leaves viewers questioning reality and their own perceptions.
-    # - Intriguing Characters: Create compelling characters, particularly Walmart employees or other shoppers with their own complexities.
-    # - Emotional Stakes: Highlight the protagonist's emotional journey as they navigate the unsettling situation within Walmart and question their own sanity.
-
-
-    # Task:
-    # Write 1 high-concept pitch for a YouTube horror story centered around an unsettling Walmart experience. Base them on user input ("{user_input}") if any.  
-
-
-    # Incorporate the following elements:
-    # - A protagonist (not named) looking for a quick, mundane shopping trip turned nightmarish.
-    # - An unusual Walmart employee or fellow shopper with unsettling behavior.
-    # - A series of seemingly mundane but increasingly disturbing events that take place within the Walmart.
-    # - An open ending that leaves the audience questioning the nature of reality and the motives of the people they encountered.
-
-    # Remember:
-    # * Write in the first person (as if recalling the experience).
-    # * Avoid supernatural elements.
-
-    # Additional Notes:
-    # Feel free to add details to enhance the atmosphere and build tension.
-    # Focus on crafting the pitch within the YouTube format, keeping the audience engaged throughout.
-    # By omitting supernatural elements and focusing on the psychological impact of mundane events and bizarre behavior, this refined task description aims to create a more unsettling and thought-provoking horror story.'''
-
 
     t1_childhood_stories = ''' Task Description: I want you to help me create a pitch for a real-life horror story based on disturbing childhood memories for my YouTube Channel.
-
     Key points:
-
     Rooted in Realism: The story should be grounded in reality, focusing on unsettling events and strange behaviors that occur during childhood. Avoid supernatural elements.
     Narrative Style: First person, told as if recalling an actual childhood experience. The storytelling should effectively convey the growing unease and fear.
     Compelling Hook: Start with a powerful opening that introduces the unsettling atmosphere of the new neighborhood or school and the strange occurrences.
@@ -534,23 +493,23 @@ def story_generator(
 
     t2 = f'''
     Tasks for writing the story
-    5. For the selected pitch give me a highly detailed synopsis for a {genre} story in the traditional three act structure. Each act should be clearly labeled and should build toward the chosen ending.
+    21. For the selected pitch give me a highly detailed synopsis for a {genre} story in the traditional three act structure. Each act should be clearly labeled and should build toward the chosen ending.
         Premise:    
         Ending:
         Other Information:
-    6. Narration style: {narration_style}
-    7. Character Profile Creation
+    22. Narration style: {narration_style}
+    23. Character Profile Creation
     - Protagonist Profile: Begin by choosing a name and a gender for the protagonist. DO NOT USE THE NAME ALEX!! Describe their physical appearance in detail, including height, body type, race, hair color and style, eye color, and any distinctive features such as scars or tattoos. Mention their typical attire or clothing style, fitting the story's context. Include personality traits, skills, and backstory relevant to their role in the story.
     - Supporting Characters Profiles (up to 2): Identify up to two key supporting characters and provide a detailed description for each, following the same structure as for the protagonist. Ensure these characters have distinct appearances, attire, and personalities to complement the protagonist and contribute to the story's dynamics.
 
-    8. Detailed Story Summary with a Compelling Hook
+    24. Detailed Story Summary with a Compelling Hook
     - Begin with a Compelling Hook: Start your story summary by crafting a powerful opening that immediately grabs the audience's attention. This could be a mysterious event, a chilling revelation, a provocative question, or a foreboding statement that hints at the horror to come. The hook should be closely tied to the core horror element of your story, such as an unsettling encounter with Voodoo magic or a terrifying brush with dark forces, setting the tone for the rest of the narrative.
     - Introduction and Setup: Following the hook, describe the initial setting, introduce the protagonist and key supporting characters, and establish the story’s normal world before the main conflict begins. This part should build on the intrigue created by the hook, drawing the audience deeper into the story’s atmosphere.
     - Beginning, Middle, and End: Detail the progression of the story from the inciting incident through to the climax and resolution. Include how the characters’ relationships evolve, key events that escalate the conflict, settings that enhance the horror, and how the characters confront and ultimately resolve (or fail to resolve) their situation.
     - Character Development Arcs: Explain the protagonist's and key supporting characters’ growth or transformation throughout the story, influenced by their encounters with the supernatural or their journey into the dark aspects of Voodoo and magic.
     - Ensure that each part of your summary maintains the tension and mystery introduced by your opening hook, weaving a cohesive and engaging narrative that keeps the audience listening or reading with bated breath.
 
-    9. Action Beats for Script
+    25. Action Beats for Script
     - List {count_action_beats} detailed action beats crucial for the story's development, ensuring the protagonist remains the focal point while integrating up to two supporting characters in these scenes. Each action beat should contribute to building the suspense and horror, echoing the unsettling tone set by your opening hook.
     - For each action beat, provide comprehensive STORY INFORMATION, including setting, character emotions and motivations, and the beat's outcome. Highlight interactions between the protagonist and supporting characters, showcasing their importance to the story and character development.
     '''
@@ -558,11 +517,12 @@ def story_generator(
     r2 = new_msg(t2)
     print(r2)
 
-    s1 = new_msg(f'''Now write part 1 of the story covering a compelling hook and intro and actionbeat {beats_split[1]}. Output nothing but part 1 of the story.''') 
+    limits = '''NEVER WRITE EDITORIAL STUFF LIKE "action beat" in the story.'''
+    s1 = new_msg(f'''Now write part 1 of the story covering a compelling hook and intro and actionbeat {beats_split[1]}. Output nothing but part 1 of the story. {limits}''') 
     # print(s1)
-    s2 = new_msg(f'''Now write part 2 of the story covering actionbeat {beats_split[2]}. Output nothing but part 2 of the story.''') 
+    s2 = new_msg(f'''Now write part 2 of the story covering actionbeat {beats_split[2]}. Output nothing but part 2 of the story. {limits}''') 
     # print(s2)
-    s3 = new_msg(f'''Now write part 3 of the story covering actionbeat {beats_split[3]} and the ending. Output nothing but part 3 of the story.''') 
+    s3 = new_msg(f'''Now write part 3 of the story covering actionbeat {beats_split[3]} and the ending. Output nothing but part 3 of the story. {limits}''') 
     # print(s3)
 
     story = s1 + s2 + s3
@@ -642,9 +602,15 @@ def story_generator(
         query = '''Use your talents as digital artist to create a detailed image prompt for a thumbnail to this story on youtube,
                 ''' + user_input + '''
                 Make sure the prompt complies with OpenAIs policy for image generation. Do not mention any brands.'''
-        img_prompt = new_msg(query) 
-        image_url, filename = tci.chatgpt_dalle(prompt = img_prompt, fn= path_img, i=100)
-        # image_files_.append(filename)
+        img_prompt = new_msg(query)
+        try:
+            image_url, filename = tci.chatgpt_dalle(prompt = img_prompt, fn= path_img, i=100)
+        except:
+            try:
+                img_prompt = new_msg(f"This prompt was declined by Dall-e. Please rephrase it  carefully: {img_prompt}")
+                image_url, filename = tci.chatgpt_dalle(prompt = img_prompt, fn= path_img, i=100)
+            except:
+                error_list.append("Error in function create_thumbnail()")
 
     create_thumbnail("")
     # create_thumbnail("Portrait the house the story is happening in")
