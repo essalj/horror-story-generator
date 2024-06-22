@@ -4,6 +4,21 @@ import tools_create_mp4 as tcm
 from time import time, sleep
 import datetime
 import _1_short_story_gen_assistants as story_gen
+
+
+# ##########################
+# ##### Shifting Reality Stories
+# title_compilation = "TRUE Scary Shifting Reality Stories"
+# num_stories = 12
+# story_type = "shifting"  # controls the storygenerator functions
+# genre = "Truly Scary Shifting Reality and Parallel Universe Stories"
+# user_input = ""
+# optimized_search_phrases = "Scary Shifting Reality Stories", "Parallel Universe Horror Stories"
+# general_seo_phrases = "true horror stories", "true scary stories", "reddit stories"
+# ##########################
+
+
+
 ###########################
 # ############# walmart stories
 # title_compilation = "TRUE Scary Walmart Stories"
@@ -16,16 +31,16 @@ import _1_short_story_gen_assistants as story_gen
 # ##########################
 
 
-# ##########################
-# ##### Tinder/dating Stories
+# # ##########################
+# # ##### Tinder/dating Stories
 # title_compilation = "TRUE Scary Dating Stories"
-# num_stories = 7
+# num_stories = 12
 # story_type = "tinder" # controls the storygenerator functions
 # genre = "Truly Scary tinder online dating Stories"
 # user_input = ""
 # optimized_search_phrases ="Scary Tinder Dating Stories", "Tinder Dating Horror Stories"
 # general_seo_phrases = "true horror stories","true scary stories", "reddit stories"
-# # ##########################
+# # # ##########################
 
 
 # ##########################
@@ -64,10 +79,10 @@ import _1_short_story_gen_assistants as story_gen
 ############################
 
 
-###########################
-############# ouija stories
+# ###########################
+# ############# ouija stories
 title_compilation = "TRUE Scary ouija board Stories From The Internet | True Scary Stories"
-num_stories = 2
+num_stories = 10
 story_type = "Ouija" # controls the storygenerator functions
 genre = "Truly Scary Ouija Stories"
 user_input = ""
@@ -119,6 +134,15 @@ def create_dated_folder(base_path, text_add_on):
         print(f"Folder already exists: {new_folder_path}")
     return new_folder_path
 
+# Get the list of matching folders
+def list_folders(base_path, prefix):
+    folders = [os.path.join(base_path, d) for d in os.listdir(base_path) if os.path.isdir(os.path.join(base_path, d)) and d.startswith(prefix)]
+    return folders
+# folders = list_folders(base_path = "C:\\my\\__youtube\\videos",prefix = "2024-06-05")
+# for folder in folders:
+#     print(folder)
+
+# ['C:\\my\\__youtube\\videos\\2024-06-05_1311_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1312_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1329_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1345_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1401_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1419_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1435_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1453_Truly Scary Shifting Reality and Parallel Universe Stories']
 
 #################################
 # Create folder for output
@@ -126,8 +150,7 @@ cwd_path = os.getcwd()
 xp_path_0 = "C:\\my\\__youtube\\videos"
 additional_text = genre  # Replace with your desired text
 xp_path = create_dated_folder(xp_path_0, additional_text + "_compilation")
-#xp_path = r"C:\my\__youtube\videos\2024-04-13_2052_Truly Scary Walmart Stories_compilation"
-
+#xp_path = r'C:\\my\\__youtube\\videos\\2024-06-05_1311_Truly Scary Shifting Reality and Parallel Universe Stories_compilation'
 
 for j in range(1, num_stories + 1):
     story_lib, error_list = story_gen.story_generator(
@@ -142,6 +165,14 @@ story_paths = [item[0] for item in lStory] # list of story libraries
 error_list = [item[1] for item in lStory] # error list from story_generator 
 
 # manaually create lStory
+# story_paths0 = 'C:\\my\\__youtube\\videos\\2024-05-20_1036_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1051_Truly Scary tinder online dating Stories', 
+# 'C:\\my\\__youtube\\videos\\2024-05-20_1104_Truly Scary tinder online dating Stories'
+# story_paths.append(story_paths0)
+
+# story_paths = ['C:\\my\\__youtube\\videos\\2024-05-20_1317_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1332_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1346_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1400_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1036_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1051_Truly Scary tinder online dating Stories', r'C:\my\__youtube\videos\2024-05-20_1104_Truly Scary tinder online dating Stories', r'C:\my\__youtube\videos\2024-04-05_0058_Truly Scary tinder online dating Stories_x', r'C:\my\__youtube\videos\2024-04-05_0043_Truly Scary tinder online dating Stories_x', r'C:\my\__youtube\videos\2024-04-05_0026_Truly Scary tinder online dating Stories_x', r'C:\my\__youtube\videos\2024-04-05_0011_Truly Scary tinder online dating Stories_x']
+# story_paths = ['C:\\my\\__youtube\\videos\\2024-06-05_1312_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1329_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1345_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1401_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1419_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1435_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1453_Truly Scary Shifting Reality and Parallel Universe Stories']
+
+
 # lStory = [r"C:\my\__youtube\videos\2024-04-13_2053_Truly Scary Walmart Stories",
 #           r"C:\my\__youtube\videos\2024-04-13_2109_Truly Scary Walmart Stories",
 #           r"C:\my\__youtube\videos\2024-04-13_2126_Truly Scary Walmart Stories",
@@ -153,6 +184,10 @@ error_list = [item[1] for item in lStory] # error list from story_generator
 # lStory = ['C:\\my\\__youtube\\videos\\2024-05-12_1142_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1156_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1209_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1224_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1237_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1249_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1303_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1316_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1329_Truly Scary Ouija Stories', 'C:\my\__youtube\videos\2024-05-11_1006_Truly Scary Ouija Stories', 'C:\my\__youtube\videos\2024-05-11_0105_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0050_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0035_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0018_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0001_Truly Scary Ouija Stories']
 # story_paths = [item[0] for item in lStory]
 # lStory.append([r'C:\my\__youtube\videos\2024-03-14_1251_True Scary Tinder Dating Stories', []])
+
+
+
+# ['C:\\my\\__youtube\\videos\\2024-05-20_1317_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1332_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1346_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1400_Truly Scary tinder online dating Stories']
 
 import pickle
 # pickle backup of story paths
@@ -215,12 +250,12 @@ am.add_ambient_music_to_video(
     video_file_path=output_concat_mp4,
     music_folder_path='C:\\my\\__youtube\\videos\\horror_music',
     output_file_path=output_final_mp4_music,
-    music_volume=0.02  # Adjust volume as needed
+    music_volume=0.03  # Adjust volume as needed
     )
 
 ###### add rain
 # output_final_mp4_rain = os.path.join(xp_path, genre + "_rain.mp4")
-am.add_rain_to_video(video_file_path = output_concat_mp4, music_volume=0.05)
+am.add_rain_to_video(video_file_path = output_concat_mp4, music_volume=0.28)
 
 
 
@@ -245,15 +280,11 @@ I want you to optimize in order to rank #1 on google for these phrases: {optimiz
 3. Go thru the desc again line by line and make sure to use these search phrases at least 10 times each in the desc: {optimized_search_phrases}.  If not then add  some text to implement it where it makes sense.
 4. Output only the final and latest optimized description.\n------------'''
 
-r = tqc.chatgpt(userinput, system_role=system_role, moed=gpt4)
-desc = r.choices[0].message.content
+r = tqc.chatgpt(userinput, system_role=system_role, model=gpt4)
+desc = r
 
 descx = start_times_str + "\n" + desc
 path_desc = os.path.join(xp_path, "desc.txt")
 save_file(path_desc, str(descx))
 print(descx)
-
-# desc = open_file(path_desc)
-
-
 

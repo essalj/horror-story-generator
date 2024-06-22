@@ -20,8 +20,8 @@ def story_generator(
 
     # select model
     # gpt4 = "gpt-4-turbo-preview"
-    # gpt4 = "gpt-4o"
-    gpt4 = "gpt-4-turbo"
+    gpt4 = "gpt-4o"
+    # gpt4 = "gpt-4-turbo"
     gpt3 = "gpt-3.5-turbo"
     selected_gpt = gpt4
 
@@ -252,6 +252,7 @@ def story_generator(
     4. Output the Winning Pitch: Showcase the chosen pitch, its score, and the rationale behind its selection. Emphasize its strength in portraying a Tinder dating horror story that is both believable and deeply unsettling, with a unique twist and emotional depth that truly engages and horrifies the audience.
 
     '''
+
     t1_ouija = f'''
     Ouija Board Horror Story Generation Task
 
@@ -468,8 +469,40 @@ def story_generator(
     4. **Select the Premier Pitch:** Identify the pitch that stands out for its compelling narrative, depth of cultural lore, and potential to engage and terrify the audience through its unique perspective and storytelling approach.
     5. **Detail the Selection:** Share the top-rated pitch, explaining why it excels in lore authenticity, character depth, and viewer engagement potential, particularly highlighting its chosen narrative perspective.
     '''
+
+    t1_shifting_reality = '''
+    Parallel Universe Horror Story Generation Task
+    Objective: Create an intensely scary parallel universe horror story.
+    Story Foundation:
+    • A gripping hook that reels the listener in
+    • Central Theme: An unsettling experience with shifting into a parallel universe. Explore the eerie atmosphere, the dynamics of the new reality, and the protagonist's struggle to understand their situation.
+    • Psychological and Supernatural Elements: Combine psychological terror with the consequences of existing in an alternate reality. Characters face fears, unexpected truths, and the aftermath of their actions.
+    • First-Person Recollection: Narrate as a personal memory, mimicking the authentic accounts found in Reddit's true horror stories for realism and impact.
+    • Climax and Revelation: Include a revelation or twist that changes the narrator’s understanding, such as discovering the parallel universe's dark secrets or realizing they can't return to their original reality.
+
+    Inspiration & Story Ideas in no paricular order:
+    - Captured on thee other side: A man wakes up in a paralelle world yhat he really loves. Gets back to his original reality and misses the alternative world  immensely 
+    - The Other Side of the Mirror: A man accidentally steps through a mirror and finds himself in a subtly altered version of his home. As he tries to navigate this world, he discovers his doppelgänger plotting to replace him.
+    - The Silent Town: A woman wakes up in a town where everything is eerily silent and slightly different. She must uncover the town's secret while avoiding the watchful eyes of its sinister inhabitants.
+    - The Looping Day: A teenager group finds themselves reliving the same day, each time with minor and increasingly disturbing changes. They must figure out how to break the loop before it consumes their sanity.
+    - The Perfect Stranger: A man meets a seemingly perfect version of his spouse in a parallel universe, only to find out they have a dark and horrifying agenda.
+    - The Hidden Corridor: A group of friends discovers a hidden corridor in their school that leads to an alternate version of the building, filled with nightmarish versions of their classmates.
+    - The Vanished Family: A woman returns home to find her family replaced by eerily perfect replicas. She must uncover the truth and find a way back to her real family.
+    - The Time-Lost Room: A man finds a room in his house that transports him to a different era with subtle but terrifying differences. He must navigate this world and find a way back before he becomes trapped.
+    - The Doppelgänger’s Intent: A person keeps encountering their exact double, who seems intent on replacing them. The protagonist must uncover the double's plan and find a way to stop it.
+    - The Alien Landscape: A group of friends stumbles into a parallel world with bizarre and dangerous flora and fauna. They must survive and find a way back home.
+    - The Whispering Shadows: A teenager finds themselves in a world where shadows seem to whisper and move on their own. They must uncover the shadows' secrets and find a way back to their own reality.
+
+    Task Execution:
+    1. Choose Your Narrative Lens: Opt for a first-person narrative to deepen the story's immersive quality.
+    2. Develop the Story Pitch: Drawing inspiration from above story ideas - craft a pitch that encapsulates the essence of a parallel universe encounter, focusing on psychological depth and supernatural aspects.
+    3. Inspiration Utilization: Draw from the provided story ideas, blend them, or use original concepts. The goal is to create a pitch that's authentic, engaging, and frightening.
+    4. Evaluation Criteria: Judge your pitch based on its portrayal of a parallel universe horror story, its integration of psychological and supernatural elements, and its potential to elicit fear.
+    '''
     
-    match story_type.lower():    
+    match story_type.lower():
+        case "shifting":
+            t1 = t1_shifting_reality
         case "tinder":
             t1 = t1_tinder
         case "ouija":
@@ -499,7 +532,7 @@ def story_generator(
         Other Information:
     22. Narration style: {narration_style}
     23. Character Profile Creation
-    - Protagonist Profile: Begin by choosing a name and a gender for the protagonist. DO NOT USE THE NAME ALEX!! Describe their physical appearance in detail, including height, body type, race, hair color and style, eye color, and any distinctive features such as scars or tattoos. Mention their typical attire or clothing style, fitting the story's context. Include personality traits, skills, and backstory relevant to their role in the story.
+    - Protagonist Profile: Begin by choosing a name and a gender for the protagonist. DO NOT USE THE NAME ALEX!! Describe their physical appearance in detail, including height, body type, race, skin color, hair color and style, facial structure, eye color, nose, and any distinctive features such as scars or tattoos. Mention their typical attire or clothing style, fitting the story's context. Include personality traits, skills, and backstory relevant to their role in the story.
     - Supporting Characters Profiles (up to 2): Identify up to two key supporting characters and provide a detailed description for each, following the same structure as for the protagonist. Ensure these characters have distinct appearances, attire, and personalities to complement the protagonist and contribute to the story's dynamics.
 
     24. Detailed Story Summary with a Compelling Hook
@@ -557,7 +590,7 @@ def story_generator(
             prompt = f'''
                     Use your talents as digital artist to create a detailed image prompt for action beat {i}. 
                     Focusing on visualizing the scene with the protagonist always as the primary focus.
-                        - Describe the protagonist and up to two supporting characters involved in the scene, ensuring their appearances, expressions, and attire are detailed for consistency across images.
+                        - Describe the protagonist and up to two supporting characters involved in the scene making sure to use the generated Character profiles for securing detailed character consistency across images.
                         - Include setting details (time of day, location), important objects, and environmental elements to convey the mood or atmosphere.
                         - Ensure that style of the image is consistent across all the images. Make the images photo realistic, Hasselblad.
                         - Ensure the protagonist's prominence in the scene, with supporting characters positioned to highlight their relationship and interactions with the protagonist.
