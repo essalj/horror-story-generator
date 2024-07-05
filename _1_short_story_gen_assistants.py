@@ -2,18 +2,22 @@
 #pip install Pillow
 # pip install pydub
 
+
+import re
+import os
+import openai
+from openai import OpenAI
+from time import time,sleep
+import datetime
+
 def story_generator(
         story_type = "Tinder",
         genre = "True Scary Tinder Dating Stories", 
-        user_input = "A tinder dat that goes horriblly wrong"):
-    import re
-    import os
-    import openai
-    from openai import OpenAI
-    from time import time,sleep
-    import datetime
+        user_input = "A tinder date that goes horriblly wrong"):
+
 
     error_list = []
+    
     ####################
     # Story settings
     ####################
@@ -28,7 +32,6 @@ def story_generator(
 
     narration_style = "Opt for a first-person narrative to deepen the story's immersive quality."
     # narration_style = "Choose what you think suits the story best."
-    
     fn = "Stories"  #file name
     beats_split = ['7','1-2','3-5','6-7']  # count. part 1, 2, 3
     # beats_split = ['6','1-2','3-4','5-6']  # count. part 1, 2, 3
@@ -36,7 +39,8 @@ def story_generator(
 
 
     no_of_pitches = 3 # to select the best story
-
+    
+    
     ############################
 
 
@@ -550,7 +554,7 @@ def story_generator(
     r2 = new_msg(t2)
     print(r2)
 
-    limits = '''NEVER WRITE EDITORIAL STUFF LIKE "action beat" in the story.'''
+    limits = '''NEVER WRITE EDITORIAL STUFF LIKE "action beat" in the story.\n IF something in the story is spelled, make sure to type it with extra spaces and lines after all letters includinig the last letter. It is to make narration slower . example E  -  L  -  I  -  A  -  S  -  " '''
     s1 = new_msg(f'''Now write part 1 of the story covering a compelling hook and intro and actionbeat {beats_split[1]}. Output nothing but part 1 of the story. {limits}''') 
     # print(s1)
     s2 = new_msg(f'''Now write part 2 of the story covering actionbeat {beats_split[2]}. Output nothing but part 2 of the story. {limits}''') 

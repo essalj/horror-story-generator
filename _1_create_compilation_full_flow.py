@@ -82,7 +82,7 @@ import _1_short_story_gen_assistants as story_gen
 # ###########################
 # ############# ouija stories
 title_compilation = "TRUE Scary ouija board Stories From The Internet | True Scary Stories"
-num_stories = 10
+num_stories = 5
 story_type = "Ouija" # controls the storygenerator functions
 genre = "Truly Scary Ouija Stories"
 user_input = ""
@@ -150,7 +150,7 @@ cwd_path = os.getcwd()
 xp_path_0 = "C:\\my\\__youtube\\videos"
 additional_text = genre  # Replace with your desired text
 xp_path = create_dated_folder(xp_path_0, additional_text + "_compilation")
-#xp_path = r'C:\\my\\__youtube\\videos\\2024-06-05_1311_Truly Scary Shifting Reality and Parallel Universe Stories_compilation'
+#xp_path = r'C:\\my\\__youtube\\videos\\2024-07-04_1609_Truly Scary Ouija Stories_compilation'
 
 for j in range(1, num_stories + 1):
     story_lib, error_list = story_gen.story_generator(
@@ -164,30 +164,8 @@ for j in range(1, num_stories + 1):
 story_paths = [item[0] for item in lStory] # list of story libraries 
 error_list = [item[1] for item in lStory] # error list from story_generator 
 
-# manaually create lStory
-# story_paths0 = 'C:\\my\\__youtube\\videos\\2024-05-20_1036_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1051_Truly Scary tinder online dating Stories', 
-# 'C:\\my\\__youtube\\videos\\2024-05-20_1104_Truly Scary tinder online dating Stories'
-# story_paths.append(story_paths0)
-
-# story_paths = ['C:\\my\\__youtube\\videos\\2024-05-20_1317_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1332_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1346_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1400_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1036_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1051_Truly Scary tinder online dating Stories', r'C:\my\__youtube\videos\2024-05-20_1104_Truly Scary tinder online dating Stories', r'C:\my\__youtube\videos\2024-04-05_0058_Truly Scary tinder online dating Stories_x', r'C:\my\__youtube\videos\2024-04-05_0043_Truly Scary tinder online dating Stories_x', r'C:\my\__youtube\videos\2024-04-05_0026_Truly Scary tinder online dating Stories_x', r'C:\my\__youtube\videos\2024-04-05_0011_Truly Scary tinder online dating Stories_x']
-# story_paths = ['C:\\my\\__youtube\\videos\\2024-06-05_1312_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1329_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1345_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1401_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1419_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1435_Truly Scary Shifting Reality and Parallel Universe Stories', 'C:\\my\\__youtube\\videos\\2024-06-05_1453_Truly Scary Shifting Reality and Parallel Universe Stories']
-
-
-# lStory = [r"C:\my\__youtube\videos\2024-04-13_2053_Truly Scary Walmart Stories",
-#           r"C:\my\__youtube\videos\2024-04-13_2109_Truly Scary Walmart Stories",
-#           r"C:\my\__youtube\videos\2024-04-13_2126_Truly Scary Walmart Stories",
-#           r"C:\my\__youtube\videos\2024-04-13_2142_Truly Scary Walmart Stories",
-#           r"C:\my\__youtube\videos\2024-04-13_2159_Truly Scary Walmart Stories",
-#           r"C:\my\__youtube\videos\2024-04-13_2216_Truly Scary Walmart Stories",
-#           r"C:\my\__youtube\videos\2024-04-13_2231_Truly Scary Walmart Stories"]
-
-# lStory = ['C:\\my\\__youtube\\videos\\2024-05-12_1142_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1156_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1209_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1224_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1237_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1249_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1303_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1316_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-05-12_1329_Truly Scary Ouija Stories', 'C:\my\__youtube\videos\2024-05-11_1006_Truly Scary Ouija Stories', 'C:\my\__youtube\videos\2024-05-11_0105_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0050_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0035_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0018_Truly Scary Ouija Stories','C:\my\__youtube\videos\2024-05-11_0001_Truly Scary Ouija Stories']
-# story_paths = [item[0] for item in lStory]
+# 20240704 story_paths = ['C:\\my\\__youtube\\videos\\2024-07-04_1609_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-04_2005_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-04_2018_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-04_2029_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-04_2042_Truly Scary Ouija Stories','C:\\my\\__youtube\\videos\\2024-07-01_0034_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-01_0049_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-01_0102_Truly Scary Ouija Stories']
 # lStory.append([r'C:\my\__youtube\videos\2024-03-14_1251_True Scary Tinder Dating Stories', []])
-
-
-
-# ['C:\\my\\__youtube\\videos\\2024-05-20_1317_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1332_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1346_Truly Scary tinder online dating Stories', 'C:\\my\\__youtube\\videos\\2024-05-20_1400_Truly Scary tinder online dating Stories']
 
 import pickle
 # pickle backup of story paths
@@ -207,7 +185,7 @@ path_desc = os.path.join(xp_path, "stories_text.txt")
 save_file(path_desc, str(stories_str))
 
 
-############## concat intro and stories ####
+############## concat intro, incite_text  and stories ####
 # create intro mp4
 intro_0 = intro_speech_0 + ". [pause] "
 sub_text = "Smash like and subscribe to tread the thin line between reality and the surreal. Let’s begin our eerie expedition. [pause]"
@@ -218,6 +196,13 @@ intro_speech = intro_0 + sub_text
 import tools_create_mp4_intro as tcmi
 tcmi.create_intro_mp4(gender='male', xp_path=xp_path, story = intro_speech, fn="000_intro"  )
 intro_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
+
+#create incite text - incites listener to subscribe and buy me a cup of mocca
+incite_text = "... [pause]....If you've made it this far, the shadows have already begun to close in. Subscribe now to ensure you never miss a terrifying tale. And if you dare, hit the thanks button to buy me a cup of midnight brew. Your support keeps the nightmares flowing. Now, brace yourself for our next story... [pause]"
+incite_audio_clip = tcmi.create_voice_over(gender='male', xp_path = xp_path, story = incite_text, fn="002_incite_audio")
+# incite_audio_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
+
+#xp_path = 'C:\\my\\__youtube\\videos\\2024-07-04_1609_Truly Scary Ouija Stories_compilation'
 
 
 ######## concat stories #####

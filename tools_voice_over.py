@@ -28,7 +28,8 @@ chatbot_artist_role = open_file("chatbot_artist_role.txt")
 break_line = "\n" + 50*"-" + "\n"
 
 # models
-gpt4 = "gpt-4-1106-preview"
+# gpt4 = "gpt-4-1106-preview"
+gpt4 = "gpt-4o"
 gpt3 = "gpt-3.5-turbo-1106"
 
 #chatbot
@@ -145,5 +146,5 @@ def test_voice_over(text_string="testing", voice_name="onyx", fn="output"):
 # test_text = '''[08:38] quaint gathering with my friends had taken a curious turn when [DO NOT SAY THIS] Mia always Enchanted by the Arcane had Unearthed the board from the attic. [08:45] just for fun she had claimed yet as everyone took their places around the ancient board I couldn't shake off a for booting sense of dread as if compelled by an unseen Force we all delicately placed our fingers on the old wooden planchet the candl light flickered casting Eerie Shadows that seemed to play tricks on our eyes is there anyone here with us Mia asked with a mixture of
 # '''
 
-
+# test_text ="it spelled E  -  L  -  I  -  A  -  S."
 # test_voice_over(text_string=test_text, voice_name="onyx", fn="test_output")
