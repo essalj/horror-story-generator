@@ -17,6 +17,27 @@ def add_silence_to_audio(original_audio_clip, silence_duration=2.0):
     return concatenate_audioclips([original_audio_clip, silent_clip])
 
 
+# usecase: add chime in end of story... add incite to coffe and subscribe in end of story 1
+def add_end_sound(video_clip, sound_effect_path, duration=2.0):
+    # Load the sound effect
+    sound_effect = AudioFileClip(sound_effect_path).subclip(0, duration)
+    
+    # Get the original audio
+    original_audio = video_clip.audio
+    
+    # Calculate the start time for the sound effect
+    start_time = video_clip.duration - duration
+    
+    # Combine the original audio with the sound effect
+    new_audio = CompositeAudioClip([
+        original_audio,
+        sound_effect.set_start(start_time)
+    ])
+    
+    # Set the new audio to the video clip
+    return video_clip.set_audio(new_audio)
+
+
 def create_video_with_images_and_audio(image_paths, audio_path, output_filename='final_video.mp4', fps=30):
     silent_clip = create_silence_audio_clip(silence_duration=2.0)
     audio_clip_in = AudioFileClip(audio_path)
@@ -57,24 +78,15 @@ def create_video_with_images_and_audio(image_paths, audio_path, output_filename=
     final_video.write_videofile(output_filename, fps=fps)
 
     # create_video_with_images_and_audio(image_paths=image_files, audio_path=audio_file, output_filename=output_mp4, fps=30)
+    # # Example usage
+    # image_paths = ['image1.jpg', 'image2.jpg', 'image3.jpg', ...]  # Add your image paths
+    # audio_path = 'your_audio_file.mp3'
+    # create_video_with_images_and_audio(image_paths, audio_path)
 
+    # image_paths = ['C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img11.png' , 'C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img12.png']
+    # audio_path = "C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - audio_1.mp3"
+    # create_video_with_images_and_audio(image_paths, audio_path, output_filename='final_video.mp4', fps=30)
 
-# # Example usage
-# image_paths = ['image1.jpg', 'image2.jpg', 'image3.jpg', ...]  # Add your image paths
-# audio_path = 'your_audio_file.mp3'
-# create_video_with_images_and_audio(image_paths, audio_path)
-
-# image_paths = ['C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img11.png' , 'C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - img12.png']
-# audio_path = "C:\\my\\__youtube\\videos\\2023-12-13_horror\\Ghost in the Machine A Chilling AI Experiment Story - audio_1.mp3"
-# create_video_with_images_and_audio(image_paths, audio_path, output_filename='final_video.mp4', fps=30)
-
-# concatenates mp4 files
-# def concatenate_videos_old(video_files, output_path):
-#     # Load the video clips
-#     clips = [VideoFileClip(path) for path in video_files]
-#     # clips = [VideoFileClip(os.path.join(xp_path, path)) for path in video_files]
-#     final_clip = concatenate_videoclips(clips)
-#     final_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
 
 
 # concatenate_videos(mp4_clips, output_final_mp4)
@@ -85,104 +97,63 @@ def format_duration(seconds):
     # Convert seconds to a time string of format hh:mm:ss
     return time.strftime('%H:%M:%S', time.gmtime(seconds))
 
-# def concatenate_videos(video_files, output_path, target_fps=30, target_width=1920, target_height=1080):
-# # def concatenate_videos(video_files, output_path):
-#     clips = []
-#     start_times = []
-#     current_start = 0
+from moviepy.editor import VideoFileClip, concatenate_videoclips, CompositeVideoClip, ColorClip
 
-#     for index, path in enumerate(video_files):
-#         try:
-#             # clip = VideoFileClip(path)
-#             # Load the video clip with a target resolution and fps
-#             # clip = VideoFileClip(path).set_fps(target_fps).resize(newsize=(target_width, target_height))
-#             # clip = VideoFileClip(path).set_fps(target_fps).resize(newsize=(target_width, target_height), resample=Image.Resampling.LANCZOS)
-#             # clip = VideoFileClip(path).set_fps(target_fps).resize(newsize=(target_width, target_height), resample=Image.Resampling.LANCZOS)
-#             clip = VideoFileClip(path).set_fps(target_fps).resize((target_width, target_height))
-
-#             clips.append(clip)
-#             start_times.append(f"{index}. {format_duration(current_start)}")
-#             current_start += clip.duration
-#         except Exception as e:
-#             print(f"Error processing {path}: {e}")
-
-#     final_clip = concatenate_videoclips(clips)
-#     final_clip.write_videofile(output_path, codec="libx264")
-    
-#     print("Stories " + " ".join(start_times))
-#     return start_times
-
-# video_files = mp4_clips
-# output_path = output_concat_mp4
-# start_times = concatenate_videos(mp4_clips, output_concat_mp4)
-# # Example usage:
-# video_files = ['video1.mp4', 'video2.mp4', 'video3.mp4']
-# output_path = 'output.mp4'
-# concatenate_videos(video_files, output_path)
-
-def concatenate_videos(video_files, output_path):
-    # Initialize a list to hold VideoFileClip objects
+def concatenate_videos(video_files, output_path, end_sound_path=None, incite_audio_path=None, incite_video_path=None, incite_position=2):
     clips = []
     start_times = []
     current_start = 0
 
     for index, path in enumerate(video_files):
-    
-    # for path in video_files:
         try:
-            # Load the video clip and ensure it's compatible by setting target resolution and fps
             clip = VideoFileClip(path)
-            # Optionally, you can ensure all clips have the same fps and size
-            # For example: clip = clip.set_fps(target_fps).resize(new_size=(target_width, target_height))
-            clips.append(clip)
+            
+            # Add a 2-second pause at the end of each clip
+            pause_clip = ColorClip(size=clip.size, color=(0, 0, 0), duration=2)
+            pause_clip = pause_clip.set_audio(None)  # Ensure the pause is silent
+            
+            combined_clip = concatenate_videoclips([clip, pause_clip])
+            clips.append(combined_clip)
+            
             start_times.append(f"{index}. {format_duration(current_start)}")
-            current_start += clip.duration
+            current_start += combined_clip.duration
+
+            # Insert incite clip after the specified position
+            if index + 1 == incite_position and incite_audio_path and incite_video_path:
+                incite_video = VideoFileClip(incite_video_path)
+                incite_audio = AudioFileClip(incite_audio_path)
+                
+                # If video is shorter than audio, extend it
+                if incite_video.duration < incite_audio.duration:
+                    incite_video = incite_video.fx(vfx.loop, duration=incite_audio.duration)
+                # If video is longer, trim it
+                else:
+                    incite_video = incite_video.subclip(0, incite_audio.duration)
+                
+                incite_clip = incite_video.set_audio(incite_audio)
+                clips.append(incite_clip)
+                current_start += incite_clip.duration
+
+            # Add end sound clip after each video except the last one
+            if end_sound_path and index < len(video_files) - 1:
+                sound_clip = AudioFileClip(end_sound_path)
+                silent_clip = ColorClip(size=clip.size, color=(0, 0, 0), duration=sound_clip.duration)
+                silent_clip = silent_clip.set_audio(sound_clip)
+                clips.append(silent_clip)
+                current_start += sound_clip.duration
+
         except Exception as e:
             print(f"Error processing {path}: {e}")
     
     if clips:
         try:
-            # Concatenate video clips
-            # The method="compose" argument can help avoid size mismatch issues
             final_clip = concatenate_videoclips(clips, method="compose")
-            # Write the result to a file
             final_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
         except Exception as e:
             print(f"Error during concatenation: {e}")
     else:
         print("No video clips were successfully loaded.")
+    
     print("Stories " + " ".join(start_times))
     return start_times
 
-
-# def concatenate_videos(video_files, output_path):
-#     # Initialize a list to hold VideoFileClip objects
-#     clips = []
-    
-#     for path in video_files:
-#         try:
-#             # Load the video clip and ensure it's compatible by setting target resolution and fps
-#             clip = VideoFileClip(path)
-#             # Optionally, you can ensure all clips have the same fps and size
-#             # For example: clip = clip.set_fps(target_fps).resize(new_size=(target_width, target_height))
-#             clips.append(clip)
-#         except Exception as e:
-#             print(f"Error processing {path}: {e}")
-    
-#     if clips:
-#         try:
-#             # Concatenate video clips
-#             # The method="compose" argument can help avoid size mismatch issues
-#             final_clip = concatenate_videoclips(clips, method="compose")
-#             # Write the result to a file
-#             final_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
-#         except Exception as e:
-#             print(f"Error during concatenation: {e}")
-#     else:
-#         print("No video clips were successfully loaded.")
-
-
-# Example usage
-# video_files = ['path/to/video1.mp4', 'path/to/video2.mp4']
-# output_path = 'path/to/output_video.mp4'
-# concatenate_videos(video_files, output_path)

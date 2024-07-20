@@ -78,17 +78,27 @@ import _1_short_story_gen_assistants as story_gen
 # general_seo_phrases = "asian horror stories","true scary stories", "reddit stories"
 ############################
 
+# ###########################
+# ############# Reddit scary stories
+title_compilation = "TRUE Scary Stories From Reddit | Dark Tales with Rain Ambience for Sleep"
+num_stories = 3
+story_type = "Reddit" # controls the storygenerator functions
+genre = "True Reddit Scary Stories"
+user_input = ""
+optimized_search_phrases = "Scary Stories with Rain Sounds", "Creepy Reddit Stories for Sleep"
+general_seo_phrases = "scary stories to fall asleep", "ASMR rain", "reddit horror stories for bedtime"
+# ##########################
 
 # ###########################
-# ############# ouija stories
-title_compilation = "TRUE Scary ouija board Stories From The Internet | True Scary Stories"
-num_stories = 5
-story_type = "Ouija" # controls the storygenerator functions
-genre = "Truly Scary Ouija Stories"
-user_input = ""
-optimized_search_phrases ="Scary Ouija Board Stories", "Ouija Board Horror Stories"
-general_seo_phrases = "true horror stories","true scary stories", "reddit stories"
-# ##########################
+# # ############# ouija stories
+# title_compilation = "TRUE Scary ouija board Stories From The Internet | True Scary Stories"
+# num_stories = 5
+# story_type = "Ouija" # controls the storygenerator functions
+# genre = "Truly Scary Ouija Stories"
+# user_input = ""
+# optimized_search_phrases ="Scary Ouija Board Stories", "Ouija Board Horror Stories"
+# general_seo_phrases = "true horror stories","true scary stories", "reddit stories"
+# # ##########################
 
 ###########################
 # ############# walmart stories
@@ -104,7 +114,8 @@ general_seo_phrases = "true horror stories","true scary stories", "reddit storie
 # ----
 
 gpt4 = "gpt-4o" # gpt4 model selection
-intro_speech_0 = f"Welcome to {genre}" #gets spoken in the intro  - DO NOT CHANGE!
+# intro_speech_0 = f"Welcome to {genre}" #gets spoken in the intro  - DO NOT CHANGE!
+intro_speech = f'''Hello everyone, and welcome back to Horror Stories! Tonight is all about {genre}.  I know a lot of you use these videos to sleep so before you drift off into the world of darkness, share your unlucky number and the spooky story behind it! Is it 13, or does 666 give you the chills? We'd love to hear what number haunts you and why. And if you're enjoying our nightly journeys into the realm of darkness and horrors, don't forget to like and subscribe. It helps our haunted community grow and ensures you never miss a spine-tingling episode. Now, let's get comfy and relaxed as we begin tonight's tales. Grab your headphones for the best immersive experience, and if you're using this to sleep, sweet dreams... If you have an Ouija board nearby, maybe keep it closed... just in case! Stay tuned, and sleep tight... you never know what numbers might appear in your dreams tonight!'''
 
 
 lStory = []
@@ -164,8 +175,32 @@ for j in range(1, num_stories + 1):
 story_paths = [item[0] for item in lStory] # list of story libraries 
 error_list = [item[1] for item in lStory] # error list from story_generator 
 
-# 20240704 story_paths = ['C:\\my\\__youtube\\videos\\2024-07-04_1609_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-04_2005_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-04_2018_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-04_2029_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-04_2042_Truly Scary Ouija Stories','C:\\my\\__youtube\\videos\\2024-07-01_0034_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-01_0049_Truly Scary Ouija Stories', 'C:\\my\\__youtube\\videos\\2024-07-01_0102_Truly Scary Ouija Stories']
+# 20240710 story_paths = ['C:\my\__youtube\videos\2024-07-10_1320_True Reddit Scary Stories','C:\my\__youtube\videos\2024-07-10_1304_True Reddit Scary Stories','C:\\my\\__youtube\\videos\\2024-07-08_2202_True Reddit Scary Stories', 'C:\\my\\__youtube\\videos\\2024-07-08_2216_True Reddit Scary Stories', 'C:\\my\\__youtube\\videos\\2024-07-08_2229_True Reddit Scary Stories', 'C:\\my\\__youtube\\videos\\2024-07-08_2241_True Reddit Scary Stories']
 # lStory.append([r'C:\my\__youtube\videos\2024-03-14_1251_True Scary Tinder Dating Stories', []])
+
+story_paths = [r'C:\my\__youtube\videos\2024-07-10_1320_True Reddit Scary Stories', 
+               r'C:\my\__youtube\videos\2024-07-10_1304_True Reddit Scary Stories',
+                r'C:\\my\\__youtube\\videos\\2024-07-08_2202_True Reddit Scary Stories', 
+                r'C:\my\__youtube\videos\2024-07-04_2042_Truly Scary Ouija Stories',
+                r'C:\\my\\__youtube\\videos\\2024-07-08_2216_True Reddit Scary Stories', 
+                r'C:\my\__youtube\videos\2024-06-05_1435_Truly Scary Shifting Reality and Parallel Universe Stories',
+                r'C:\my\__youtube\videos\2024-05-20_1414_Truly Scary tinder online dating Stories',
+                r'C:\my\__youtube\videos\2024-04-13_2159_Truly Scary Walmart Stories',
+                r'C:\\my\\__youtube\\videos\\2024-07-08_2229_True Reddit Scary Stories', 
+                r'C:\my\__youtube\videos\2024-05-20_1400_Truly Scary tinder online dating Stories',
+                r'C:\my\__youtube\videos\2024-04-13_2216_Truly Scary Walmart Stories',
+                r'C:\\my\\__youtube\\videos\\2024-07-08_2241_True Reddit Scary Stories',
+                r'C:\my\__youtube\videos\2024-07-04_2029_Truly Scary Ouija Stories',
+                r'C:\my\__youtube\videos\2024-07-04_2005_Truly Scary Ouija Stories',
+                r'C:\my\__youtube\videos\2024-06-05_1419_Truly Scary Shifting Reality and Parallel Universe Stories',
+                r'C:\my\__youtube\videos\2024-07-04_2018_Truly Scary Ouija Stories',
+                r'C:\my\__youtube\videos\2024-06-05_1401_Truly Scary Shifting Reality and Parallel Universe Stories',
+                r'C:\my\__youtube\videos\2024-06-05_1345_Truly Scary Shifting Reality and Parallel Universe Stories',
+                r'C:\my\__youtube\videos\2024-05-20_1346_Truly Scary tinder online dating Stories',
+                r'C:\my\__youtube\videos\2024-04-13_2231_Truly Scary Walmart Stories',
+                r'C:\my\__youtube\videos\2024-05-20_1332_Truly Scary tinder online dating Stories',
+                r'C:\my\__youtube\videos\2024-04-13_2142_Truly Scary Walmart Stories'
+                ]
 
 import pickle
 # pickle backup of story paths
@@ -187,22 +222,19 @@ save_file(path_desc, str(stories_str))
 
 ############## concat intro, incite_text  and stories ####
 # create intro mp4
-intro_0 = intro_speech_0 + ". [pause] "
-sub_text = "Smash like and subscribe to tread the thin line between reality and the surreal. Let’s begin our eerie expedition. [pause]"
-intro_speech = intro_0 + sub_text
-
-
 #create intro mp4 clip - creates the intro of the video - using an image from the folder xp_path
 import tools_create_mp4_intro as tcmi
 tcmi.create_intro_mp4(gender='male', xp_path=xp_path, story = intro_speech, fn="000_intro"  )
 intro_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
 
-#create incite text - incites listener to subscribe and buy me a cup of mocca
-incite_text = "... [pause]....If you've made it this far, the shadows have already begun to close in. Subscribe now to ensure you never miss a terrifying tale. And if you dare, hit the thanks button to buy me a cup of midnight brew. Your support keeps the nightmares flowing. Now, brace yourself for our next story... [pause]"
+# #create incite text - incites listener to subscribe and buy me a cup of mocca
+incite_text = ".....If you've made it this far, the shadows have already begun to close in. Subscribe now to ensure you never miss a terrifying tale. And if you dare, hit the thanks button to buy me a cup of midnight brew. Your support keeps the nightmares flowing. Now, brace yourself for our next story... [pause]"
 incite_audio_clip = tcmi.create_voice_over(gender='male', xp_path = xp_path, story = incite_text, fn="002_incite_audio")
 # incite_audio_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
+# Create or specify a video to go with the incite audio
+incite_video_path = r"C:\my\__youtube\videos\_horror_effects\incite_coffee.mp4"  # Replace with actual path
 
-#xp_path = 'C:\\my\\__youtube\\videos\\2024-07-04_1609_Truly Scary Ouija Stories_compilation'
+
 
 
 ######## concat stories #####
@@ -213,7 +245,24 @@ mp4_clips =  intro_clip + file_paths
 
 print(mp4_clips)
 output_concat_mp4 = os.path.join(xp_path, "" + genre + ".mp4")
-start_times = tcm.concatenate_videos(mp4_clips, output_concat_mp4)
+
+# start_times = tcm.concatenate_videos(mp4_clips, output_concat_mp4)
+# start_times = tcm.concatenate_videos(mp4_clips, output_concat_mp4, end_sound_path=end_sound_path)
+
+
+
+
+# concatenate_videos(video_files, output_path, end_sound_path=None, incite_audio_path=None, incite_video_path=None, incite_position=2)
+# When calling concatenate_videos
+start_times = tcm.concatenate_videos(
+    mp4_clips, 
+    output_concat_mp4, 
+    end_sound_path,
+    incite_audio_path=incite_audio_clip,
+    incite_video_path=incite_video_path,
+    incite_position=2  # This will insert after the first story
+)
+
 
 start_times_str = "Stories " + " ".join(start_times)  # to insert in top of desc
 
@@ -263,7 +312,8 @@ userinput = f'''1. Create a seo and youtube search optimized description to yout
 I want you to optimize in order to rank #1 on google for these phrases: {optimized_search_phrases}. 
 2. Go thru the description line by line and note what to optimize in order to rank #1 on google for these phrases: {optimized_search_phrases}. Rewrite it and implement the changes.
 3. Go thru the desc again line by line and make sure to use these search phrases at least 10 times each in the desc: {optimized_search_phrases}.  If not then add  some text to implement it where it makes sense.
-4. Output only the final and latest optimized description.\n------------'''
+4. Go through the text and edit it shorter than 5000 chars.
+5. Output only the final and latest optimized description.\n------------'''
 
 r = tqc.chatgpt(userinput, system_role=system_role, model=gpt4)
 desc = r

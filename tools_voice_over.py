@@ -146,5 +146,15 @@ def test_voice_over(text_string="testing", voice_name="onyx", fn="output"):
 # test_text = '''[08:38] quaint gathering with my friends had taken a curious turn when [DO NOT SAY THIS] Mia always Enchanted by the Arcane had Unearthed the board from the attic. [08:45] just for fun she had claimed yet as everyone took their places around the ancient board I couldn't shake off a for booting sense of dread as if compelled by an unseen Force we all delicately placed our fingers on the old wooden planchet the candl light flickered casting Eerie Shadows that seemed to play tricks on our eyes is there anyone here with us Mia asked with a mixture of
 # '''
 
-# test_text ="it spelled E  -  L  -  I  -  A  -  S."
-# test_voice_over(text_string=test_text, voice_name="onyx", fn="test_output")
+# test_text = '''It was a note, hastily written, its message clear and horrifying: " 
+# test_voice_over(text_string=test_text, voice_name="onyx", fn="test_output_1")
+
+
+# test_text = '''I stared at the note, my hands trembling as the words seemed to blur and swim in front of me. "I  L-I-K-E   W-A-T-C-H-I-N-G   Y-O-U   S-L-E-E-P"'''
+# test_voice_over(text_string=test_text, voice_name="onyx", fn="test_output_2")
+
+
+# test_text = '''It was a note, hastily written, its message clear and horrifying: "I    L - I - K - E     W - A - T - C - H - I - N - G     Y - O - U     S - L - E - E - P". 
+#     I stared at the note, my hands trembling as the words seemed to blur and swim in front of me. "I     L - I - K - E     W - A - T - C - H - I - N - G     Y - O - U     S - L - E - E - P"'''
+
+

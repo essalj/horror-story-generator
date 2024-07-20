@@ -157,57 +157,6 @@ def story_generator(
     # r = new_msg("What is the gender of the protagonist")
     # print(r)
 
-    t1_reddit_scary_stories = f'''
-        Reddit-Style Scary Story Generation Task
-
-        Objective: Create an intensely unsettling and psychologically terrifying story in the style of Reddit's popular scary stories. The story should feel authentic, as if recounted by someone who genuinely experienced the events.
-
-        Story Foundation:
-        - Realism: Ground the story in seemingly real-life situations that take a terrifying turn.
-        - Narrative Perspective: First-person, mimicking a personal recollection or confession on a Reddit post.
-        - Psychological Impact: Focus on the narrator's emotional and psychological state throughout the experience.
-        - Pacing: Build tension gradually, with a powerful climax and a lingering sense of unease.
-        - Ending: Craft a conclusion that leaves readers unsettled and questioning, as many real-life scary encounters often do.
-
-        Key Elements to Incorporate:
-        1. A compelling hook that immediately draws the reader in
-        2. Vivid, sensory descriptions that make the experience feel real
-        3. Subtle details that contribute to the overall sense of dread
-        4. Exploration of common fears or relatable situations gone wrong
-        5. Moments of escalating tension or near-misses
-        6. A climactic scene that pushes the boundaries of what feels "real" while remaining plausible
-
-        Inspirational Themes (Note: These are merely guidelines. Feel free to create your own unique concept):
-        1. Stalker encounters
-        2. Home invasions or unexplained occurrences at home
-        3. Creepy interactions with strangers
-        4. Unexplained phenomena
-        5. Near-miss situations or narrow escapes
-        6. Disturbing childhood memories
-        7. Urban exploration gone wrong
-        8. Workplace horror (especially during night shifts)
-        9. Online dating horrors
-        10. Camping or hiking incidents
-        11. Paranormal experiences
-        12. Creepy technology glitches
-
-        Remember: While these themes are common in Reddit scary stories, they are only meant as inspiration. You are encouraged to develop your own unique idea that captures the essence of a real, terrifying experience.
-
-        Task Execution:
-        1. Develop a Unique Story Concept: Create an original story idea that feels like it could be a real experience shared on Reddit. While you can draw inspiration from the themes above, your story should be distinctly your own.
-
-        2. Craft the Narrative Voice: Write in a first-person style that mimics the tone of someone sharing a true, personal story on Reddit. The voice should feel authentic and conversational.
-
-        3. Build Tension and Realism: Focus on creating a sense of mounting dread through realistic details and plausible circumstances. The horror should come from the situation itself and the narrator's growing fear.
-
-        4. Create Ambiguity: Leave some elements unexplained or open to interpretation, as many real-life scary encounters have unanswered questions.
-
-        5. Evaluation Criteria: Judge your story based on its ability to feel like a genuine, terrifying experience, its psychological impact, and its lingering effect on the reader.
-
-        Remember: The most effective Reddit-style scary stories often focus on the psychological impact of the experience rather than graphic details. The goal is to make the reader think, "This could happen to me," and leave them looking over their shoulder long after finishing the story.
-        '''
-
-
     t1_occultism = f'''
     **Template for Occultism Horror Story Creation**
 
@@ -556,8 +505,6 @@ def story_generator(
     '''
     
     match story_type.lower():
-        case "reddit":
-            t1 = t1_reddit_scary_stories    
         case "shifting":
             t1 = t1_shifting_reality
         case "tinder":
@@ -593,7 +540,7 @@ def story_generator(
     - Supporting Characters Profiles (up to 2): Identify up to two key supporting characters and provide a detailed description for each, following the same structure as for the protagonist. Ensure these characters have distinct appearances, attire, and personalities to complement the protagonist and contribute to the story's dynamics.
 
     24. Detailed Story Summary with a Compelling Hook
-    - Begin with a Compelling Hook: Start your story summary by crafting a powerful opening that immediately grabs the audience's attention. This could be a mysterious event, a chilling revelation, a provocative question, or a foreboding statement that hints at the horror to come. The hook should be closely tied to the core horror element of your story, setting the tone for the rest of the narrative.
+    - Begin with a Compelling Hook: Start your story summary by crafting a powerful opening that immediately grabs the audience's attention. This could be a mysterious event, a chilling revelation, a provocative question, or a foreboding statement that hints at the horror to come. The hook should be closely tied to the core horror element of your story, such as an unsettling encounter with Voodoo magic or a terrifying brush with dark forces, setting the tone for the rest of the narrative.
     - Introduction and Setup: Following the hook, describe the initial setting, introduce the protagonist and key supporting characters, and establish the story’s normal world before the main conflict begins. This part should build on the intrigue created by the hook, drawing the audience deeper into the story’s atmosphere.
     - Beginning, Middle, and End: Detail the progression of the story from the inciting incident through to the climax and resolution. Include how the characters’ relationships evolve, key events that escalate the conflict, settings that enhance the horror, and how the characters confront and ultimately resolve (or fail to resolve) their situation.
     - Character Development Arcs: Explain the protagonist's and key supporting characters’ growth or transformation throughout the story, influenced by their encounters with the supernatural or their journey into the dark aspects of Voodoo and magic.
@@ -607,13 +554,7 @@ def story_generator(
     r2 = new_msg(t2)
     print(r2)
 
-    limits = '''NEVER WRITE EDITORIAL STUFF LIKE "action beat" in the story.
-    IF something in the story is spelled out, see if you in any way can change the sentence and make it work without spelling it out.
-    IF you really have to spell it out do this:
-    - make sure to type it in quotation marks
-    - use a new line
-    - use capital letters spaces and lines between all letters and 5 spaces between words. 
-    - All this is to make narration slower . Example:\n   "E - L - I - A - S     I - S     H - E - R - E  " '''
+    limits = '''NEVER WRITE EDITORIAL STUFF LIKE "action beat" in the story.\n IF something in the story is spelled, make sure to type it with extra spaces and lines after all letters includinig the last letter. It is to make narration slower . example E  -  L  -  I  -  A  -  S  -  " '''
     s1 = new_msg(f'''Now write part 1 of the story covering a compelling hook and intro and actionbeat {beats_split[1]}. Output nothing but part 1 of the story. {limits}''') 
     # print(s1)
     s2 = new_msg(f'''Now write part 2 of the story covering actionbeat {beats_split[2]}. Output nothing but part 2 of the story. {limits}''') 
