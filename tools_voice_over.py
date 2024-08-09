@@ -157,4 +157,7 @@ def test_voice_over(text_string="testing", voice_name="onyx", fn="output"):
 # test_text = '''It was a note, hastily written, its message clear and horrifying: "I    L - I - K - E     W - A - T - C - H - I - N - G     Y - O - U     S - L - E - E - P". 
 #     I stared at the note, my hands trembling as the words seemed to blur and swim in front of me. "I     L - I - K - E     W - A - T - C - H - I - N - G     Y - O - U     S - L - E - E - P"'''
 
+# claude_test = open_file(r"C:\my\__youtube\videos\Horror_stories_test\claude_true-horror-story_1.md")
+# test_voice_over(text_string=claude_test, voice_name="onyx", fn="output_claude_true_reddit_1")
+
 

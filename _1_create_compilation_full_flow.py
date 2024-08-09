@@ -86,8 +86,8 @@ story_type = "Reddit" # controls the storygenerator functions
 genre = "True Reddit Scary Stories"
 user_input = ""
 optimized_search_phrases = "Scary Stories with Rain Sounds", "Creepy Reddit Stories for Sleep"
-general_seo_phrases = "scary stories to fall asleep", "ASMR rain", "reddit horror stories for bedtime"
-# ##########################
+general_seo_phrases = "scary stories for sleep", "ASMR rain", "reddit horror stories for bedtime"
+##########################
 
 # ###########################
 # # ############# ouija stories
@@ -97,7 +97,7 @@ general_seo_phrases = "scary stories to fall asleep", "ASMR rain", "reddit horro
 # genre = "Truly Scary Ouija Stories"
 # user_input = ""
 # optimized_search_phrases ="Scary Ouija Board Stories", "Ouija Board Horror Stories"
-# general_seo_phrases = "true horror stories","true scary stories", "reddit stories"
+# general_seo_phrases = "true horror stories","scary stories for sleep", "reddit stories"
 # # ##########################
 
 ###########################
@@ -149,7 +149,7 @@ def create_dated_folder(base_path, text_add_on):
 def list_folders(base_path, prefix):
     folders = [os.path.join(base_path, d) for d in os.listdir(base_path) if os.path.isdir(os.path.join(base_path, d)) and d.startswith(prefix)]
     return folders
-# folders = list_folders(base_path = "C:\\my\\__youtube\\videos",prefix = "2024-06-05")
+# folders = list_folders(base_path = "C:\\my\\__youtube\\videos",prefix = "2024-06-11")
 # for folder in folders:
 #     print(folder)
 
@@ -175,32 +175,9 @@ for j in range(1, num_stories + 1):
 story_paths = [item[0] for item in lStory] # list of story libraries 
 error_list = [item[1] for item in lStory] # error list from story_generator 
 
-# 20240710 story_paths = ['C:\my\__youtube\videos\2024-07-10_1320_True Reddit Scary Stories','C:\my\__youtube\videos\2024-07-10_1304_True Reddit Scary Stories','C:\\my\\__youtube\\videos\\2024-07-08_2202_True Reddit Scary Stories', 'C:\\my\\__youtube\\videos\\2024-07-08_2216_True Reddit Scary Stories', 'C:\\my\\__youtube\\videos\\2024-07-08_2229_True Reddit Scary Stories', 'C:\\my\\__youtube\\videos\\2024-07-08_2241_True Reddit Scary Stories']
 # lStory.append([r'C:\my\__youtube\videos\2024-03-14_1251_True Scary Tinder Dating Stories', []])
+# story_paths = [r'C:\\my\\__youtube\\videos\\2024-07-20_2243_Truly Scary Ouija Stories', r'C:\\my\\__youtube\\videos\\2024-07-20_2255_Truly Scary Ouija Stories']
 
-story_paths = [r'C:\my\__youtube\videos\2024-07-10_1320_True Reddit Scary Stories', 
-               r'C:\my\__youtube\videos\2024-07-10_1304_True Reddit Scary Stories',
-                r'C:\\my\\__youtube\\videos\\2024-07-08_2202_True Reddit Scary Stories', 
-                r'C:\my\__youtube\videos\2024-07-04_2042_Truly Scary Ouija Stories',
-                r'C:\\my\\__youtube\\videos\\2024-07-08_2216_True Reddit Scary Stories', 
-                r'C:\my\__youtube\videos\2024-06-05_1435_Truly Scary Shifting Reality and Parallel Universe Stories',
-                r'C:\my\__youtube\videos\2024-05-20_1414_Truly Scary tinder online dating Stories',
-                r'C:\my\__youtube\videos\2024-04-13_2159_Truly Scary Walmart Stories',
-                r'C:\\my\\__youtube\\videos\\2024-07-08_2229_True Reddit Scary Stories', 
-                r'C:\my\__youtube\videos\2024-05-20_1400_Truly Scary tinder online dating Stories',
-                r'C:\my\__youtube\videos\2024-04-13_2216_Truly Scary Walmart Stories',
-                r'C:\\my\\__youtube\\videos\\2024-07-08_2241_True Reddit Scary Stories',
-                r'C:\my\__youtube\videos\2024-07-04_2029_Truly Scary Ouija Stories',
-                r'C:\my\__youtube\videos\2024-07-04_2005_Truly Scary Ouija Stories',
-                r'C:\my\__youtube\videos\2024-06-05_1419_Truly Scary Shifting Reality and Parallel Universe Stories',
-                r'C:\my\__youtube\videos\2024-07-04_2018_Truly Scary Ouija Stories',
-                r'C:\my\__youtube\videos\2024-06-05_1401_Truly Scary Shifting Reality and Parallel Universe Stories',
-                r'C:\my\__youtube\videos\2024-06-05_1345_Truly Scary Shifting Reality and Parallel Universe Stories',
-                r'C:\my\__youtube\videos\2024-05-20_1346_Truly Scary tinder online dating Stories',
-                r'C:\my\__youtube\videos\2024-04-13_2231_Truly Scary Walmart Stories',
-                r'C:\my\__youtube\videos\2024-05-20_1332_Truly Scary tinder online dating Stories',
-                r'C:\my\__youtube\videos\2024-04-13_2142_Truly Scary Walmart Stories'
-                ]
 
 import pickle
 # pickle backup of story paths
@@ -221,19 +198,16 @@ save_file(path_desc, str(stories_str))
 
 
 ############## concat intro, incite_text  and stories ####
-# create intro mp4
-#create intro mp4 clip - creates the intro of the video - using an image from the folder xp_path
+# create intro mp4 clip - creates the intro of the video - using an image from the folder xp_path
 import tools_create_mp4_intro as tcmi
 tcmi.create_intro_mp4(gender='male', xp_path=xp_path, story = intro_speech, fn="000_intro"  )
 intro_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
 
+
 # #create incite text - incites listener to subscribe and buy me a cup of mocca
 incite_text = ".....If you've made it this far, the shadows have already begun to close in. Subscribe now to ensure you never miss a terrifying tale. And if you dare, hit the thanks button to buy me a cup of midnight brew. Your support keeps the nightmares flowing. Now, brace yourself for our next story... [pause]"
 incite_audio_clip = tcmi.create_voice_over(gender='male', xp_path = xp_path, story = incite_text, fn="002_incite_audio")
-# incite_audio_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
-# Create or specify a video to go with the incite audio
-incite_video_path = r"C:\my\__youtube\videos\_horror_effects\incite_coffee.mp4"  # Replace with actual path
-
+incite_video_path = r"C:\my\__youtube\videos\horror_effects\incite_coffee.mp4"  # Replace with actual path
 
 
 
@@ -245,11 +219,6 @@ mp4_clips =  intro_clip + file_paths
 
 print(mp4_clips)
 output_concat_mp4 = os.path.join(xp_path, "" + genre + ".mp4")
-
-# start_times = tcm.concatenate_videos(mp4_clips, output_concat_mp4)
-# start_times = tcm.concatenate_videos(mp4_clips, output_concat_mp4, end_sound_path=end_sound_path)
-
-
 
 
 # concatenate_videos(video_files, output_path, end_sound_path=None, incite_audio_path=None, incite_video_path=None, incite_position=2)

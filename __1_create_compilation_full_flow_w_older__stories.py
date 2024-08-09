@@ -4,6 +4,7 @@ from moviepy.editor import VideoFileClip, concatenate_videoclips
 import tools_create_mp4_intro as tcmi
 import tools_add_music_to_mp4 as am
 import tools_query_chatbot as tqc
+import tools_create_mp4 as tcm
 
 def open_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as infile:
@@ -82,13 +83,7 @@ def has_valid_clip(base_path, folder_name):
         print(f"Error processing {clip_path}: {e}")
         return False
 
-def concatenate_videos(video_files, output_path):
-    clips = [VideoFileClip(f) for f in video_files]
-    final_clip = concatenate_videoclips(clips)
-    final_clip.write_videofile(output_path)
-    final_clip.close()
-    for clip in clips:
-        clip.close()
+
 
 def main():
     # Configuration
@@ -96,6 +91,14 @@ def main():
     title_compilation = f"{genre} | Dark Tales with Rain Ambience for Sleep"
     optimized_search_phrases = ["Scary Stories with Rain Sounds", "Sleep Stories with Rain Sounds", "Creepy Reddit Stories for Sleep"]
     general_seo_phrases = ["Sleep Stories", "ASMR rain", "Bedtime Stories"]
+
+    # Define intro images for different genres
+    intro_images = {
+        "Scary Stories For Sleep": r"C:\my\__youtube\videos\horror_effects\intro - ScaryStoriesForSleep_2.png",
+        "True Reddit Scary Stories": r"C:\path\to\reddit_scary_intro.png",
+        "Truly Scary Ouija Stories": r"C:\path\to\ouija_scary_intro.png",
+        # Add more genres and their corresponding intro image paths as needed
+    }
 
     # Get user input for compilation length
     length_type = input("Select compilation length by 'time' or 'count': ").lower()
@@ -108,7 +111,6 @@ def main():
         return
 
     # Select story folders
-    # base_path = input("Enter the base path for existing stories: ")
     base_path = r'C:\my\__youtube\videos'
     selected_folders, total_duration = select_story_folders(base_path, compilation_length, length_type)
 
@@ -131,34 +133,45 @@ def main():
     xp_path_0 = r"C:\my\__youtube\videos"
     xp_path = create_dated_folder(xp_path_0, f"{genre}_compilation")
 
-    # Concatenate stories
-    stories_str = ""
-    mp4_clips = []
-    for path in story_paths:
-        story_file = os.path.join(path, "Stories - story 1.txt")
-        clip_file = os.path.join(path, "clip_1.mp4")
-        if os.path.exists(story_file):
-            stories_str += open_file(story_file) + "\n"
-        else:
-            print(f"Warning: Story file not found in {path}")
-        if os.path.exists(clip_file):
-            mp4_clips.append(clip_file)
-        else:
-            print(f"Warning: Clip file not found in {path}")
-
-    # Save concatenated stories
-    path_desc = os.path.join(xp_path, "stories_text.txt")
-    save_file(path_desc, stories_str)
+    # Get the intro image path for the current genre
+    intro_image_path = intro_images.get(genre)
+    if not intro_image_path or not os.path.exists(intro_image_path):
+        print(f"Warning: No intro image found for genre '{genre}'. Using default image.")
+        intro_image_path = r"C:\my\__youtube\videos\horror_effects\intro - ScaryStoriesDefault.png"  # Specify a default image path
 
     # Create intro
-    intro_speech = f'''Hello everyone, and welcome back to Horror Stories! Tonight is all about {genre}. ...'''
-    tcmi.create_intro_mp4(gender='male', xp_path=xp_path, story=intro_speech, fn="000_intro")
-    intro_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
+    # intro_speech = f'''Hello everyone, and welcome back to Horror Stories! Tonight is all about {genre}. ...'''
+    intro_speech = f'''Hello everyone, and welcome back to Horror Stories! Tonight is all about {genre}.  I know a lot of you use these videos to sleep so before you drift off into the world of darkness, share your unlucky number and the spooky story behind it! Is it 13, or does 666 give you the chills? We'd love to hear what number haunts you and why. And if you're enjoying our nightly journeys into the realm of darkness and horrors, don't forget to like and subscribe. It helps our haunted community grow and ensures you never miss a spine-tingling episode. Now, let's get comfy and relaxed as we begin tonight's tales. Grab your headphones for the best immersive experience, and if you're using this to sleep, sweet dreams... If you have an Ouija board nearby, maybe keep it closed... just in case! Stay tuned, and sleep tight... you never know what numbers might appear in your dreams tonight!'''
+    try:
+        tcmi.create_intro_mp4(gender='male', xp_path=xp_path, story=intro_speech, fn="000_intro", intro_image=intro_image_path)
+        intro_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
+    except Exception as e:
+        print(f"Error creating intro clip: {e}")
+        print("Proceeding without intro clip.")
+        intro_clip = []
+
+    # Create incite text
+    incite_text = "....If you've made it this far, the shadows have already begun to close in. Subscribe now to ensure you never miss a terrifying tale. And if you dare, hit the thanks button to buy me a cup of midnight brew. Your support keeps the nightmares flowing. Now, brace yourself for our next story... [pause]"
+    incite_audio_clip = tcmi.create_voice_over(gender='male', xp_path=xp_path, story=incite_text, fn="002_incite_audio")
+    incite_video_path = r"C:\my\__youtube\videos\horror_effects\incite_coffee.mp4"  # Replace with actual path
+
+    # Prepare video clips
+    mp4_clips = intro_clip + [os.path.join(path, "clip_1.mp4") for path in story_paths]
 
     # Concatenate videos
-    mp4_clips = intro_clip + mp4_clips
     output_concat_mp4 = os.path.join(xp_path, f"{genre}.mp4")
-    concatenate_videos(mp4_clips, output_concat_mp4)
+    end_sound_path = r"C:\my\__youtube\videos\horror_effects\Cartoon Cowbell.mp3"  # Replace with actual path if you have an end sound
+
+    start_times = tcm.concatenate_videos(
+        mp4_clips, 
+        output_concat_mp4, 
+        end_sound_path,
+        incite_audio_path=incite_audio_clip,
+        incite_video_path=incite_video_path,
+        incite_position=2  # This will insert after the first story
+    )
+
+    start_times_str = "Stories " + " ".join(start_times)  # to insert in top of desc
 
     # Add music
     output_final_mp4_music = os.path.join(xp_path, f"{genre}_music.mp4")
@@ -170,14 +183,14 @@ def main():
     )
 
     # Add rain
-    am.add_rain_to_video(video_file_path=output_concat_mp4, music_volume=0.28)
+    am.add_rain_to_video(video_file_path=output_concat_mp4, music_volume=0.22)
 
     # Create description
     desc_stories = ""
-    for path in story_paths:
+    for i, path in enumerate(story_paths, 1):
         desc_file = os.path.join(path, "Stories - desc_ 1.txt")
         if os.path.exists(desc_file):
-            desc_stories += open_file(desc_file) + "------------------\n"
+            desc_stories += f"Chapter {i}: " + open_file(desc_file) + "------------------\n"
         else:
             print(f"Warning: Description file not found in {path}")
 
@@ -190,9 +203,14 @@ def main():
     5. Output only the final and latest optimized description.\n------------'''
 
     desc = tqc.chatgpt(userinput, system_role=system_role, model="gpt-4")
+    
+    # Add start times to the description
+    final_desc = start_times_str + "\n\n" + desc
+    
     path_desc = os.path.join(xp_path, "desc.txt")
-    save_file(path_desc, desc)
-    print(desc)
+    save_file(path_desc, final_desc)
+    print(final_desc)
 
 if __name__ == "__main__":
     main()
+

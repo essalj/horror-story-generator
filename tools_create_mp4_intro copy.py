@@ -47,38 +47,22 @@ def create_mp4(output_mp4, image_files, audio_file):
 # output_final_mp4 = os.path.join(xp_path, "clip_0_intro.mp4")
 # create_mp4(output_mp4 = output_final_mp4)
 
-# In tools_create_mp4_intro.py
 
-
-# def create_intro_mp4(gender='male', xp_path="", story = "Horror stories that will haunt you.", fn="000_intro"  ):
-#     audio_file = create_voice_over(gender=gender, xp_path = xp_path, story = story, fn=fn)
+def create_intro_mp4(gender='male', xp_path="", story = "Horror stories that will haunt you.", fn="000_intro"  ):
+    audio_file = create_voice_over(gender=gender, xp_path = xp_path, story = story, fn=fn)
     
-#     image_files = [os.path.join(xp_path, file) for file in os.listdir(xp_path) if file.endswith(".png")]
-#     # if there is no png files then return error
-#     if not image_files:
-#         print("No png files for introfound in " + xp_path)
-#         return
+    image_files = [os.path.join(xp_path, file) for file in os.listdir(xp_path) if file.endswith(".png")]
+    # if there is no png files then return error
+    if not image_files:
+        print("No png files for introfound in " + xp_path)
+        return
         
-#     # image_file = [image_files[0]]
-#     output_final_mp4 = os.path.join(xp_path, "clip_0_intro.mp4")
-    
-#     create_mp4(output_mp4 = output_final_mp4, image_files=image_files, audio_file=audio_file)
-
-
-def create_intro_mp4(gender='male', xp_path="", story="Horror stories that will haunt you.", fn="000_intro", intro_image=None):
-    audio_file = create_voice_over(gender=gender, xp_path=xp_path, story=story, fn=fn)
-    
-    if intro_image and os.path.exists(intro_image):
-        image_files = [intro_image]
-    else:
-        image_files = [os.path.join(xp_path, file) for file in os.listdir(xp_path) if file.endswith(".png")]
-        if not image_files:
-            print("No png files for intro found in " + xp_path)
-            return
-    
+    # image_file = [image_files[0]]
     output_final_mp4 = os.path.join(xp_path, "clip_0_intro.mp4")
     
-    create_mp4(output_mp4=output_final_mp4, image_files=image_files, audio_file=audio_file)
+    create_mp4(output_mp4 = output_final_mp4, image_files=image_files, audio_file=audio_file)
+
+
 # create_intro_mp4(gender='male', xp_path=xp_path, story = "3 Scary Walmart stories that will haunt you. Volume 2", fn="000_intro"  )
 
 
