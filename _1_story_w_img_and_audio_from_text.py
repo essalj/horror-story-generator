@@ -70,7 +70,7 @@ client = OpenAI(api_key=openai_api_key)
 ###############
 # Definitions
 ###############
-fn = "AirBNB stories"  #file name
+fn = "input stories"  #file name
 # chapter_count = 3 # number of stories
 action_beats_count = 6
 break_line = "\n" + 50*"-" + "\n"
@@ -125,16 +125,16 @@ def json_extract_keyword(json, keyword):
 ##############
 # Read story
 ##############
+story = open_file(r"C:\my\__youtube\videos\Horror_stories_test\claude_true-horror-story_1.md")
 story_no = 1
 sel_voice = "onyx"   # "shimmer"=female "onyx"=male
-story = open_file("gpt_story 2.txt") 
 
 path_story = os.path.join(xp_path, fn + " - story " + str(story_no) + ".txt")
 save_file(path_story, story)
 
 task_img_prompts_from_story = '''
 1. Read the story.
-2. create an image prompt describing in positive phrases the Airbnb residence.
+2. create an image prompt for a front page image to the story.
 3. Insert it in a new json structure with the coloumn names ["image_no", "image_prompt"]. Assign it to "image_no" 0.
 4. Break down the full story into scenes and create an image prompt describing each scene. 
 5. Numerate them in "image_no" starting with 1 and insert the image prompts in the existing json structure with the 
