@@ -526,33 +526,28 @@ def story_generator(
     '''
 
     t1_shifting_reality = '''
-    Parallel Universe Horror Story Generation Task
-    Objective: Create an intensely scary parallel universe horror story.
-    Story Foundation:
-    • A gripping hook that reels the listener in
-    • Central Theme: An unsettling experience with shifting into a parallel universe. Explore the eerie atmosphere, the dynamics of the new reality, and the protagonist's struggle to understand their situation.
-    • Psychological and Supernatural Elements: Combine psychological terror with the consequences of existing in an alternate reality. Characters face fears, unexpected truths, and the aftermath of their actions.
-    • First-Person Recollection: Narrate as a personal memory, mimicking the authentic accounts found in Reddit's true horror stories for realism and impact.
-    • Climax and Revelation: Include a revelation or twist that changes the narrator’s understanding, such as discovering the parallel universe's dark secrets or realizing they can't return to their original reality.
+    # Glitch in the Matrix Story Generation Task
 
-    Inspiration & Story Ideas in no paricular order:
-    - Captured on thee other side: A man wakes up in a paralelle world yhat he really loves. Gets back to his original reality and misses the alternative world  immensely 
-    - The Other Side of the Mirror: A man accidentally steps through a mirror and finds himself in a subtly altered version of his home. As he tries to navigate this world, he discovers his doppelgänger plotting to replace him.
-    - The Silent Town: A woman wakes up in a town where everything is eerily silent and slightly different. She must uncover the town's secret while avoiding the watchful eyes of its sinister inhabitants.
-    - The Looping Day: A teenager group finds themselves reliving the same day, each time with minor and increasingly disturbing changes. They must figure out how to break the loop before it consumes their sanity.
-    - The Perfect Stranger: A man meets a seemingly perfect version of his spouse in a parallel universe, only to find out they have a dark and horrifying agenda.
-    - The Hidden Corridor: A group of friends discovers a hidden corridor in their school that leads to an alternate version of the building, filled with nightmarish versions of their classmates.
-    - The Vanished Family: A woman returns home to find her family replaced by eerily perfect replicas. She must uncover the truth and find a way back to her real family.
-    - The Time-Lost Room: A man finds a room in his house that transports him to a different era with subtle but terrifying differences. He must navigate this world and find a way back before he becomes trapped.
-    - The Doppelgänger’s Intent: A person keeps encountering their exact double, who seems intent on replacing them. The protagonist must uncover the double's plan and find a way to stop it.
-    - The Alien Landscape: A group of friends stumbles into a parallel world with bizarre and dangerous flora and fauna. They must survive and find a way back home.
-    - The Whispering Shadows: A teenager finds themselves in a world where shadows seem to whisper and move on their own. They must uncover the shadows' secrets and find a way back to their own reality.
+    Objective: Create an unsettling and psychologically intense "glitch in the matrix" story.
+
+    Story Foundation:
+    -Central Theme: Waking up to a subtly altered reality. Explore the disorienting atmosphere, the protagonist's growing unease, and their struggle to understand the changes.
+    -Psychological and Reality-Bending Elements: Combine psychological horror with the consequences of experiencing a shifted reality. Characters face self-doubt, unexplained changes in their environment or relationships, and the aftermath of their attempts to reconcile their memories with the new reality.
+    -First-Person Recollection: Narrate as a personal memory, mimicking the authentic accounts found in Reddit's true glitch stories for realism and impact.
+    -Climax and Revelation: Include a revelation or twist that deepens the protagonist's confusion or forces them to confront the true nature of their situation, like discovering a major historical event never happened or realizing they have a different identity in this new reality.
+
+    Inspiration & Story Ideas:
+    1. The Vanishing Spouse: Waking up to find your partner of many years never existed in this reality, with all evidence of your life together gone.
+    2. The Career Shift: Discovering you have a completely different job and skill set, with everyone acting as if it's always been this way.
+    3. The Linguistic Leap: Suddenly understanding a language you never learned, leading to uncovering a hidden past in this new reality.
+    4. The Family Rewrite: Finding your family dynamics and history dramatically altered, forcing you to navigate relationships with essentially strangers.
+    5. The Geographical Glitch: Waking up in a familiar home, but in a completely different city or country, with no explanation for the change.
 
     Task Execution:
-    1. Choose Your Narrative Lens: Opt for a first-person narrative to deepen the story's immersive quality.
-    2. Develop the Story Pitch: Drawing inspiration from above story ideas - craft a pitch that encapsulates the essence of a parallel universe encounter, focusing on psychological depth and supernatural aspects.
-    3. Inspiration Utilization: Draw from the provided story ideas, blend them, or use original concepts. The goal is to create a pitch that's authentic, engaging, and frightening.
-    4. Evaluation Criteria: Judge your pitch based on its portrayal of a parallel universe horror story, its integration of psychological and supernatural elements, and its potential to elicit fear.
+    1. Choose Your Narrative Lens: Opt for a first-person narrative to deepen the story's immersive quality and convey the protagonist's confusion and disorientation.
+    2. Develop the Story Pitch: Craft a pitch that encapsulates the essence of a "glitch in the matrix" experience, focusing on psychological depth and reality-bending aspects.
+    3. Inspiration Utilization: Draw from the provided story ideas, blend them, or use original concepts. The goal is to create a pitch that's authentic, engaging, and psychologically unsettling.
+    4. Evaluation Criteria: Judge your pitch based on its portrayal of a "glitch in the matrix" scenario, its integration of psychological horror and reality shifts, and its potential to make readers question their own reality.    
     '''
     
     match story_type.lower():
@@ -693,23 +688,23 @@ def story_generator(
     # image_files = [os.path.join(xp_path, file) for file in os.listdir(xp_path) if file.endswith(".png")]
 
     #create thumbnail
-    def create_thumbnail(user_input = ""):
-        path_img = os.path.join(xp_path, fn + " - thumbnail_")
-        query = '''Use your talents as digital artist to create a detailed image prompt for a thumbnail to this story on youtube,
-                ''' + user_input + '''
-                Make sure the prompt complies with OpenAIs policy for image generation. Do not mention any brands.'''
-        img_prompt = new_msg(query)
-        try:
-            image_url, filename = tci.chatgpt_dalle(prompt = img_prompt, fn= path_img, i=100)
-        except:
-            try:
-                img_prompt = new_msg(f"This prompt was declined by Dall-e. Please rephrase it  carefully: {img_prompt}")
-                image_url, filename = tci.chatgpt_dalle(prompt = img_prompt, fn= path_img, i=100)
-            except:
-                error_list.append("Error in function create_thumbnail()")
+    # def create_thumbnail(user_input = ""):
+    #     path_img = os.path.join(xp_path, fn + " - thumbnail_")
+    #     query = '''Use your talents as digital artist to create a detailed image prompt for a thumbnail to this story on youtube,
+    #             ''' + user_input + '''
+    #             Make sure the prompt complies with OpenAIs policy for image generation. Do not mention any brands.'''
+    #     img_prompt = new_msg(query)
+    #     try:
+    #         image_url, filename = tci.chatgpt_dalle(prompt = img_prompt, fn= path_img, i=100)
+    #     except:
+    #         try:
+    #             img_prompt = new_msg(f"This prompt was declined by Dall-e. Please rephrase it  carefully: {img_prompt}")
+    #             image_url, filename = tci.chatgpt_dalle(prompt = img_prompt, fn= path_img, i=100)
+    #         except:
+    #             error_list.append("Error in function create_thumbnail()")
 
-    create_thumbnail("")
-    # create_thumbnail("Portrait the house the story is happening in")
+    # create_thumbnail("")
+    # # create_thumbnail("Portrait the house the story is happening in")
 
     ####################
     # Create voice over

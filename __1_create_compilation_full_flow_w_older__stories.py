@@ -88,13 +88,13 @@ def has_valid_clip(base_path, folder_name):
 def main():
     # Configuration
     genre = "Scary Stories For Sleep"
-    title_compilation = f"{genre} | Dark Tales with Rain Ambience for Sleep"
-    optimized_search_phrases = ["Scary Stories with Rain Sounds", "Sleep Stories with Rain Sounds", "Creepy Reddit Stories for Sleep"]
-    general_seo_phrases = ["Sleep Stories", "ASMR rain", "Bedtime Stories"]
+    title_compilation = f"{genre} with Rain Sounds | True Horror Stories | Fall Asleep Quick"
+    optimized_search_phrases = ["Scary Stories with Rain Sounds", "Sleep Stories with Rain Sounds", "Fall Asleep Quick"]
+    general_seo_phrases = ["Sleep Stories", "ASMR rain", "Horror Stories"]
 
     # Define intro images for different genres
     intro_images = {
-        "Scary Stories For Sleep": r"C:\my\__youtube\videos\horror_effects\intro - ScaryStoriesForSleep_2.png",
+        "Scary Stories For Sleep": r"C:\my\__youtube\videos\horror_effects\intro - ScaryStoriesForSleep_5.png",
         "True Reddit Scary Stories": r"C:\path\to\reddit_scary_intro.png",
         "Truly Scary Ouija Stories": r"C:\path\to\ouija_scary_intro.png",
         # Add more genres and their corresponding intro image paths as needed
@@ -110,10 +110,14 @@ def main():
         print("Invalid selection. Exiting.")
         return
 
+
     # Select story folders
     base_path = r'C:\my\__youtube\videos'
     selected_folders, total_duration = select_story_folders(base_path, compilation_length, length_type)
 
+    # print(selected_folders)
+    # selected_folders = ['2024-08-17_1835_Truly Scary Shifting Reality and Parallel Universe Stories', '2024-07-04_1609_Truly Scary Ouija Stories', '2024-08-17_1849_Truly Scary Shifting Reality and Parallel Universe Stories', '2024-07-08_2147_True Reddit Scary Stories', '2024-08-17_1902_Truly Scary Shifting Reality and Parallel Universe Stories', '2024-08-05_2039_True Reddit Scary Stories', '2024-08-05_2054_True Reddit Scary Stories', '2024-07-20_2243_Truly Scary Ouija Stories', '2024-07-20_2307_Truly Scary Ouija Stories', '2024-07-20_2331_Truly Scary Ouija Stories', '2024-07-10_1304_True Reddit Scary Stories',  '2024-07-08_2202_True Reddit Scary Stories', '2024-07-08_2216_True Reddit Scary Stories', '2024-07-08_2241_True Reddit Scary Stories', '2024-07-04_2005_Truly Scary Ouija Stories', '2024-07-04_2018_Truly Scary Ouija Stories']
+ 
     # Present selected folders for validation
     print("\nSelected folders:")
     for i, folder in enumerate(selected_folders, 1):
@@ -126,8 +130,12 @@ def main():
         print("Operation cancelled. Exiting.")
         return
 
+
     # Create full paths for selected folders
+    import random
+    # random.shuffle(selected_folders)     # randomize order in selected_folders
     story_paths = [os.path.join(base_path, folder) for folder in selected_folders]
+
 
     # Create output folder
     xp_path_0 = r"C:\my\__youtube\videos"
@@ -141,7 +149,10 @@ def main():
 
     # Create intro
     # intro_speech = f'''Hello everyone, and welcome back to Horror Stories! Tonight is all about {genre}. ...'''
-    intro_speech = f'''Hello everyone, and welcome back to Horror Stories! Tonight is all about {genre}.  I know a lot of you use these videos to sleep so before you drift off into the world of darkness, share your unlucky number and the spooky story behind it! Is it 13, or does 666 give you the chills? We'd love to hear what number haunts you and why. And if you're enjoying our nightly journeys into the realm of darkness and horrors, don't forget to like and subscribe. It helps our haunted community grow and ensures you never miss a spine-tingling episode. Now, let's get comfy and relaxed as we begin tonight's tales. Grab your headphones for the best immersive experience, and if you're using this to sleep, sweet dreams... If you have an Ouija board nearby, maybe keep it closed... just in case! Stay tuned, and sleep tight... you never know what numbers might appear in your dreams tonight!'''
+    intro_speech = f'''Welcome back to Horror Stories. Tonight's {genre} edition is tailor-made for those of you who use our tales as a dark lullaby. We're pleased to be your eerie sleep companion as you drift off to our whispers in the night.
+    Before you close your eyes, we're curious: **What's your cursed number, and why does it haunt you?** Last week's responses were intriguing. Think you can top them? Share your numerical nightmares in the comments.
+    For the full immersive experience, grab your headphones. As you settle in, remember: our stories might just follow you into your dreams...
+    If you're enjoying our nocturnal narratives, don't forget to like and subscribe. Your support ensures you never miss a terrifying bedtime story. Now, get comfy and prepare yourself. In the world of our stories, the line between sleep and waking nightmares is frighteningly thin. Sweet dreams, if you can manage them... and may your unlucky number stay far from tonight's horrors.'''
     try:
         tcmi.create_intro_mp4(gender='male', xp_path=xp_path, story=intro_speech, fn="000_intro", intro_image=intro_image_path)
         intro_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
@@ -157,10 +168,11 @@ def main():
 
     # Prepare video clips
     mp4_clips = intro_clip + [os.path.join(path, "clip_1.mp4") for path in story_paths]
-
+    print(mp4_clips)
     # Concatenate videos
     output_concat_mp4 = os.path.join(xp_path, f"{genre}.mp4")
     end_sound_path = r"C:\my\__youtube\videos\horror_effects\Cartoon Cowbell.mp3"  # Replace with actual path if you have an end sound
+
 
     start_times = tcm.concatenate_videos(
         mp4_clips, 
@@ -173,17 +185,28 @@ def main():
 
     start_times_str = "Stories " + " ".join(start_times)  # to insert in top of desc
 
+    import pickle
+    # pickle backup of story paths
+    path_pickl_list = os.path.join(xp_path, "list_paths.pkl")
+    with open(path_pickl_list, 'wb') as file:
+        # Serializing and saving lists
+        pickle.dump((mp4_clips, start_times_str), file)
+
+
+
+    # Add rain
+    am.add_rain_to_video(video_file_path=output_concat_mp4, music_volume=0.2)
+
+    
     # Add music
     output_final_mp4_music = os.path.join(xp_path, f"{genre}_music.mp4")
     am.add_ambient_music_to_video(
         video_file_path=output_concat_mp4,
-        music_folder_path=r'C:\my\__youtube\videos\horror_music',
+        music_folder_path=r'C:\my\__youtube\videos\horror_music\composed in suno',
         output_file_path=output_final_mp4_music,
         music_volume=0.03
     )
 
-    # Add rain
-    am.add_rain_to_video(video_file_path=output_concat_mp4, music_volume=0.22)
 
     # Create description
     desc_stories = ""
@@ -194,15 +217,16 @@ def main():
         else:
             print(f"Warning: Description file not found in {path}")
 
+    
     system_role = "You are a helpful assistant and a worldclass writer of seo optimized descriptions for youtube"
     userinput = f'''1. Create a seo and youtube search optimized description to youtube for this compilation of {genre} Horror Stories. \nDescription of the individual stories: {desc_stories}. \nUse mark down and emojies. 
     I want you to optimize in order to rank #1 on google for these phrases: {optimized_search_phrases}. 
     2. Go thru the description line by line and note what to optimize in order to rank #1 on google for these phrases: {optimized_search_phrases}. Rewrite it and implement the changes.
-    3. Go thru the desc again line by line and make sure to use these search phrases at least 10 times each in the desc: {optimized_search_phrases}.  If not then add  some text to implement it where it makes sense.
+    3. Go thru the desc again line by line and make sure to use these search phrases at least 2 times each in the desc: {optimized_search_phrases}.  If not then add  some text to implement it where it makes sense.
     4. Go through the text and edit it shorter than 5000 chars.
     5. Output only the final and latest optimized description.\n------------'''
 
-    desc = tqc.chatgpt(userinput, system_role=system_role, model="gpt-4")
+    desc = tqc.chatgpt(userinput, system_role=system_role, model="gpt-4o")
     
     # Add start times to the description
     final_desc = start_times_str + "\n\n" + desc

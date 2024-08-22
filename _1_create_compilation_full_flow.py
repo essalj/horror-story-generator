@@ -8,16 +8,27 @@ import _1_short_story_gen_assistants as story_gen
 
 # ##########################
 # ##### Shifting Reality Stories
-# title_compilation = "TRUE Scary Shifting Reality Stories"
-# num_stories = 12
-# story_type = "shifting"  # controls the storygenerator functions
-# genre = "Truly Scary Shifting Reality and Parallel Universe Stories"
-# user_input = ""
-# optimized_search_phrases = "Scary Shifting Reality Stories", "Parallel Universe Horror Stories"
-# general_seo_phrases = "true horror stories", "true scary stories", "reddit stories"
+title_compilation = "TRUE Scary Shifting Reality Stories"
+num_stories = 3
+story_type = "shifting"  # controls the storygenerator functions
+genre = "Truly Scary Shifting Reality and Parallel Universe Stories"
+user_input = ""
+optimized_search_phrases = "Shifting Reality Stories", "Parallel Universe Horror Stories"
+general_seo_phrases = "true horror stories", "true scary stories", "reddit stories"
+general_seo_phrases = "Scary Stories with Rain Sounds for sleep", "Scary Stories with Rain Sounds to fall sleep quick"
 # ##########################
 
 
+# ###########################
+# ############# Reddit scary stories
+# title_compilation = "TRUE Scary Stories From Reddit | Dark Tales with Rain Ambience for Sleep"
+# num_stories = 3
+# story_type = "Reddit" # controls the storygenerator functions
+# genre = "True Reddit Scary Stories"
+# user_input = ""
+# optimized_search_phrases = "Scary Stories with Rain Sounds", "Creepy Reddit Stories for Sleep"
+# general_seo_phrases = "scary stories for sleep", "ASMR rain", "horror stories for sleep"
+##########################
 
 ###########################
 # ############# walmart stories
@@ -78,16 +89,16 @@ import _1_short_story_gen_assistants as story_gen
 # general_seo_phrases = "asian horror stories","true scary stories", "reddit stories"
 ############################
 
-# ###########################
-# ############# Reddit scary stories
-title_compilation = "TRUE Scary Stories From Reddit | Dark Tales with Rain Ambience for Sleep"
-num_stories = 3
-story_type = "Reddit" # controls the storygenerator functions
-genre = "True Reddit Scary Stories"
-user_input = ""
-optimized_search_phrases = "Scary Stories with Rain Sounds", "Creepy Reddit Stories for Sleep"
-general_seo_phrases = "scary stories for sleep", "ASMR rain", "reddit horror stories for bedtime"
-##########################
+# # ###########################
+# # ############# Reddit scary stories
+# title_compilation = "TRUE Scary Stories From Reddit | Dark Tales with Rain Ambience for Sleep"
+# num_stories = 3
+# story_type = "Reddit" # controls the storygenerator functions
+# genre = "True Reddit Scary Stories"
+# user_input = ""
+# optimized_search_phrases = "Scary Stories with Rain Sounds", "Creepy Reddit Stories for Sleep"
+# general_seo_phrases = "scary stories for sleep", "ASMR rain", "horror stories for sleep"
+# ##########################
 
 # ###########################
 # # ############# ouija stories

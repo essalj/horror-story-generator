@@ -70,7 +70,7 @@ def split_text(text, max_length=4096):
 from moviepy.editor import AudioFileClip, concatenate_audioclips
 
 
-def text2mp3(text_string="testing", voice_name="onyx", fn="output"):
+def text2mp3(text_string="testing", model="tts-1", voice_name="onyx", fn="output"):
     text_string = "   " + text_string
     if len(text_string) <= 4096:
         # Process the entire text if it's shorter than 4096 characters
@@ -121,7 +121,7 @@ def text2mp3(text_string="testing", voice_name="onyx", fn="output"):
 
 # write a function where i can test how the voice is working with different inputs. Output the mp3 file
 # in this folder: "C:\my\__youtube\videos\Horror_stories_test"
-def test_voice_over(text_string="testing", voice_name="onyx", fn="output"):
+def test_voice_over(text_string="testing", model="tts-1", voice_name="onyx", fn="output"):
     """
     Tests the voice-over functionality with the given text, voice name, and output filename.
 
@@ -157,7 +157,29 @@ def test_voice_over(text_string="testing", voice_name="onyx", fn="output"):
 # test_text = '''It was a note, hastily written, its message clear and horrifying: "I    L - I - K - E     W - A - T - C - H - I - N - G     Y - O - U     S - L - E - E - P". 
 #     I stared at the note, my hands trembling as the words seemed to blur and swim in front of me. "I     L - I - K - E     W - A - T - C - H - I - N - G     Y - O - U     S - L - E - E - P"'''
 
-# claude_test = open_file(r"C:\my\__youtube\videos\Horror_stories_test\claude_true-horror-story_1.md")
-# test_voice_over(text_string=claude_test, voice_name="onyx", fn="output_claude_true_reddit_1")
+# claude_test = open_file(r"C:\my\__youtube\videos\Horror_stories_test\claude_20240817_glitch-in-the-matrix-story.md")
+# test_voice_over(text_string=claude_test, voice_name="onyx", fn="output_claude_glitch-in-the-matrix-story_20220817-1")
+
+# claude_test = open_file(r"C:\my\__youtube\videos\Horror_stories_test\claude_20240817_glitch-in-the-matrix-story.md")
+
+# test_voice_over(text_string=claude_test, model="tts-1-hd, voice_name="onyx", fn="output_claude_glitch-in-the-matrix-story_20220817-1")
 
 
+# def test_grp_of_voices():
+#     voices = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]  # Ensure these are lowercase
+#     models = ["tts-1", "tts-1-hd"]
+    
+#     base_text_string = "I've always prided myself on my rationality. As a psychology major, I was trained to seek logical explanations for the seemingly inexplicable. But after what happened that night at my Aunt Evelyn's house, I'm no longer certain of anything – least of all my own mind."
+    
+#     sentences = re.split(r'(?<=[.!?])\s+', base_text_string)
+#     base_text_to_process = ' '.join(sentences[:2])
+    
+#     file_paths = defaultdict(list)
+    
+#     for model in models:
+#         for voice in voices:
+#             intro_sentence = f"I am {voice} model {model}. "
+#             text_to_process = intro_sentence + base_text_to_process
+#             fn = f"output_{voice}_{model.replace('-', '_')}"
+#             file_path = test_voice_over(text_string=text_to_process, model=model, voice_name=voice, fn=fn)
+#             file_paths[voice].append(file_path)
