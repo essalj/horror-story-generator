@@ -1,5 +1,6 @@
 from moviepy.editor import *
 from moviepy.audio.AudioClip import AudioArrayClip
+# from moviepy.editor import ColorClip, VideoFileClip
 import numpy as np
 from moviepy.editor import VideoFileClip, concatenate_videoclips
 import time
@@ -15,6 +16,7 @@ def add_silence_to_audio(original_audio_clip, silence_duration=2.0):
     silent_array = np.zeros((int(silence_duration * 44100), 2))  # 44100 samples/sec, 2 channels for stereo
     silent_clip = AudioArrayClip(silent_array, fps=44100)
     return concatenate_audioclips([original_audio_clip, silent_clip])
+
 
 
 # usecase: add chime in end of story... add incite to coffe and subscribe in end of story 1
@@ -156,4 +158,33 @@ def concatenate_videos(video_files, output_path, end_sound_path=None, incite_aud
     
     print("Stories " + " ".join(start_times))
     return start_times
+
+
+
+def create_black_screen_video(duration_seconds, output_filename="black_screen_video.mp4"):
+    """
+    Create a black screen video with specified duration.
+    
+    :param duration_seconds: Duration of the video in seconds
+    :param output_filename: Name of the output file (default: "black_screen_video.mp4")
+    :return: None
+    """
+    # Set video parameters
+    width, height = 1920, 1080  # 1080p resolution
+    fps = 30
+
+    # Create a black screen clip
+    black_screen = ColorClip(size=(width, height), color=(0, 0, 0), duration=duration_seconds)
+
+    # Write the video file
+    black_screen.write_videofile(output_filename, fps=fps, codec='libx264')
+
+    # Verify the created video
+    created_video = VideoFileClip(output_filename)
+    print(f"Video duration: {created_video.duration} seconds")
+    print(f"Video resolution: {created_video.w}x{created_video.h}")
+    print(f"Video fps: {created_video.fps}")
+
+    # create_black_screen_video(600, "black_screen_10min_1080p.mp4")
+
 

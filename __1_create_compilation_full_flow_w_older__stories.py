@@ -78,7 +78,7 @@ def has_valid_clip(base_path, folder_name):
     
     try:
         with VideoFileClip(clip_path) as clip:
-            return clip.duration > 420  # 7 minutes = 420 seconds
+            return clip.duration > 360  # 6 minutes
     except Exception as e:
         print(f"Error processing {clip_path}: {e}")
         return False
@@ -94,21 +94,23 @@ def main():
 
     # Define intro images for different genres
     intro_images = {
-        "Scary Stories For Sleep": r"C:\my\__youtube\videos\horror_effects\intro - ScaryStoriesForSleep_5.png",
+        "Scary Stories For Sleep": r"C:\my\__youtube\videos\horror_effects\intro - ScaryStoriesForSleep_7.png",
         "True Reddit Scary Stories": r"C:\path\to\reddit_scary_intro.png",
         "Truly Scary Ouija Stories": r"C:\path\to\ouija_scary_intro.png",
         # Add more genres and their corresponding intro image paths as needed
     }
 
-    # Get user input for compilation length
-    length_type = input("Select compilation length by 'time' or 'count': ").lower()
-    if length_type == 'time':
-        compilation_length = int(input("Enter desired compilation length in minutes: "))
-    elif length_type == 'count':
-        compilation_length = int(input("Enter desired number of stories: "))
-    else:
-        print("Invalid selection. Exiting.")
-        return
+    # # Get user input for compilation length
+    length_type = 'time'
+    compilation_length = 213 #213*60+33
+    # length_type = input("Select compilation length by 'time' or 'count': ").lower()
+    # if length_type == 'time':
+    #     compilation_length = int(input("Enter desired compilation length in minutes: "))
+    # elif length_type == 'count':
+    #     compilation_length = int(input("Enter desired number of stories: "))
+    # else:
+    #     print("Invalid selection. Exiting.")
+    #     return
 
 
     # Select story folders
@@ -123,6 +125,26 @@ def main():
     for i, folder in enumerate(selected_folders, 1):
         print(f"{i}. {folder}")
     print(f"\nTotal duration: {total_duration/60:.2f} minutes")
+
+    # selected_folders = [
+    #     '2024-08-19_1102_Truly Scary Shifting Reality and Parallel Universe Stories',
+    #     '2024-08-19_1725_ouija Scary Stories +',
+    #     '2024-08-19_1703_True Reddit Scary Stories +',
+    #     '2024-08-19_1709_True Reddit Scary Stories +',
+    #     '2024-08-19_1712_True Reddit Scary Stories +',
+    #     '2024-08-19_1726_ouija Scary Stories +',
+    #     '2024-08-17_1835_Truly Scary Shifting Reality and Parallel Universe Stories',
+    #     '2024-08-19_1706_True Reddit Scary Stories+',
+    #     '2024-08-17_1849_Truly Scary Shifting Reality and Parallel Universe Stories',
+    #     '2024-08-17_1902_Truly Scary Shifting Reality and Parallel Universe Stories',
+    #     '2024-07-20_2243_Truly Scary Ouija Stories',
+    #     '2024-08-05_2039_True Reddit Scary Stories',
+    #     '2024-08-05_2054_True Reddit Scary Stories',
+    #     '2024-07-20_2307_Truly Scary Ouija Stories',
+    #     '2024-08-19_1714_ouija_Scary Stories+',
+    #     '2024-07-20_2331_Truly Scary Ouija Stories',
+    #     '2024-07-10_1304_True Reddit Scary Stories'
+    #     ]
 
     # Ask for confirmation
     confirmation = input("\nDo you want to proceed with these folders? (yes/no): ").lower()
@@ -149,10 +171,22 @@ def main():
 
     # Create intro
     # intro_speech = f'''Hello everyone, and welcome back to Horror Stories! Tonight is all about {genre}. ...'''
-    intro_speech = f'''Welcome back to Horror Stories. Tonight's {genre} edition is tailor-made for those of you who use our tales as a dark lullaby. We're pleased to be your eerie sleep companion as you drift off to our whispers in the night.
-    Before you close your eyes, we're curious: **What's your cursed number, and why does it haunt you?** Last week's responses were intriguing. Think you can top them? Share your numerical nightmares in the comments.
-    For the full immersive experience, grab your headphones. As you settle in, remember: our stories might just follow you into your dreams...
-    If you're enjoying our nocturnal narratives, don't forget to like and subscribe. Your support ensures you never miss a terrifying bedtime story. Now, get comfy and prepare yourself. In the world of our stories, the line between sleep and waking nightmares is frighteningly thin. Sweet dreams, if you can manage them... and may your unlucky number stay far from tonight's horrors.'''
+    # intro_speech = f'''
+    # Welcome back, night owls, to Horror Stories. Tonight's {genre} selection is crafted especially for those who use our chilling tales as a macabre lullaby. We're honored to be your sinister storyteller as you drift into the realm of shadows.
+    # Before you surrender to slumber, we're dying to know: **What number fills you with dread, and why does it haunt your waking hours?** Last week's responses sent shivers down our spine. Think you can outdo them? Share your numerical nightmares in the comment section below.
+    # For the full bone-chilling experience, don your headphones. As you nestle into your false sense of security, remember: our stories have a habit of seeping into your subconscious...
+    # If our nocturnal narratives keep you coming back for more, don't forget to like and subscribe. Your support ensures you'll never miss a spine-tingling bedtime story. Now, make yourself comfortable and steel your nerves. In the twisted world of our tales, the boundary between sleep and waking terrors is unsettlingly blurred. Pleasant dreams... if you dare to have them. And may your cursed number stay far from tonight's horrors.
+    # '''
+    intro_speech = f'''Welcome back to Horror Stories. Tonight's {genre} tale is perfect for those who like to fall asleep to our scary stories. We're happy to be your creepy bedtime companion as you drift off to sleep.
+     Before you close your eyes, we want to ask: **What number scares you, and why?** Last week's answers were really interesting. Think you can top them? Tell us about your scary numbers in the comments below. 
+     For the best experience, use headphones. As you get comfy, remember: our stories might follow you into your dreams... 
+     If you're enjoying our nightly stories, please like and subscribe. This way, you won't miss any of our scary bedtime tales. Now, get ready. In our stories, sleep and nightmares are very close. Sweet dreams... if you can have them. And we hope your unlucky number stays away from tonight's scares.
+     '''
+
+    # intro_speech = f'''Welcome back to Horror Stories. Tonight's {genre} edition is tailor-made for those of you who use our tales as a dark lullaby. We're pleased to be your eerie sleep companion as you drift off to our whispers in the night.
+    # Before you close your eyes, we're curious: **What's your cursed number, and why does it haunt you?** Last week's responses were intriguing. Think you can top them? Share your numerical nightmares in the comments.
+    # For the full immersive experience, grab your headphones. As you settle in, remember: our stories might just follow you into your dreams...
+    # If you're enjoying our nocturnal narratives, don't forget to like and subscribe. Your support ensures you never miss a terrifying bedtime story. Now, get comfy and prepare yourself. In the world of our stories, the line between sleep and waking nightmares is frighteningly thin. Sweet dreams, if you can manage them... and may your unlucky number stay far from tonight's horrors.'''
     try:
         tcmi.create_intro_mp4(gender='male', xp_path=xp_path, story=intro_speech, fn="000_intro", intro_image=intro_image_path)
         intro_clip = [os.path.join(xp_path, "clip_0_intro.mp4")]
@@ -161,13 +195,18 @@ def main():
         print("Proceeding without intro clip.")
         intro_clip = []
 
+    # logo_video = r"C:\my\__youtube\videos\horror_effects\horror video intro 6s_1080p.mp4"
+    black_screen_10min_1080p = r"C:\my\__youtube\videos\horror_effects\black_screen_10min_1080p.mp4"
     # Create incite text
     incite_text = "....If you've made it this far, the shadows have already begun to close in. Subscribe now to ensure you never miss a terrifying tale. And if you dare, hit the thanks button to buy me a cup of midnight brew. Your support keeps the nightmares flowing. Now, brace yourself for our next story... [pause]"
     incite_audio_clip = tcmi.create_voice_over(gender='male', xp_path=xp_path, story=incite_text, fn="002_incite_audio")
     incite_video_path = r"C:\my\__youtube\videos\horror_effects\incite_coffee.mp4"  # Replace with actual path
 
+
     # Prepare video clips
-    mp4_clips = intro_clip + [os.path.join(path, "clip_1.mp4") for path in story_paths]
+    black_screen = [black_screen_10min_1080p] * 2
+
+    mp4_clips = intro_clip + [os.path.join(path, "clip_1.mp4") for path in story_paths] + black_screen
     print(mp4_clips)
     # Concatenate videos
     output_concat_mp4 = os.path.join(xp_path, f"{genre}.mp4")
@@ -185,6 +224,10 @@ def main():
 
     start_times_str = "Stories " + " ".join(start_times)  # to insert in top of desc
 
+    xp_path = r'C:\\my\\__youtube\\videos\\2024-08-25_1927_Scary Stories For Sleep_compilation'
+    import tools_ffmpeg
+    cut to desired length
+
     import pickle
     # pickle backup of story paths
     path_pickl_list = os.path.join(xp_path, "list_paths.pkl")
@@ -192,6 +235,14 @@ def main():
         # Serializing and saving lists
         pickle.dump((mp4_clips, start_times_str), file)
 
+# # add logo in front
+# import tools_ffmpeg as tff
+# logo_video = r"C:\my\__youtube\videos\horror_effects\horror video intro 6s.mp4"
+# rain_10m_video = r"C:\my\__youtube\videos\sound_effects\rain and black screen 10 min.mp4"
+
+# input_files = [logo_video, output_concat_mp4, rain_10m_video, rain_10m_video, rain_10m_video]
+
+# # add 30 minutes of rain
 
 
     # Add rain
