@@ -1,0 +1,30 @@
+# Large files/directories
+generated_stories/
+effects/
+json_files/
+archive/
+
+# Temp files
+*.mp3
+*.mp4
+*.wav
+*.avi
+__pycache__/
+*.pyc
+.DS_Store
+
+# Secrets
+.env
+*.json
+token.json
+client_secrets.json
+openaiapikey.txt
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Virtual env
+.venv/
+venv/
