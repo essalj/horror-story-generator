@@ -3,8 +3,8 @@ import os
 
 
 ## MODELS
-writer_model = 'anthropic/claude-opus-4'  # Opus 4 - tested and working
-worker_model = 'google/gemini-2.5-flash'  # For simple tasks
+writer_model = 'anthropic/claude-opus-4.6'  # Opus 4.6 - tested and working
+worker_model = 'google/gemini-2.5-flash'    # For simple tasks
 import tools_query_openrouter as tqo
 
 import tools_file_operations
