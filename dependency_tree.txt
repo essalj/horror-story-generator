@@ -1,0 +1,27 @@
+flow_1_orchestrator.py (Hovedfil - run_full_flow)
+├── tools_query_openrouter.py
+│   └── requests (HTTP kald til OpenRouter API)
+├── tools_file_operations.py
+│   └── os, glob (fil system operationer)
+├── flow_1c_yt_description_generator.py
+│   └── tools_query_openrouter.py (samme som ovenfor)
+├── flow_1a_create_mp4_story.py
+│   ├── tools_create_images.py
+│   │   └── openai (DALL-E til billeder)
+│   ├── tools_voice_over.py
+│   │   └── openai (TTS til narration)
+│   ├── tools_create_mp4.py
+│   │   ├── ffmpeg (video encoding)
+│   │   └── PIL/Pillow (billedbehandling)
+│   └── tools_query_openrouter.py
+└── flow_1b_create_compilation_from_files.py
+    ├── tools_ffmpeg.py
+    │   └── ffmpeg (kompilering af videoer)
+    └── tools_file_operations.py
+
+EKSTERNE DEPENDENCIES:
+- Python: os, random, glob
+- API: OpenRouter (Kimi, Claude, etc.)
+- API: OpenAI (DALL-E, TTS)
+- System: FFmpeg (skal være installeret)
+- Python libs: requests, Pillow

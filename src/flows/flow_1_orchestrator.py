@@ -3,9 +3,8 @@ import os
 
 
 ## MODELS
-# writer_model = 'anthropic/claude-opus-4.6'
-writer_model = 'moonshotai/kimi-k2.5'
-worker_model = 'google/gemini-2.5-flash'
+writer_model = 'anthropic/claude-opus-4'  # Opus 4 - tested and working
+worker_model = 'google/gemini-2.5-flash'  # For simple tasks
 import tools_query_openrouter as tqo
 
 import tools_file_operations
@@ -39,8 +38,6 @@ def select_old_stories(old_stories=0):
         old_story_path = story_list[0:old_stories]
     return old_story_path
 #select_old_stories(3)
-
-qq
 
 def run_full_flow(new_stories, old_stories, user_story_query, genre, rain_hours):
     """
