@@ -117,18 +117,51 @@ def add_ambient_music_to_video(video_file_path, music_folder_path, output_file_p
 
 
 def add_rain_to_video(video_file_path, music_volume=0.1):
-    # Example usage: add rain asmr
+    """Add rain sound effects to a video."""
     path, filename = os.path.split(video_file_path)
     fn0 = filename.replace(".mp4","")
     fn_out = os.path.join(path, fn0) + " - rain.mp4"
 
+    # Use absolute path to rain effects (works on both Mac and Windows)
+    rain_folder = os.path.expanduser("~/Desktop/my/youtube/videos/sound_effects/rain_folder")
+    if not os.path.exists(rain_folder):
+        # Fallback to effects/audio folder
+        rain_folder = os.path.join(os.path.dirname(__file__), "..", "..", "effects", "audio")
+    
     add_ambient_music_to_video(
         video_file_path=video_file_path,
-        music_folder_path=r"C:\my\__youtube\videos\sound_effects\rain_folder",
+        music_folder_path=rain_folder,
         output_file_path=fn_out,
-        music_volume=music_volume  # Adjust volume as needed
+        music_volume=music_volume
     )
     return fn_out
+
+
+def add_suno_music_to_video(video_file_path, music_folder_path=None, output_file_path=None, music_volume=0.2):
+    """Add Suno AI-generated music to a video.
+    
+    Args:
+        video_file_path: Path to input video
+        music_folder_path: Path to folder with MP3 files (defaults to effects/audio/)
+        output_file_path: Path for output video (optional)
+        music_volume: Volume level (0.0 to 1.0)
+    """
+    if music_folder_path is None:
+        # Default to effects/audio folder which includes both suno_2024 and suno_2025
+        music_folder_path = os.path.join(os.path.dirname(__file__), "..", "..", "effects", "audio")
+    
+    if output_file_path is None:
+        path, filename = os.path.split(video_file_path)
+        fn0 = filename.replace(".mp4","")
+        output_file_path = os.path.join(path, fn0) + " - with_suno_music.mp4"
+    
+    add_ambient_music_to_video(
+        video_file_path=video_file_path,
+        music_folder_path=music_folder_path,
+        output_file_path=output_file_path,
+        music_volume=music_volume
+    )
+    return output_file_path
 
 # ex.
 # add_ambient_music_to_video(
